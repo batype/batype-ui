@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@batype/ui": ["./src/index.ts"],
+      "@batype/ui/editors": ["./src/editors.ts"],
+      "@batype/ui/markdown": ["./src/markdown.ts"]
+    }
+  },
+  "include": ["src", "playground", "tests", "*.ts", "docs/examples"]
+}

@@ -1,0 +1,132 @@
+{
+  "name": "@batype/ui",
+  "version": "0.2.0",
+  "description": "Business-independent React UI extracted from Batype Manager.",
+  "license": "MIT",
+  "author": "batype",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css",
+    "./editors": {
+      "types": "./dist/editors.d.ts",
+      "import": "./dist/editors.js"
+    },
+    "./markdown": {
+      "types": "./dist/markdown.d.ts",
+      "import": "./dist/markdown.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "packageManager": "pnpm@9.3.0",
+  "scripts": {
+    "dev": "vite --config vite.docs.config.ts",
+    "build": "vite build && tsc -p tsconfig.lib.json",
+    "build:docs": "vite build --config vite.docs.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:browser": "playwright test",
+    "check:package": "node scripts/check-package.mjs",
+    "check": "pnpm format:check && pnpm typecheck && pnpm check:api && pnpm test && pnpm build && pnpm check:package && pnpm build:docs",
+    "prepack": "pnpm build && pnpm check:package",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:consumer": "node scripts/test-consumer.mjs",
+    "docs:api": "node scripts/generate-api.mjs",
+    "check:api": "node scripts/generate-api.mjs --check"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1 || ^19.0.0",
+    "react-dom": "^18.3.1 || ^19.0.0",
+    "@codemirror/state": "^6.5.0",
+    "@codemirror/view": "^6.36.4",
+    "@codemirror/commands": "^6.8.0",
+    "@codemirror/lang-javascript": "^6.2.3",
+    "@codemirror/lang-json": "^6.0.1",
+    "@wangeditor/editor": "^5.1.23",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.58.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.6.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.0",
+    "vitest": "^4.0.0",
+    "@codemirror/state": "^6.5.0",
+    "@codemirror/view": "^6.36.4",
+    "@codemirror/commands": "^6.8.0",
+    "@codemirror/lang-javascript": "^6.2.3",
+    "@codemirror/lang-json": "^6.0.1",
+    "@wangeditor/editor": "^5.1.23",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "peerDependenciesMeta": {
+    "@codemirror/state": {
+      "optional": true
+    },
+    "@codemirror/view": {
+      "optional": true
+    },
+    "@codemirror/commands": {
+      "optional": true
+    },
+    "@codemirror/lang-javascript": {
+      "optional": true
+    },
+    "@codemirror/lang-json": {
+      "optional": true
+    },
+    "@wangeditor/editor": {
+      "optional": true
+    },
+    "react-markdown": {
+      "optional": true
+    },
+    "remark-gfm": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/batype/batype-ui.git"
+  },
+  "homepage": "https://github.com/batype/batype-ui#readme",
+  "bugs": {
+    "url": "https://github.com/batype/batype-ui/issues"
+  }
+}

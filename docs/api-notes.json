@@ -1,0 +1,832 @@
+{
+  "common": [
+    "以下参数类型与必填标记由实际TypeScript签名生成；默认值与行为说明按当前实现维护。未设置表示未赋默认prop值，运行时回退在说明/使用约定中列明。",
+    "安装本地tarball后，在应用根部导入 @batype/ui/style.css 并使用 UIProvider 包裹示例；普通示例假定已有该根部配置。UIProvider页面给出完整根部示例。",
+    "示例为完整可编译TSX组件，包含所需导入、数据与状态；demo媒体路径需替换成自己的文件。upload等适配器必须由接入方提供真实实现。",
+    "受控组件不会自动保存value/checked/page/isOpen/selectedKeys；必须在相应回调中更新状态。原生表单onChange接收事件，编辑器和Tabs的onChange直接接收新值。",
+    "事件表展示主要回调；其他React原生事件及属性在折叠表中逐项列出。原生属性仅对组件声明支持的DOM类型有效，组件主动控制/覆盖的属性见各组件约定。",
+    "所有示例不带业务SDK、权限或路由；权限判断、数据请求、上传服务、HTML净化和服务端幂等由应用负责。"
+  ],
+  "properties": {
+    "children": "子内容；具体展示位置由组件决定。",
+    "title": "标题内容。",
+    "description": "补充说明内容。",
+    "action": "标题区域右侧的操作节点。",
+    "footer": "底部自定义节点。",
+    "label": "可见标签或无障碍名称，应明确描述控件用途。",
+    "icon": "图标节点；可传本库Icon或外部ReactNode。",
+    "tone": "语义色：neutral、primary、success、warning、danger。",
+    "variant": "视觉变体：solid、soft、outline、ghost。",
+    "size": "组件尺寸。",
+    "loading": "加载状态；按钮加载时禁用交互，表格加载时保留现有数据。",
+    "disabled": "禁用用户交互。",
+    "startContent": "内容前侧插槽。",
+    "endContent": "内容后侧插槽。",
+    "fullWidth": "是否占满容器宽度。",
+    "theme": "局部主题：light、dark、system；system响应系统主题。",
+    "locale": "基础内置文案语言：zh-CN或en。",
+    "density": "comfortable或compact；控制密度。",
+    "tokens": "局部CSS变量覆盖，键需以--bui-开头；可同时传入CSSProperties。",
+    "value": "当前受控值。",
+    "defaultValue": "非受控初始值，不与value同时使用。",
+    "onChange": "值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。",
+    "onClick": "原生点击事件；组件不会自行发起业务请求。",
+    "onError": "错误回调，参数类型及错误来源见组件使用约定。",
+    "hint": "辅助说明，错误存在时优先显示error。",
+    "error": "错误提示；存在时标记aria-invalid。",
+    "options": "候选项数组，value唯一；每项含value、label和可选disabled。",
+    "checked": "受控勾选状态，配合onChange更新。",
+    "defaultChecked": "非受控初始勾选状态。",
+    "readOnly": "只读模式。",
+    "rows": "多行输入默认可见行数，非最大字符数。",
+    "name": "表单字段名称；Icon中为图标名称。",
+    "map": "按String(value)索引的状态映射；每项含label和可选tone。",
+    "fallbackLabel": "未命中状态映射时的回退内容。",
+    "count": "数量；保留0，非有限数回退为0。",
+    "content": "提示文本；TabItem中为该页签内容。",
+    "href": "链接地址；只允许http、https、mailto、tel及相对地址。",
+    "copy": "异步复制适配器；未传时使用navigator.clipboard.writeText。",
+    "onCopied": "复制完成后回调，无参数。",
+    "onCopyError": "复制失败时回调，接收原始错误，不输出敏感内容日志。",
+    "items": "传入的数据项列表。",
+    "columns": "表格列定义列表，顺序即显示顺序。",
+    "rowKey": "稳定唯一行键：字段名或函数；运行时结果必须是string/number，0合法。",
+    "caption": "桌面表格说明。",
+    "className": "附加CSS类；具体挂载节点见使用约定。",
+    "style": "原生内联样式；使用CSS变量进行主题覆盖更方便。",
+    "emptyContent": "无数据且非加载状态时的自定义空态。",
+    "selectionMode": "none、single、multiple；不负责业务权限。",
+    "selectedKeys": "受控选中键集合。",
+    "onSelectionChange": "返回新Set，调用方需更新selectedKeys；不修改传入集合。",
+    "sort": "受控排序字段及方向；不会自动对数据排序。",
+    "onSortChange": "排序意图回调；调用方负责本地排序或重新请求。",
+    "data": "详情记录或树根节点数组，具体类型见签名。",
+    "getChildren": "读取节点的子节点列表，无子节点可返回undefined。",
+    "expandedKeys": "受控展开键集合，配合onExpandedChange。",
+    "defaultExpandedKeys": "非受控初始展开键集合。",
+    "onExpandedChange": "展开/收起后返回新的Set；受控模式必须更新expandedKeys。",
+    "page": "当前页码，从1开始。",
+    "pageSize": "每页数量，内部至少按1处理。",
+    "total": "总记录数，非当前页行数。",
+    "onPageChange": "返回目标页码；不会自动获取数据。",
+    "onPageSizeChange": "返回新pageSize；调用方需同步重置page=1并更新数据。",
+    "pageSizeOptions": "页大小候选；过滤非正整数、合并当前size、去重排序。",
+    "fields": "详情字段定义，字段顺序即显示顺序。",
+    "hideEmpty": "隐藏null、undefined、空白字符串；0和false不视为空。",
+    "emptyValue": "字段为空或无法直接展示对象时的替代内容。",
+    "isOpen": "受控打开状态。",
+    "onClose": "请求关闭回调；调用方需将isOpen设为false。",
+    "extra": "以data/fields渲染详情时附加的节点。",
+    "dismissible": "是否允许Escape、背景和右上角按钮关闭；不影响自定义底部按钮。",
+    "onConfirm": "确认回调，可返回Promise；成功后请求关闭，拒绝时显示错误并保留弹窗。",
+    "confirmLabel": "确认按钮文字。",
+    "cancelLabel": "取消按钮文字。",
+    "onSelect": "选择项时返回对应key；不访问路由。",
+    "files": "受控文件条目列表。",
+    "upload": "上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。",
+    "accept": "逗号分隔MIME或扩展名，例如image/*,.png。仅客户端体验校验。",
+    "maxCount": "最多文件数。",
+    "maxSize": "单文件大小上限，单位字节。",
+    "src": "媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。",
+    "alt": "图片替代文字，同时用于预览弹窗标题。",
+    "preview": "是否允许点击图片打开大图弹窗。",
+    "captionSrc": "字幕文件URL；需使用浏览器可识别的字幕格式。",
+    "code": "按文本展示的源代码。",
+    "language": "代码语言标识；CodeBlock仅显示标签，CodeEditor用于语言解析。",
+    "copyable": "是否显示复制按钮。",
+    "height": "编辑区高度，单位px；不包含工具栏。",
+    "extensions": "CodeMirror扩展数组；建议在组件外或useMemo中保持引用稳定。",
+    "uploadImage": "自定义图片上传，接收File并返回图片URL；初始化时决定是否启用。",
+    "toolbarKeys": "wangEditor工具栏key列表，初始化时读取。",
+    "placeholder": "未输入时的提示文字。",
+    "activeKey": "当前激活项key，由调用方控制。",
+    "retryLabel": "重试按钮文字。",
+    "backLabel": "返回按钮文字。",
+    "onRetry": "点击重试后回调；库不会自行请求。",
+    "onBack": "点击返回后回调；库不会自行导航。",
+    "status": "HTTP状态码；按状态类别配色。",
+    "onAction": "空态操作按钮点击回调。",
+    "actionLabel": "空态操作按钮文案；设置后才渲染按钮。",
+    "lines": "占位行数；取整并限制1–20，非有限值回退3。",
+    "key": "稳定唯一标识。",
+    "render": "自定义展示函数，具体输入见签名。",
+    "align": "单元格对齐方式。",
+    "width": "列宽，接受CSS宽度值。",
+    "sortable": "展示排序按钮还需要提供onSortChange。",
+    "mobileHidden": "手机卡片中隐藏该列；调用方需提供其他信息访问入口。",
+    "progress": "上传进度，范围0–100。",
+    "url": "上传后返回的展示URL。",
+    "file": "本地File对象；由文件选择生成。",
+    "closable": "允许关闭；还需RouteTabs提供onClose。",
+    "ref": "原生元素引用；Button/Input等forwardRef组件支持React18/19。",
+    "id": "稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。"
+  },
+  "components": {
+    "UIProvider": {
+      "summary": "应用根部或局部区域的主题、密度及基础文案提供器。",
+      "notes": [
+        "必须在应用中单独导入样式；不对html/body做全局重置。",
+        "style合并时覆盖同名tokens；CSS变量以--bui-开头。",
+        "locale不会翻译业务文案，上传/媒体提示与上游工具栏目前主要为中文。"
+      ],
+      "defaults": {
+        "theme": "light",
+        "locale": "zh-CN",
+        "density": "comfortable"
+      },
+      "properties": {},
+      "models": ["Tone", "Size", "Locale"]
+    },
+    "Button": {
+      "summary": "支持视觉层级、尺寸和加载态的原生按钮。",
+      "notes": [
+        "默认type=button；需要提交表单时显式type=submit。",
+        "loading=true同时禁用按钮并替换前侧内容；没有children时显示加载文案。",
+        "ref指向button；disabled和loading任意为真均禁用。"
+      ],
+      "defaults": {
+        "tone": "primary",
+        "variant": "solid",
+        "size": "md",
+        "loading": "false",
+        "type": "button"
+      },
+      "properties": {},
+      "models": []
+    },
+    "ActionButton": {
+      "summary": "带可访问名称的图标操作按钮。",
+      "notes": [
+        "不包含权限校验；调用方决定是否渲染。",
+        "label覆盖aria-label及title；icon作为唯一children。",
+        "其余支持Button参数，ref指向button。"
+      ],
+      "defaults": {
+        "tone": "neutral",
+        "variant": "soft",
+        "size": "sm",
+        "type": "button",
+        "loading": "false"
+      },
+      "properties": {},
+      "models": []
+    },
+    "Icon": {
+      "summary": "本库内置线条SVG图标。",
+      "notes": [
+        "默认aria-hidden=true、focusable=false；语义通过外部按钮label或文字提供。",
+        "不包含原项目私有字体；其他图标可直接作为ReactNode传给组件。",
+        "IconName列出全部10个图标；size同时设置width和height，但显式SVG属性可覆盖。"
+      ],
+      "defaults": {
+        "size": "18"
+      },
+      "properties": {
+        "name": {
+          "description": "内置图标名，允许值见IconName。"
+        }
+      },
+      "models": ["IconName"]
+    },
+    "Card": {
+      "summary": "组合标题、正文、操作和底部内容的容器。",
+      "notes": [
+        "className挂载在section；标题使用h2，调用方管理页面标题层级。",
+        "title/description/action任一有内容才展示header；children在正文容器中。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": []
+    },
+    "CopyButton": {
+      "summary": "带异步防重和复制反馈的图标按钮。",
+      "notes": [
+        "默认Clipboard API需要安全上下文（HTTPS/localhost）；可用copy适配器覆盖。",
+        "onCopied只在成功后调用，失败通过onCopyError传出；2秒后重置提示。",
+        "继承ActionButton视觉及原生按钮参数；onClick/loading/icon由内部管理，不支持传入。"
+      ],
+      "defaults": {
+        "tone": "neutral",
+        "variant": "soft",
+        "size": "sm",
+        "type": "button",
+        "label": "随locale：复制 / Copy"
+      },
+      "properties": {},
+      "models": []
+    },
+    "ExternalLink": {
+      "summary": "带安全协议过滤的新窗口链接。",
+      "notes": [
+        "始终覆盖target为_blank，rel为noopener noreferrer；传入同名原生属性不会改变行为。",
+        "无效href移除真实链接并设置aria-disabled；title是卡片标题内容，不是原生title tooltip。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": []
+    },
+    "ItemCounter": {
+      "summary": "展示数量及单位，支持0。",
+      "notes": ["count为NaN/Infinity时显示0；不请求或统计数据。"],
+      "defaults": {
+        "label": "条记录"
+      },
+      "properties": {},
+      "models": []
+    },
+    "Tooltip": {
+      "summary": "支持悬停与键盘焦点的简短提示。",
+      "notes": [
+        "children若是元素，会被克隆并合并aria-describedby；自定义组件须将其透传到实际DOM。",
+        "非元素children用可聚焦span包裹；不适合放交互内容或必读信息。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": []
+    },
+    "Input": {
+      "summary": "带标签、辅助说明和错误状态的原生输入框。",
+      "notes": [
+        "value/onChange为受控模式；defaultValue为非受控模式；onChange读取event.target.value。",
+        "className挂载外层field容器，其余原生输入属性及ref传给input。",
+        "error优先于hint；required仅做原生表单约束，不包含业务规则。"
+      ],
+      "defaults": {},
+      "properties": {
+        "onChange": {
+          "description": "原生输入事件，读取event.target.value并更新value。"
+        }
+      },
+      "models": []
+    },
+    "PasswordInput": {
+      "summary": "带标签、辅助说明和错误状态的密码输入框。",
+      "notes": [
+        "value/onChange为受控模式；defaultValue为非受控模式；onChange读取event.target.value。",
+        "className挂载外层field容器，其余原生输入属性及ref传给input。",
+        "error优先于hint；required仅做原生表单约束，不包含业务规则。",
+        "内部管理type及endContent，不接受这两个参数；显示/隐藏按钮不改变输入值。"
+      ],
+      "defaults": {},
+      "properties": {
+        "onChange": {
+          "description": "原生输入事件，读取event.target.value并更新value。"
+        }
+      },
+      "models": []
+    },
+    "Textarea": {
+      "summary": "带标签和校验信息的多行输入。",
+      "notes": [
+        "原生onChange读取event.target.value；className挂载外层field容器。",
+        "error优先于hint；rows仅影响初始可见高度。"
+      ],
+      "defaults": {
+        "rows": "4"
+      },
+      "properties": {
+        "onChange": {
+          "description": "原生textarea事件，读取event.target.value。"
+        }
+      },
+      "models": []
+    },
+    "Select": {
+      "summary": "使用原生select及option的选择器。",
+      "notes": [
+        "options的value需唯一；单选读取event.target.value（字符串）。",
+        "multiple可透传；多选时自行遍历event.target.selectedOptions，value传数组。",
+        "className挂载外层field；原生children会被options渲染覆盖，不用children添加选项。"
+      ],
+      "defaults": {},
+      "properties": {
+        "onChange": {
+          "description": "原生select事件；单选读取event.target.value，多选读取selectedOptions。"
+        }
+      },
+      "models": []
+    },
+    "Checkbox": {
+      "summary": "原生复选输入。",
+      "notes": [
+        "使用checked/onChange或defaultChecked；回调读取event.target.checked布尔值。",
+        "className挂载外层label，ref指向input；type由内部固定为checkbox。"
+      ],
+      "defaults": {},
+      "properties": {
+        "onChange": {
+          "description": "原生input变更事件，读取event.target.checked更新布尔状态。"
+        }
+      },
+      "models": []
+    },
+    "Switch": {
+      "summary": "原生复选输入，使用switch角色。",
+      "notes": [
+        "使用checked/onChange或defaultChecked；回调读取event.target.checked布尔值。",
+        "className挂载外层label，ref指向input；type由内部固定为checkbox。"
+      ],
+      "defaults": {},
+      "properties": {
+        "onChange": {
+          "description": "原生input变更事件，读取event.target.checked更新布尔状态。"
+        }
+      },
+      "models": []
+    },
+    "DataTable": {
+      "summary": "桌面语义表格与手机卡片共享数据及受控状态。",
+      "notes": [
+        "rowKey必须在整个数据生命周期稳定且唯一；重复/非string-number键会报错。",
+        "选择完全受控；全选仅影响当前items，保留集合中的其他页键。",
+        "排序仅返回意图，不会修改items；配置sortable列且提供onSortChange才启用。",
+        "640px以下使用移动卡片；caption只用于桌面表格。对象字段必须使用render。",
+        "没有虚拟滚动、内置请求或分页；通过Pagination及业务层组合。"
+      ],
+      "defaults": {
+        "selectionMode": "none",
+        "selectedKeys": "空Set（不自动保存）"
+      },
+      "properties": {},
+      "models": ["TableColumn"]
+    },
+    "TreeTable": {
+      "summary": "将层级节点展开为响应式表格。",
+      "notes": [
+        "getChildren返回子节点；第一列显示缩进与展开按钮。",
+        "expandedKeys存在即受控，否则用defaultExpandedKeys初始化内部状态。",
+        "只检查可见/展开节点；重复键或循环在遍历时报错，最大深度100。",
+        "选择复用DataTable且不级联；TreeTable不接受DataTable的sort/caption/className等未声明参数。"
+      ],
+      "defaults": {
+        "defaultExpandedKeys": "空Set",
+        "selectionMode": "none",
+        "selectedKeys": "空Set（不自动保存）"
+      },
+      "properties": {},
+      "models": ["TableColumn"]
+    },
+    "Pagination": {
+      "summary": "受控页码及可选页大小切换。",
+      "notes": [
+        "页码从1开始；total=0时显示1/1且不允许翻页。",
+        "只有传onPageSizeChange才展示页大小选择器；调用方在回调中重置page=1。",
+        "非法page/pageSize/total会做下界与整数修正，不修改调用方原状态。"
+      ],
+      "defaults": {
+        "pageSizeOptions": "[10, 20, 50]"
+      },
+      "properties": {},
+      "models": []
+    },
+    "DescriptionList": {
+      "summary": "基于字段定义展示记录详情。",
+      "notes": [
+        "null/undefined/空白字符串算空；0和false保留显示。",
+        "字段hideEmpty覆盖全局hideEmpty；对象不隐式字符串化，需提供render。",
+        "render接收原始字段值及整条记录；字段key限于keyof T。"
+      ],
+      "defaults": {
+        "hideEmpty": "true",
+        "emptyValue": "—"
+      },
+      "properties": {},
+      "models": ["DetailField"]
+    },
+    "Badge": {
+      "summary": "带语义颜色的轻量标签。",
+      "notes": ["原生span属性透传；不会自动把状态值翻译成业务名称。"],
+      "defaults": {
+        "tone": "neutral"
+      },
+      "properties": {},
+      "models": []
+    },
+    "StatusChip": {
+      "summary": "由调用方提供状态到标签/颜色的映射。",
+      "notes": [
+        "map使用String(value)为key；null/undefined按空字符串查找。",
+        "展示优先级：映射label → fallbackLabel → 原始值字符串 → —。",
+        "tone优先使用命中映射的tone，否则使用传入tone或Badge默认neutral。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": []
+    },
+    "MethodChip": {
+      "summary": "根据HTTP方法展示固定语义颜色。",
+      "notes": [
+        "输入转为大写；GET绿、POST主色、PUT/PATCH警告、DELETE危险，未知为neutral。",
+        "声明继承Badge参数，但tone会被HTTP映射覆盖，不能用tone手动改色。"
+      ],
+      "defaults": {},
+      "properties": {
+        "value": {
+          "description": "HTTP方法字符串，例如GET、POST；会转为大写显示。"
+        }
+      },
+      "models": []
+    },
+    "RequestStatusChip": {
+      "summary": "按HTTP状态码类别展示标签。",
+      "notes": [
+        "2xx成功、4xx警告、>=500危险，其他neutral；不负责校验状态码是否在HTTP合法范围。",
+        "tone由状态计算并覆盖传入tone。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": []
+    },
+    "DetailModal": {
+      "summary": "受控原生dialog详情弹窗。",
+      "notes": [
+        "isOpen由调用方更新；onClose只通知，不会修改父组件状态。",
+        "loading优先；否则children非null时优先于data/fields；extra只在data渲染分支展示。",
+        "footer为null/undefined时仍使用默认关闭按钮；需要空底部传<></>。",
+        "dismissible=false只禁用Escape/背景/右上角关闭，默认底部关闭按钮仍可点击；异步提交应自定义footer。",
+        "原生dialog负责焦点约束与关闭恢复；需现代浏览器支持showModal。"
+      ],
+      "defaults": {
+        "fields": "[]",
+        "size": "md",
+        "dismissible": "true"
+      },
+      "properties": {},
+      "models": ["DetailField"]
+    },
+    "ConfirmDialog": {
+      "summary": "支持异步提交和错误重试的确认弹窗。",
+      "notes": [
+        "确认进行中禁止取消和重复点击；onConfirm成功后调用onClose，Promise拒绝则保留并展示错误。",
+        "关闭仍由调用方更新isOpen；不提供后端幂等或回滚能力。"
+      ],
+      "defaults": {
+        "tone": "danger",
+        "confirmLabel": "随locale：确认 / Confirm",
+        "cancelLabel": "随locale：取消 / Cancel"
+      },
+      "properties": {},
+      "models": []
+    },
+    "Dropdown": {
+      "summary": "使用原生details/summary的操作列表。",
+      "notes": [
+        "选择后回调key并关闭，焦点回到summary；Escape和外部pointerdown可关闭。",
+        "disabled项不能触发；使用Tab导航，不承诺完整ARIA menu方向键模型。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": ["DropdownItem"]
+    },
+    "FileUpload": {
+      "summary": "受控文件选择与上传。",
+      "notes": [
+        "files/onChange必须成对管理；没有upload适配器时只选择，不会自动上传或显示完成。",
+        "upload接收signal和onProgress；移除/卸载触发abort，适配器需响应signal。",
+        "格式/数量/大小限制是前端体验，不代替服务端验证；失败文件可移除后重选。",
+        "进度限制0–100；完成URL不能使用危险协议；不包含分片/断点/自动重试。"
+      ],
+      "defaults": {
+        "maxSize": "10485760（10 MiB）",
+        "maxCount": "5",
+        "accept": "空字符串（不限）"
+      },
+      "properties": {
+        "onChange": {
+          "description": "返回完整的新UploadItem[]，调用方用它替换files。"
+        },
+        "onError": {
+          "description": "接收格式/数量/大小或上传失败的消息字符串。"
+        }
+      },
+      "models": ["UploadItem"]
+    },
+    "ImageUpload": {
+      "summary": "受控图片选择上传及已完成预览。",
+      "notes": [
+        "files/onChange必须成对管理；没有upload适配器时只选择，不会自动上传或显示完成。",
+        "upload接收signal和onProgress；移除/卸载触发abort，适配器需响应signal。",
+        "格式/数量/大小限制是前端体验，不代替服务端验证；失败文件可移除后重选。",
+        "进度限制0–100；完成URL不能使用危险协议；不包含分片/断点/自动重试。",
+        "固定accept=image/*，不可传accept覆盖。"
+      ],
+      "defaults": {
+        "maxSize": "10485760（10 MiB）",
+        "maxCount": "5"
+      },
+      "properties": {
+        "onChange": {
+          "description": "返回完整的新UploadItem[]，调用方用它替换files。"
+        },
+        "onError": {
+          "description": "接收格式/数量/大小或上传失败的消息字符串。"
+        }
+      },
+      "models": ["UploadItem"]
+    },
+    "VideoUpload": {
+      "summary": "受控单视频上传与播放。",
+      "notes": [
+        "files/onChange必须成对管理；没有upload适配器时只选择，不会自动上传或显示完成。",
+        "upload接收signal和onProgress；移除/卸载触发abort，适配器需响应signal。",
+        "格式/数量/大小限制是前端体验，不代替服务端验证；失败文件可移除后重选。",
+        "进度限制0–100；完成URL不能使用危险协议；不包含分片/断点/自动重试。",
+        "固定accept=video/*且maxCount=1，不可传这两个参数覆盖。"
+      ],
+      "defaults": {
+        "maxSize": "10485760（10 MiB）"
+      },
+      "properties": {
+        "onChange": {
+          "description": "返回完整的新UploadItem[]，调用方用它替换files。"
+        },
+        "onError": {
+          "description": "接收格式/数量/大小或上传失败的消息字符串。"
+        }
+      },
+      "models": ["UploadItem"]
+    },
+    "ImagePreview": {
+      "summary": "可点击打开大图的图片展示组件。",
+      "notes": [
+        "loading固定为lazy，即使传原生loading也会被覆盖；src变化重置失败与弹窗状态。",
+        "className在外层span，其余img属性传入缩略图；大图只使用src/alt。",
+        "图片加载失败展示回退；preview=false只展示图片。"
+      ],
+      "defaults": {
+        "preview": "true",
+        "loading": "lazy"
+      },
+      "properties": {},
+      "models": []
+    },
+    "VideoPlayer": {
+      "summary": "原生HTML video播放器。",
+      "notes": [
+        "默认controls=true、preload=metadata；显式传原生controls/preload可覆盖。",
+        "字幕使用captionSrc；更多track配置尚未作为独立API开放。",
+        "onError收到原生video事件，并展示失败回退。"
+      ],
+      "defaults": {
+        "controls": "true",
+        "preload": "metadata"
+      },
+      "properties": {},
+      "models": []
+    },
+    "CodeBlock": {
+      "summary": "安全的文本代码展示与复制。",
+      "notes": [
+        "不会执行内容，也不做语法高亮；language只用于标签。",
+        "复制使用CopyButton默认Clipboard API。"
+      ],
+      "defaults": {
+        "language": "text",
+        "copyable": "true"
+      },
+      "properties": {},
+      "models": []
+    },
+    "CodeEditor": {
+      "summary": "真实CodeMirror 6的受控代码编辑区。",
+      "notes": [
+        "使用/editors可选入口，安装CodeMirror相关peer依赖，基础包不加载引擎。",
+        "onChange直接接收完整代码字符串；外部value更新不会回调onChange。",
+        "readOnly禁止编辑；height单位px，extensions建议稳定引用。",
+        "客户端动态初始化，卸载销毁；SSR只渲染容器，不加载浏览器引擎。"
+      ],
+      "defaults": {
+        "language": "text",
+        "readOnly": "false",
+        "height": "260",
+        "extensions": "[]"
+      },
+      "properties": {
+        "onChange": {
+          "description": "用户编辑后返回完整代码字符串，不是DOM事件。"
+        },
+        "onError": {
+          "description": "引擎加载或配置失败时返回原始错误。"
+        }
+      },
+      "models": []
+    },
+    "RichTextEditor": {
+      "summary": "真实wangEditor 5的受控HTML编辑器。",
+      "notes": [
+        "使用/editors入口，安装@wangeditor/editor，并导入其dist/css/style.css；示例已包含该CSS。",
+        "onChange直接返回HTML字符串；外部value回显不会重建编辑器或回调。",
+        "uploadImage和toolbarKeys在初始化时决定，需改变能力时用key重建组件；未传适配器时不启用图片上传。",
+        "输出HTML不是净化后的安全HTML，保存和再次展示前须服务端允许列表净化。",
+        "客户端动态初始化及销毁，SSR只展示容器；上游工具栏保留中文行为。"
+      ],
+      "defaults": {
+        "readOnly": "false",
+        "height": "300",
+        "placeholder": "请输入内容…"
+      },
+      "properties": {
+        "onChange": {
+          "description": "用户编辑后返回完整HTML字符串，不是DOM事件。"
+        },
+        "onError": {
+          "description": "编辑器加载或图片上传失败时返回原始错误。"
+        }
+      },
+      "models": []
+    },
+    "Markdown": {
+      "summary": "使用react-markdown及GFM渲染Markdown字符串。",
+      "notes": [
+        "从/markdown可选入口引入，安装react-markdown、remark-gfm。",
+        "默认跳过原始HTML，保留上游URL过滤；未接入rehype-raw、数学公式或代码高亮。",
+        "className在外层div；支持GFM表格、任务列表等。"
+      ],
+      "defaults": {
+        "className": "空字符串"
+      },
+      "properties": {
+        "children": {
+          "description": "Markdown源码字符串，不接受ReactNode。"
+        }
+      },
+      "models": []
+    },
+    "NavigationMenu": {
+      "summary": "不绑定路由的层级导航展示。",
+      "notes": [
+        "只通过onSelect返回叶子key；activeKey改变需要父级更新。",
+        "children分组使用details默认展开；最大深度20。",
+        "分组disabled目前不会禁止展开；disabled只用于叶子按钮。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": ["NavigationItem"]
+    },
+    "RouteTabs": {
+      "summary": "供应用路由组合的可关闭导航页签。",
+      "notes": [
+        "这是导航而非同页tabpanel；不会自己修改路由或缓存页面。",
+        "closable=true且存在onClose才显示关闭按钮；关闭不会触发onSelect。",
+        "关闭激活项后如何选择下一项由调用方决定；示例包含该处理。"
+      ],
+      "defaults": {
+        "label": "工作区页签"
+      },
+      "properties": {
+        "onClose": {
+          "description": "返回待关闭页签key，不是无参数弹窗关闭事件。"
+        }
+      },
+      "models": ["RouteTab"]
+    },
+    "Tabs": {
+      "summary": "支持键盘操作的同页内容切换。",
+      "notes": [
+        "value必须配合onChange更新；无效或禁用key显示首个可用项。",
+        "左右/Home/End键跳过禁用项并自动激活；隐藏面板保留在DOM，昂贵内容需自行延迟渲染。",
+        "items.key需唯一，content为各面板内容。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": ["TabItem"]
+    },
+    "ThemeSwitch": {
+      "summary": "受控light/dark主题切换按钮。",
+      "notes": [
+        "只返回主题值；需要同步更新UIProvider的theme，示例包含Provider。",
+        "不处理system模式或本地存储。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": []
+    },
+    "LanguageSwitcher": {
+      "summary": "受控基础文案语言切换。",
+      "notes": [
+        "只返回zh-CN或en；调用方更新UIProvider的locale，示例包含Provider。",
+        "不翻译业务文本，也不自动持久化。"
+      ],
+      "defaults": {},
+      "properties": {},
+      "models": []
+    },
+    "Alert": {
+      "summary": "带语义颜色及实时提示角色的消息块。",
+      "notes": [
+        "danger默认role=alert，其他role=status；显式原生role可覆盖。",
+        "避免把大量长期内容都标成实时消息。"
+      ],
+      "defaults": {
+        "tone": "primary"
+      },
+      "properties": {},
+      "models": []
+    },
+    "EmptyState": {
+      "summary": "无数据场景的展示与可选操作。",
+      "notes": [
+        "不把接口失败当作空数据；错误请使用ErrorState。",
+        "只有actionLabel存在才渲染按钮；调用方提供onAction。"
+      ],
+      "defaults": {
+        "title": "随locale：暂无数据 / No data",
+        "icon": "内置box图标"
+      },
+      "properties": {},
+      "models": []
+    },
+    "ErrorState": {
+      "summary": "错误说明及返回/重试操作。",
+      "notes": [
+        "仅有onRetry/onBack时显示对应按钮，不自动请求或导航。",
+        "code为真值才显示；0不会展示为错误码。"
+      ],
+      "defaults": {
+        "title": "出现了一点问题",
+        "retryLabel": "重试",
+        "backLabel": "返回"
+      },
+      "properties": {
+        "code": {
+          "description": "可选错误码/标识，仅作展示，不影响按钮行为。"
+        }
+      },
+      "models": []
+    },
+    "Spinner": {
+      "summary": "带可访问状态文字的加载指示。",
+      "notes": [
+        "label默认来自UIProvider；className合并到外层div。",
+        "默认role=status，原生role可覆盖。"
+      ],
+      "defaults": {
+        "label": "随locale：加载中 / Loading"
+      },
+      "properties": {},
+      "models": []
+    },
+    "Skeleton": {
+      "summary": "多行装饰性加载占位。",
+      "notes": [
+        "lines取整限制在1–20；非有限值使用3。",
+        "aria-hidden固定为true，不能用作读屏状态通知；需要时组合Spinner。"
+      ],
+      "defaults": {
+        "lines": "3"
+      },
+      "properties": {},
+      "models": []
+    }
+  },
+  "models": [
+    "Tone",
+    "Size",
+    "Locale",
+    "IconName",
+    "TableColumn",
+    "DetailField",
+    "DropdownItem",
+    "UploadItem",
+    "NavigationItem",
+    "RouteTab",
+    "TabItem"
+  ],
+  "modelNotes": {
+    "UploadItem": {
+      "name": "UploadItem",
+      "properties": {
+        "name": {
+          "description": "文件名，包含扩展名。"
+        },
+        "status": {
+          "description": "selected仅选择、uploading上传中、done已完成、error失败。"
+        },
+        "error": {
+          "description": "该文件上传失败的消息。"
+        }
+      }
+    },
+    "NavigationItem": {
+      "properties": {
+        "children": {
+          "description": "嵌套导航项；非空时作为分组展示。"
+        }
+      }
+    },
+    "TableColumn": {
+      "properties": {
+        "key": {
+          "description": "列唯一key；没有render时也作为行字段名读取。"
+        }
+      }
+    },
+    "DetailField": {
+      "properties": {
+        "key": {
+          "description": "记录字段名，必须属于keyof T。"
+        }
+      }
+    }
+  }
+}

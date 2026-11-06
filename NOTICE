@@ -1,0 +1,10 @@
+Batype UI
+Copyright (c) 2025 batype; package adaptations Copyright (c) 2026 Batype UI contributors.
+
+UI patterns adapted from jiujiu-manager (MIT), including components authored by shaosong.
+The original MIT license is preserved in LICENSE. Source-to-package mapping is in docs/EXTRACTION.md.
+Business logic, generated SDKs, private configuration, fonts, screenshots and company data are not distributed.
+React and development tools retain their respective upstream licenses; they are not relicensed by this project.
+The small interface SVGs in this package were authored for this extraction; no project icon font is included.
+
+Optional peer engines CodeMirror, wangEditor, react-markdown and remark-gfm retain their upstream licenses. Their source/assets are not vendored into the published library; optional wrappers dynamically load the installed engines. Documentation builds include installed engines for local demonstrations.
