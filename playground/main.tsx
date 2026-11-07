@@ -42,7 +42,7 @@ function App() {
             <strong>
               batype<span> / ui</span>
             </strong>
-            <Badge>0.2.0</Badge>
+            <Badge>0.3.0</Badge>
           </a>
           <div className="header-actions">
             <span>REACT COMPONENT LIBRARY</span>

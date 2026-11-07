@@ -1,3 +1,15 @@
+import MessageProviderDemo from '../docs/examples/MessageProvider'
+import FormDemo from '../docs/examples/Form'
+import FormFieldDemo from '../docs/examples/FormField'
+import FormListDemo from '../docs/examples/FormList'
+import SearchSelectDemo from '../docs/examples/SearchSelect'
+import CascaderDemo from '../docs/examples/Cascader'
+import DatePickerDemo from '../docs/examples/DatePicker'
+import DateRangePickerDemo from '../docs/examples/DateRangePicker'
+import NumberInputDemo from '../docs/examples/NumberInput'
+import RadioGroupDemo from '../docs/examples/RadioGroup'
+import ImageCropperDemo from '../docs/examples/ImageCropper'
+import PageHeaderDemo from '../docs/examples/PageHeader'
 import { lazy, Suspense, useEffect, useRef, useState, type Key } from 'react'
 import * as UI from '../src'
 import type { TableColumn, DetailField, UploadItem, Locale, RouteTab } from '../src'
@@ -78,6 +90,7 @@ export function TableExample() {
     {
       key: 'actions',
       title: '操作',
+      kind: 'actions',
       render: (row) => (
         <UI.Button size="sm" tone="neutral" variant="ghost" onClick={() => setDetail(row)}>
           查看详情
@@ -229,6 +242,22 @@ export function ComponentExample({
     urls.current.push(url)
     return { url }
   }
+  const added = {
+    MessageProvider: MessageProviderDemo,
+    Form: FormDemo,
+    FormField: FormFieldDemo,
+    FormList: FormListDemo,
+    SearchSelect: SearchSelectDemo,
+    Cascader: CascaderDemo,
+    DatePicker: DatePickerDemo,
+    DateRangePicker: DateRangePickerDemo,
+    NumberInput: NumberInputDemo,
+    RadioGroup: RadioGroupDemo,
+    ImageCropper: ImageCropperDemo,
+    PageHeader: PageHeaderDemo,
+  }
+  const Extra = added[name as keyof typeof added]
+  if (Extra) return <Extra />
   let demo: React.ReactNode
   switch (name) {
     case 'UIProvider':

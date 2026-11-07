@@ -1,6 +1,16 @@
 # Changelog
 
-源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。以下为源码版本记录，尚未发布 npm。
+源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。公开发布状态以 npm 注册表和 GitHub Releases 为准。
+
+## 0.3.0 — 2026-11-07
+
+- 新增 MessageProvider/useMessage、Form/FormField/FormList、SearchSelect、Cascader、DatePicker/DateRangePicker、NumberInput、RadioGroup、ImageCropper 和 PageHeader，组件总数为57。
+- 动态表单支持校验、异步提交防重、重置及列表增删；原有 Select 保留原生事件 API。
+- 上传增加可取消的 beforeUpload 预处理；裁剪在本地导出 File，不接入业务服务。
+- 移动表格支持操作列隐藏标签、按钮占满整行和换行，旧列默认显示不变。
+- 同步57个完整示例、22个共享类型和生成式API文档，改善窄屏代码区域键盘可达性。
+- 核心无新增运行时依赖；React18/19仍为peer。业务权限、路由与SDK留在调用方。
+- Markdown公式、更多编辑语言及原后台富文本悬浮工具栏定制仍为后续可选增强。
 
 ## 0.2.0 文档完善 — Unreleased
 

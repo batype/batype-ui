@@ -50,8 +50,9 @@ test('组件名导航、搜索、直接访问和页面覆盖', async ({ page }, 
     const links = page.getByRole('navigation', { name: '组件文档' }).getByRole('link')
     await expect(links).toHaveCount(4)
     await page.getByLabel('搜索组件').fill('')
-    await expect(links).toHaveCount(46)
-  } else await expect(page.getByLabel('选择组件文档').locator('option')).toHaveCount(46)
+    await expect(links).toHaveCount(catalog.length + 1)
+  } else
+    await expect(page.getByLabel('选择组件文档').locator('option')).toHaveCount(catalog.length + 1)
   for (const name of [
     'Button',
     'Select',
@@ -176,7 +177,7 @@ test('主题、手机溢出和基础可访问性', async ({ page }, info) => {
   await page.screenshot({ path: `test-results/${info.project.name}-catalog.png`, fullPage: true })
 })
 
-test('45个组件都有完整API表、可复制示例和适用约定', async ({ page }) => {
+test('所有组件都有完整API表、可复制示例和适用约定', async ({ page }) => {
   test.setTimeout(90000)
   await page.goto('/')
   for (const { name } of catalog) {

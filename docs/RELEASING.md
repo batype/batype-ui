@@ -1,8 +1,8 @@
 # 正式公开发布检查
 
-GitHub 源码仓库为 [batype/batype-ui](https://github.com/batype/batype-ui)，已确认仓库归属；npm 尚未发布。以下清单用于后续 npm 版本发布。
+GitHub 源码仓库为 [batype/batype-ui](https://github.com/batype/batype-ui)，已确认仓库归属；公开发布状态以 npm 注册表和 GitHub Releases 为准。以下清单用于 npm 版本发布。
 
-1. 确认 `@batype/ui` 的 npm scope 所有权及包名可用性；GitHub 仓库归属为 batype。
+1. 确认 `@batype/ui` 的 npm scope 所有权及包名可用性；GitHub 仓库归属为 batype。2026-11-07已验证当前npm账号shaosong为batype组织owner；每次发布仍应复核登录和权限。
 2. 核对 package.json 中的 repository/homepage/bugs；本仓库已填写真实地址，并在 SECURITY.md 提供 GitHub 私密漏洞报告及维护者入口。
 3. 复核LICENSE/NOTICE及docs/EXTRACTION，确认有权公开来源代码。检查未提交业务文件、字体、账号和配置。
 4. 使用Node20.19+/22+及锁文件安装，运行 `pnpm check`、`pnpm exec playwright install chromium`、`pnpm test:browser`、`pnpm audit`。React18/19消费环境分别验证。

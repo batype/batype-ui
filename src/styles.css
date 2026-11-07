@@ -1,4 +1,198 @@
 /* MIT · scoped design tokens; does not reset document or host application styles. */
+/* Additive form and feedback primitives; no host document reset. */
+.bui-messages {
+  position: fixed;
+  z-index: 10000;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  gap: 10px;
+  width: min(360px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.bui-messages--top-center {
+  right: 50%;
+  transform: translateX(50%);
+}
+.bui-messages--bottom-right {
+  top: auto;
+  bottom: 16px;
+}
+.bui-message {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--bui-tone);
+  border-radius: var(--bui-radius);
+  background: var(--bui-surface);
+  color: var(--bui-text);
+  box-shadow: var(--bui-shadow);
+  pointer-events: auto;
+}
+.bui-message > div {
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.bui-form,
+.bui-form__fields,
+.bui-form-list {
+  display: grid;
+  gap: var(--bui-space);
+  min-width: 0;
+}
+.bui-form__fields,
+.bui-cascader,
+.bui-date-range,
+.bui-radio-group,
+.bui-crop-controls {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.bui-form__fields:disabled {
+  opacity: 0.7;
+}
+.bui-form .bui-field > input {
+  box-sizing: border-box;
+  min-height: var(--bui-control-height);
+  border: 1px solid var(--bui-border);
+  border-radius: 9px;
+  padding: 9px 12px;
+  background: var(--bui-surface);
+  color: var(--bui-text);
+}
+.bui-form .bui-field > input[aria-invalid='true'] {
+  border-color: var(--bui-danger);
+}
+.bui-form .bui-field > input:focus-visible {
+  outline: 2px solid var(--bui-ring) !important;
+}
+.bui-search-select {
+  position: relative;
+}
+.bui-search-select__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  z-index: 20;
+  margin: 4px 0 0;
+  padding: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  border: 1px solid var(--bui-border);
+  border-radius: 9px;
+  background: var(--bui-surface);
+  color: var(--bui-text);
+  box-shadow: var(--bui-shadow);
+}
+.bui-search-select__list > li {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.bui-search-select__list > li[data-active='true'],
+.bui-search-select__list > li[aria-selected='true'] {
+  background: var(--bui-primary-soft);
+  color: var(--bui-primary);
+}
+.bui-search-select__list > li[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.bui-cascader legend,
+.bui-date-range legend,
+.bui-radio-group legend {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 550;
+}
+.bui-cascader__levels,
+.bui-date-range > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.bui-cascader__levels > *,
+.bui-date-range > div > * {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+.bui-radio-group > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.bui-page-header {
+  margin-bottom: var(--bui-space);
+}
+.bui-page-header > div:not(.bui-page-header__breadcrumb) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.bui-page-header h1 {
+  margin: 0;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+.bui-page-header p,
+.bui-page-header__breadcrumb {
+  margin: 6px 0;
+  color: var(--bui-muted);
+  font-size: 13px;
+}
+.bui-page-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bui-table-mobile dl > .bui-table-mobile__wide {
+  display: block;
+}
+.bui-table-mobile .bui-table-mobile__wide > dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+}
+.bui-crop-preview {
+  position: relative;
+  width: min(100%, 400px);
+  max-height: 50dvh;
+  overflow: hidden;
+  margin: 0 auto;
+  background: var(--bui-subtle);
+}
+.bui-crop-preview img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+.bui-crop-controls {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+.bui-crop-controls label {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+.bui-crop-controls input {
+  width: 100%;
+  accent-color: var(--bui-primary);
+}
 .bui-root {
   --bui-primary: #1765e8;
   --bui-primary-text: #fff;

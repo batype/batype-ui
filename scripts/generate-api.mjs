@@ -17,14 +17,16 @@ const names = []
 function findCatalog(node) {
   if (
     ts.isPropertyAssignment(node) &&
-    node.name.getText() === 'name' &&
+    (ts.isIdentifier(node.name) || ts.isStringLiteral(node.name)) &&
+    node.name.text === 'name' &&
     ts.isStringLiteral(node.initializer)
   )
     names.push(node.initializer.text)
   ts.forEachChild(node, findCatalog)
 }
 findCatalog(catalogFile)
-assert.equal(names.length, 45)
+assert(names.length > 0)
+assert.equal(new Set(names).size, names.length, 'Catalog names must be unique')
 assert.deepEqual(
   Object.keys(notes.components).sort(),
   [...names].sort(),
@@ -114,7 +116,7 @@ for (const name of names) {
   assert(signature, `${name} must be callable`)
   const parameter = signature.parameters[0]
   const props = checker.getTypeOfSymbolAtLocation(parameter, declaration)
-  const meta = { name, ...notes.components[name] }
+  const meta = { name, defaults: {}, properties: {}, models: [], ...notes.components[name] }
   const rows = rowsOf(props, declaration, meta)
   for (const prop of Object.keys(meta.defaults || {}))
     assert(

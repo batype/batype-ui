@@ -8,6 +8,9 @@
     "所有示例不带业务SDK、权限或路由；权限判断、数据请求、上传服务、HTML净化和服务端幂等由应用负责。"
   ],
   "properties": {
+    "onBlur": "控件失焦通知；FormFieldControl中用于触发字段校验。",
+    "aria-invalid": "字段校验失败时为true，需透传给真实输入元素。",
+    "aria-describedby": "字段提示或错误节点的id，需透传给真实输入元素。",
     "children": "子内容；具体展示位置由组件决定。",
     "title": "标题内容。",
     "description": "补充说明内容。",
@@ -85,7 +88,7 @@
     "files": "受控文件条目列表。",
     "upload": "上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。",
     "accept": "逗号分隔MIME或扩展名，例如image/*,.png。仅客户端体验校验。",
-    "maxCount": "最多文件数。",
+    "maxCount": "同时展示的消息上限，至少1条；超出时移除最早消息。",
     "maxSize": "单文件大小上限，单位字节。",
     "src": "媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。",
     "alt": "图片替代文字，同时用于预览弹窗标题。",
@@ -108,18 +111,65 @@
     "onAction": "空态操作按钮点击回调。",
     "actionLabel": "空态操作按钮文案；设置后才渲染按钮。",
     "lines": "占位行数；取整并限制1–20，非有限值回退3。",
-    "key": "稳定唯一标识。",
+    "key": "稳定唯一键。",
     "render": "自定义展示函数，具体输入见签名。",
     "align": "单元格对齐方式。",
-    "width": "列宽，接受CSS宽度值。",
+    "width": "源图片裁剪宽度，单位像素。",
     "sortable": "展示排序按钮还需要提供onSortChange。",
     "mobileHidden": "手机卡片中隐藏该列；调用方需提供其他信息访问入口。",
     "progress": "上传进度，范围0–100。",
     "url": "上传后返回的展示URL。",
-    "file": "本地File对象；由文件选择生成。",
-    "closable": "允许关闭；还需RouteTabs提供onClose。",
+    "file": "当前本地图片文件；null表示无文件。",
+    "closable": "是否显示关闭按钮，默认true。",
     "ref": "原生元素引用；Button/Input等forwardRef组件支持React18/19。",
-    "id": "稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。"
+    "id": "稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。",
+    "duration": "消息显示时长，单位毫秒；0为持续显示。",
+    "position": "消息容器位置：top-right、top-center、bottom-right。",
+    "initialValues": "首次挂载的表单初值；切换对象使用新 key。",
+    "onFinish": "校验通过后的提交回调，可返回 Promise。",
+    "onValuesChange": "字段变化或重置后返回完整新值。",
+    "validate": "校验函数：字段返回错误字符串，表单返回字段错误字典；可异步。",
+    "onFinishFailed": "校验不通过时返回错误字典。",
+    "onSubmitError": "校验或提交抛出异常的通知回调。",
+    "submitting": "表单校验及提交处理中。",
+    "setFieldValue": "设置顶层字段并清除该字段旧错误；禁用/提交中不修改。",
+    "reset": "恢复首次挂载初值并清空错误；提交中不生效。",
+    "requiredMessage": "required校验失败的自定义文字。",
+    "register": "内部字段注册。",
+    "required": "是否必填，具体空值规则见组件约定。",
+    "onSearch": "搜索文本变化通知，不执行请求。",
+    "emptyLabel": "无匹配候选项时的展示文字。",
+    "clearable": "是否提供清空选择按钮。",
+    "levelLabels": "各级原生选择框的标签。",
+    "min": "最小数值或最早日期，具体类型见签名。",
+    "max": "最大数值或最晚日期，具体类型见签名。",
+    "step": "数字输入的原生步长或any。",
+    "precision": "失焦后的小数位数，支持0到15。",
+    "onCrop": "接收裁剪后的File，可返回Promise；不会自动上传或关闭。",
+    "aspect": "裁剪框宽高比，大于0。",
+    "outputWidth": "期望输出宽度，不超过4096；小图不放大。",
+    "outputType": "输出图片MIME类型；浏览器不支持时使用实际导出类型。",
+    "quality": "JPEG/WebP导出质量，0到1；PNG遵循浏览器编码。",
+    "actions": "页头操作节点。",
+    "breadcrumb": "页头面包屑插槽，不读取路由。",
+    "beforeUpload": "上传前适配器，接收File和AbortSignal；返回处理后File，null取消；结果仍检查格式及大小。",
+    "mobileLabel": "是否在移动卡片中显示列标题，false使值占满整行；默认显示。",
+    "kind": "data或actions；actions在移动端隐藏列名并允许按钮换行。",
+    "index": "当前数组下标，用于列表操作。",
+    "update": "按id更新消息或按index替换列表项，具体签名见类型。",
+    "add": "向动态列表追加新值。",
+    "remove": "按下标移除当前表单列表项，不操作服务端。",
+    "move": "按下标移动列表项，同时保留稳定React键。",
+    "x": "源图片横向像素坐标。",
+    "y": "源图片纵向像素坐标。",
+    "revision": "消息更新序号。",
+    "show": "显示消息并返回id。",
+    "success": "显示成功消息并返回id。",
+    "warning": "显示警告消息并返回id。",
+    "close": "按id移除指定消息。",
+    "clear": "移除当前容器内全部消息。",
+    "values": "表单当前完整值，禁止原地修改。",
+    "errors": "字段名到错误消息的映射。"
   },
   "components": {
     "UIProvider": {
@@ -341,7 +391,8 @@
         "选择完全受控；全选仅影响当前items，保留集合中的其他页键。",
         "排序仅返回意图，不会修改items；配置sortable列且提供onSortChange才启用。",
         "640px以下使用移动卡片；caption只用于桌面表格。对象字段必须使用render。",
-        "没有虚拟滚动、内置请求或分页；通过Pagination及业务层组合。"
+        "没有虚拟滚动、内置请求或分页；通过Pagination及业务层组合。",
+        "列kind=actions或mobileLabel=false时，移动端隐藏该列标题，值占满整行且可换行；桌面表头仍保留。"
       ],
       "defaults": {
         "selectionMode": "none",
@@ -484,7 +535,8 @@
         "files/onChange必须成对管理；没有upload适配器时只选择，不会自动上传或显示完成。",
         "upload接收signal和onProgress；移除/卸载触发abort，适配器需响应signal。",
         "格式/数量/大小限制是前端体验，不代替服务端验证；失败文件可移除后重选。",
-        "进度限制0–100；完成URL不能使用危险协议；不包含分片/断点/自动重试。"
+        "进度限制0–100；完成URL不能使用危险协议；不包含分片/断点/自动重试。",
+        "beforeUpload 可进行裁剪或转换；处理期间status=processing，返回null取消，移除/卸载会终止signal，迟到结果不更新条目。"
       ],
       "defaults": {
         "maxSize": "10485760（10 MiB）",
@@ -777,6 +829,128 @@
       },
       "properties": {},
       "models": []
+    },
+    "MessageProvider": {
+      "summary": "作用域内的消息容器，配合 useMessage 显示成功、错误、警告和可更新的加载提示。",
+      "notes": [
+        "必须位于 UIProvider 内；useMessage 在 MessageProvider 后代使用，不创建跨应用的全局单例。",
+        "duration 单位为毫秒，0 表示持续显示；loading 消息不自动关闭。鼠标悬停或焦点停留时暂停倒计时。",
+        "show 返回 id；update 可把 loading 设为 false 并更新内容/颜色/时长，重新开始倒计时。卸载时清理计时器。"
+      ],
+      "defaults": {
+        "duration": "4000",
+        "maxCount": "5",
+        "position": "top-right"
+      },
+      "models": ["MessageOptions", "MessageAPI"]
+    },
+    "Form": {
+      "summary": "独立表单状态、字段校验、异步提交和重置，不包含业务请求。",
+      "notes": [
+        "initialValues 只在首次挂载时读取；切换编辑对象请改变 key。字段名为顶层 key，不解析点分路径。",
+        "onFinish 仅在所有校验通过后调用；处理中禁用原生字段、防止重复提交。异步失败显示错误并允许重试。",
+        "validate 返回字段错误字典；FormField 校验返回单个错误。onValuesChange 接收新对象，调用方不应原地修改。"
+      ],
+      "defaults": {
+        "disabled": "false"
+      },
+      "models": ["FormController", "FormErrors"]
+    },
+    "FormField": {
+      "summary": "关联标签、提示、校验和错误；通过 render prop 连接实际控件。",
+      "notes": [
+        "必须放在 Form 内；children 接收 id/value/onChange/onBlur/disabled/ARIA 属性，示例展示完整连接。",
+        "required 将空字符串、null、undefined、false 和空数组视为空，0 为有效值。validate 可返回 Promise。",
+        "不会自动克隆控件；原生 onChange 事件需转换为 control.onChange(event.target.value)。同名 FormField 不可重复注册。"
+      ],
+      "models": ["FormFieldControl", "FieldValidator"]
+    },
+    "FormList": {
+      "summary": "动态数组字段的增加、移除、更新和移动，移除后保留其他行的稳定 key。",
+      "notes": [
+        "必须放在 Form 内，name 指向顶层数组字段；空列表提交为 []。不删除任何服务端数据。",
+        "children 接收 items 和 actions；以 item.key 为 React key，update/remove/move 使用 item.index。",
+        "列表数据由 Form 管理，所有更新生成新数组；在 submitting/disabled 状态下操作无效。列表整体校验交给 Form.validate。"
+      ],
+      "models": ["FormListItem", "FormListActions"]
+    },
+    "SearchSelect": {
+      "summary": "受控、可搜索的单选框，支持键盘导航、禁用项和清空。",
+      "notes": [
+        "独立于原生 Select；onChange 直接返回字符串，不返回原生事件。value 与 options.value 使用字符串。",
+        "ArrowUp/ArrowDown/Home/End 移动候选，Enter 选择，Escape 关闭且不改变已选值。无匹配项不会创建任意新值。",
+        "onSearch 只通知查询文本变化，不发请求；options 由调用方维护。弹层不通过 Portal，受父容器 overflow 约束。"
+      ],
+      "defaults": {
+        "disabled": "false",
+        "clearable": "true"
+      },
+      "models": ["SelectOption"]
+    },
+    "Cascader": {
+      "summary": "无业务区域数据的多级原生选择，父项变化时清空下级。",
+      "notes": [
+        "value 为根到当前项的字符串路径；每一级改变都会回调新路径，允许部分选择。需要叶节点时由表单校验。",
+        "不内置省市区、分类数据或远程加载；options/value 由调用方维护；每层 value 应唯一且不为空。",
+        "使用原生 select，支持键盘和系统选择器；最多展示32级。"
+      ],
+      "models": ["CascaderOption"]
+    },
+    "DatePicker": {
+      "summary": "带标签的原生 date 输入，不隐式转换时区。",
+      "notes": [
+        "值遵循浏览器 date 输入：YYYY-MM-DD 或空字符串；onChange 是原生事件。",
+        "弹出的日历外观、键盘行为和本地化由浏览器/操作系统提供，不是自绘日历。min/max 是日期字符串。"
+      ]
+    },
+    "DateRangePicker": {
+      "summary": "受控的开始/结束日期组合，展示反向范围错误。",
+      "notes": [
+        "onChange 返回 [start,end]，清空一端保留另一端。不会偷偷交换日期或转换 UTC。",
+        "反向范围保留原值并展示错误；提交时仍须在 Form.validate 或服务端验证。min/max 传递给两个原生 date 控件。"
+      ]
+    },
+    "NumberInput": {
+      "summary": "受控数字或 null，支持范围、步长及失焦精度规范。",
+      "notes": [
+        "清空返回 null；onChange 直接返回 number/null。输入时允许暂时超出 min/max，失焦后钳制范围并处理 precision。",
+        "precision 为0到15整数；step遵循原生数字输入语义。disabled/readOnly 不产生用户值更新。",
+        "使用 JavaScript number，不提供金融级任意精度；大整数ID或精确十进制金额应使用文本输入和业务精度库。"
+      ],
+      "defaults": {
+        "step": "any"
+      }
+    },
+    "RadioGroup": {
+      "summary": "带 legend 的原生受控单选组，支持组及单项禁用。",
+      "notes": [
+        "value 为字符串，onChange 直接返回新值；未给 name 时生成实例唯一名称，避免不同单选组串选。",
+        "required 遵循原生约束；Form 使用 noValidate 时应注册相应校验。"
+      ],
+      "models": ["SelectOption"]
+    },
+    "ImageCropper": {
+      "summary": "本地图片裁剪弹窗，预览与 Canvas 导出共享源像素坐标。",
+      "notes": [
+        "仅处理调用方提供的 PNG/JPEG/WebP File（20MB以内、最多6400万像素），不下载远程资源或上传文件。",
+        "支持比例、缩放和水平/垂直位置；输出最长单边受4096像素限制，不自动放大小图。onCrop 返回新 File，成功后由调用方关闭。",
+        "可在 FileUpload.beforeUpload 适配器中等待裁剪结果；取消时返回 null，AbortSignal 触发时应关闭对应裁剪流程。",
+        "对象URL在关闭/换文件/卸载时回收；导出或回调失败保留弹窗供重试。"
+      ],
+      "defaults": {
+        "aspect": "1",
+        "outputWidth": "1024",
+        "outputType": "image/png",
+        "quality": "0.92"
+      },
+      "models": ["CropRect"]
+    },
+    "PageHeader": {
+      "summary": "响应式标题、说明、面包屑和操作区，不读取路由或翻译状态。",
+      "notes": [
+        "title 和其他插槽接受 ReactNode；文案、权限和路由全部由调用方提供。",
+        "使用 h1，通常每个页面使用一个；操作区在窄屏自动换行。"
+      ]
     }
   },
   "models": [
@@ -790,7 +964,18 @@
     "UploadItem",
     "NavigationItem",
     "RouteTab",
-    "TabItem"
+    "TabItem",
+    "MessageOptions",
+    "MessageAPI",
+    "FormController",
+    "FormErrors",
+    "FormFieldControl",
+    "FieldValidator",
+    "FormListItem",
+    "FormListActions",
+    "SelectOption",
+    "CascaderOption",
+    "CropRect"
   ],
   "modelNotes": {
     "UploadItem": {
@@ -800,7 +985,7 @@
           "description": "文件名，包含扩展名。"
         },
         "status": {
-          "description": "selected仅选择、uploading上传中、done已完成、error失败。"
+          "description": "selected仅选择、processing上传前处理、uploading上传中、done完成、error失败。"
         },
         "error": {
           "description": "该文件上传失败的消息。"
@@ -825,6 +1010,23 @@
       "properties": {
         "key": {
           "description": "记录字段名，必须属于keyof T。"
+        }
+      }
+    },
+    "MessageAPI": {
+      "properties": {
+        "loading": {
+          "description": "显示持续加载消息并返回id，需显式更新loading=false或关闭。"
+        },
+        "error": {
+          "description": "显示错误消息并返回id。"
+        }
+      }
+    },
+    "FormController": {
+      "properties": {
+        "disabled": {
+          "description": "只读状态：表单禁用或处理中。"
         }
       }
     }

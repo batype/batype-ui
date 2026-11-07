@@ -10,6 +10,8 @@ export interface TableColumn<T> {
   width?: CSSProperties['width']
   sortable?: boolean
   mobileHidden?: boolean
+  mobileLabel?: boolean
+  kind?: 'data' | 'actions'
 }
 export interface DataTableProps<T> {
   items: readonly T[]
@@ -186,8 +188,17 @@ export function DataTable<T>({
                   {columns
                     .filter((c) => !c.mobileHidden)
                     .map((column) => (
-                      <div key={column.key}>
-                        <dt>{column.title}</dt>
+                      <div
+                        key={column.key}
+                        className={
+                          column.kind === 'actions' || column.mobileLabel === false
+                            ? 'bui-table-mobile__wide'
+                            : undefined
+                        }
+                      >
+                        {column.kind !== 'actions' && column.mobileLabel !== false && (
+                          <dt>{column.title}</dt>
+                        )}
                         <dd>{cell(row, column)}</dd>
                       </div>
                     ))}

@@ -1,5 +1,16 @@
 # 本地验收记录
 
+## 0.3.0 发布前验证 — 2026-11-07
+
+- `pnpm check`：格式、严格类型、57组件/22共享类型的API契约、54项单元测试、库构建、包边界检查和文档构建全部通过。
+- `pnpm test:browser`：Chromium桌面及手机共24项通过，包含表单、动态列表清空、搜索/级联、消息、真实Canvas裁剪导出/取消焦点恢复、320px窄屏及基础axe扫描；旧表格、上传和编辑器继续回归。
+- `pnpm test:consumer`：0.3.0本地tarball分别安装到全新React18.3.1/19.3.1消费项目，新增组件类型及核心ESM/CJS/SSR/CSS通过，可选编辑/Markdown入口也通过。
+- `pnpm audit --audit-level high`：No known vulnerabilities found。
+- 已确认npm账号shaosong为batype组织owner，GitHub账号具有batype/batype-ui仓库ADMIN权限；未在源码中写入令牌。
+- 以上为本地验证，不代表npm发布或远程CI完成；实际发布状态以npm注册表和GitHub Releases为准。未验证范围仍包括Firefox、Safari、全部辅助技术及非Web平台。
+
+## 0.2.0 历史验收记录
+
 日期：2026-11-06。版本0.2.0验收记录。源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)；尚未发布 npm。
 
 | 检查                 | 结果                                                                                                                                                                       |

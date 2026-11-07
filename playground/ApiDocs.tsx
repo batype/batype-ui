@@ -62,7 +62,7 @@ export function UsageDocs({ name }: { name: ComponentName }) {
           导入路径：<code>{doc.entry}</code>
         </p>
         {name === 'CodeEditor' && (
-          <pre className="api-install">
+          <pre className="api-install" tabIndex={0} aria-label="CodeEditor 安装命令">
             <code>
               pnpm add @codemirror/state @codemirror/view @codemirror/commands
               @codemirror/lang-javascript @codemirror/lang-json
@@ -70,12 +70,12 @@ export function UsageDocs({ name }: { name: ComponentName }) {
           </pre>
         )}
         {name === 'RichTextEditor' && (
-          <pre className="api-install">
+          <pre className="api-install" tabIndex={0} aria-label="RichTextEditor 安装命令">
             <code>pnpm add @wangeditor/editor</code>
           </pre>
         )}
         {name === 'Markdown' && (
-          <pre className="api-install">
+          <pre className="api-install" tabIndex={0} aria-label="Markdown 安装命令">
             <code>pnpm add react-markdown remark-gfm</code>
           </pre>
         )}
@@ -85,7 +85,7 @@ export function UsageDocs({ name }: { name: ComponentName }) {
         title="完整使用示例"
         action={<CopyButton value={doc.example} label="复制示例代码" />}
       >
-        <pre>
+        <pre tabIndex={0} aria-label={`${name} 完整示例代码`}>
           <code>{doc.example}</code>
         </pre>
       </Card>
@@ -155,7 +155,7 @@ export function ApiDocs({ name }: { name: ComponentName }) {
             return (
               <details key={name} className="api-model" open>
                 <summary>{name}</summary>
-                <pre>
+                <pre tabIndex={0} aria-label={`${name} 类型定义`}>
                   <code>{model.definition}</code>
                 </pre>
                 {!!model.properties.length && (
@@ -168,7 +168,7 @@ export function ApiDocs({ name }: { name: ComponentName }) {
       )}
       <details className="api-signature">
         <summary>完整函数签名</summary>
-        <pre>
+        <pre tabIndex={0} aria-label={`${name} 函数签名`}>
           <code>{doc.signature}</code>
         </pre>
         <p className="code-note">源码：{doc.source}。表单原生事件与直接返回值的回调不可混用。</p>

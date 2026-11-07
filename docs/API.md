@@ -56,6 +56,18 @@
 - [ErrorState](#errorstate)
 - [Spinner](#spinner)
 - [Skeleton](#skeleton)
+- [MessageProvider](#messageprovider)
+- [Form](#form)
+- [FormField](#formfield)
+- [FormList](#formlist)
+- [SearchSelect](#searchselect)
+- [Cascader](#cascader)
+- [DatePicker](#datepicker)
+- [DateRangePicker](#daterangepicker)
+- [NumberInput](#numberinput)
+- [RadioGroup](#radiogroup)
+- [ImageCropper](#imagecropper)
+- [PageHeader](#pageheader)
 
 ## UIProvider
 
@@ -97,8 +109,8 @@ export default function UIProviderExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置      | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置      | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `CSSProperties &#124; undefined`                                                           | 否   | 未设置      | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置      | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置      | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置      | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置      | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置      | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 
 ### 事件回调
@@ -237,7 +249,7 @@ export default function UIProviderExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLDivElement, Element> &#124; undefined`                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -442,8 +454,8 @@ export default function ButtonExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置  | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置  | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置  | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置  | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置  | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置  | 子内容；具体展示位置由组件决定。                             |
 | `ref`              | `React.Ref<HTMLButtonElement> &#124; undefined`                                            | 否   | 未设置  | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
@@ -588,7 +600,7 @@ export default function ButtonExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLButtonElement, Element> &#124; undefined`                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -739,7 +751,7 @@ export default function ButtonExample() {
 | `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStart`              | `React.TransitionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                               |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                 |
 
 </details>
 
@@ -793,8 +805,8 @@ export default function ActionButtonExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `ref`              | `React.Ref<HTMLButtonElement> &#124; undefined`                                            | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
 
 ### 事件回调
@@ -937,7 +949,7 @@ export default function ActionButtonExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLButtonElement, Element> &#124; undefined`                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -1088,7 +1100,7 @@ export default function ActionButtonExample() {
 | `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStart`              | `React.TransitionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                               |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                 |
 
 </details>
 
@@ -1122,8 +1134,8 @@ export default function IconExample() {
 | `name`             | `"search" &#124; "copy" &#124; "plus" &#124; "close" &#124; "chevron-left" &#124; "chevron-right" &#124; "check" &#124; "arrow-up" &#124; "arrow-down" &#124; "box"` | 是   | —（必填） | 内置图标名，允许值见IconName。                               |
 | `style`            | `React.CSSProperties &#124; undefined`                                                                                                                               | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
 | `type`             | `string &#124; undefined`                                                                                                                                            | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-describedby` | `string &#124; undefined`                                                                                                                                            | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined`                                                                           | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                                                                                            | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined`                                                                           | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                                                                                            | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `React.ReactNode`                                                                                                                                                    | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `ref`              | `React.Ref<SVGSVGElement> &#124; undefined`                                                                                                                          | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
@@ -1154,15 +1166,15 @@ export default function IconExample() {
 | `color`                       | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `height`                      | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                           |
 | `lang`                        | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `max`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `max`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | 最大数值或最晚日期，具体类型见签名。                         |
 | `media`                       | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `method`                      | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `min`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `min`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | 最小数值或最早日期，具体类型见签名。                         |
 | `nonce`                       | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `part`                        | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `slot`                        | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `target`                      | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `width`                       | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | 列宽，接受CSS宽度值。                                        |
+| `width`                       | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                   |
 | `role`                        | `React.AriaRole &#124; undefined`                                                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `tabIndex`                    | `number &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `crossOrigin`                 | `CrossOrigin`                                                                                                                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -1370,7 +1382,7 @@ export default function IconExample() {
 | `unicodeRange`                | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `unitsPerEm`                  | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `vAlphabetic`                 | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `values`                      | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `values`                      | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | 表单当前完整值，禁止原地修改。                               |
 | `vectorEffect`                | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `version`                     | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `vertAdvY`                    | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -1387,7 +1399,7 @@ export default function IconExample() {
 | `writingMode`                 | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `x1`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `x2`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `x`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `x`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | 源图片横向像素坐标。                                         |
 | `xChannelSelector`            | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `xHeight`                     | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `xlinkActuate`                | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -1404,7 +1416,7 @@ export default function IconExample() {
 | `xmlSpace`                    | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `y1`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `y2`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `y`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `y`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | 源图片纵向像素坐标。                                         |
 | `yChannelSelector`            | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `z`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `zoomAndPan`                  | `string &#124; undefined`                                                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -1473,7 +1485,7 @@ export default function IconExample() {
 | `onCompositionUpdateCapture`  | `React.CompositionEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                     | `React.FocusEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`              | `React.FocusEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                      | `React.FocusEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                      | `React.FocusEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                                 | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`               | `React.FocusEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`             | `React.ChangeEventHandler<SVGSVGElement, Element> &#124; undefined`                                                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`               | `React.InputEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -1624,7 +1636,7 @@ export default function IconExample() {
 | `onTransitionRunCapture`      | `React.TransitionEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStart`           | `React.TransitionEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStartCapture`    | `React.TransitionEventHandler<SVGSVGElement> &#124; undefined`                                                                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `key`                         | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                                                                  | 否   | 未设置 | 稳定唯一标识。                                               |
+| `key`                         | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                                                                  | 否   | 未设置 | 稳定唯一键。                                                 |
 
 </details>
 
@@ -1667,8 +1679,8 @@ export default function CardExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置 | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置 | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置 | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置 | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置 | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置 | 子内容；具体展示位置由组件决定。                             |
 
@@ -1804,7 +1816,7 @@ export default function CardExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLElement> &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLElement> &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLElement> &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLElement> &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLElement> &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLElement, Element> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLElement> &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -2007,8 +2019,8 @@ export default function CopyButtonExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置                | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置                | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置                | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置                | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置                | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置                | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置                | 字段校验失败时为true，需透传给真实输入元素。                 |
 
 ### 事件回调
 
@@ -2151,7 +2163,7 @@ export default function CopyButtonExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLButtonElement, Element> &#124; undefined`                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLButtonElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -2332,8 +2344,8 @@ export default function ExternalLinkExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `href`             | `string`                                                                                   | 是   | —（必填） | 链接地址；只允许http、https、mailto、tel及相对地址。         |
@@ -2472,7 +2484,7 @@ export default function ExternalLinkExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLAnchorElement> &#124; undefined`                                                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLAnchorElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLAnchorElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLAnchorElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLAnchorElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLAnchorElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLAnchorElement, Element> &#124; undefined`                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLAnchorElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -2742,7 +2754,7 @@ export default function InputExample() {
 | `name`             | `string &#124; undefined`                                                                  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                             |
 | `placeholder`      | `string &#124; undefined`                                                                  | 否   | 未设置    | 未输入时的提示文字。                                         |
 | `readOnly`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 只读模式。                                                   |
-| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
 | `type`             | `React.HTMLInputTypeAttribute &#124; undefined`                                            | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `value`            | `string &#124; number &#124; readonly string[] &#124; undefined`                           | 否   | 未设置    | 当前受控值。                                                 |
 | `defaultChecked`   | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 非受控初始勾选状态。                                         |
@@ -2750,8 +2762,8 @@ export default function InputExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `ref`              | `React.Ref<HTMLInputElement> &#124; undefined`                                             | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
@@ -2786,16 +2798,16 @@ export default function InputExample() {
 | `formTarget`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                                         |
 | `list`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最大数值或最晚日期，具体类型见签名。                                       |
 | `maxLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最小数值或最早日期，具体类型见签名。                                       |
 | `minLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `multiple`                       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `pattern`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `size`                           | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 组件尺寸。                                                                 |
 | `src`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。 |
-| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 列宽，接受CSS宽度值。                                                      |
+| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 数字输入的原生步长或any。                                                  |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                                 |
 | `suppressContentEditableWarning` | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `suppressHydrationWarning`       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `accessKey`                      | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -2911,7 +2923,7 @@ export default function InputExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocus`                        | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。                         |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLInputElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -3062,7 +3074,7 @@ export default function InputExample() {
 | `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onTransitionStart`              | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                                             |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                               |
 
 </details>
 
@@ -3106,8 +3118,8 @@ export default function PasswordInputExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `label`            | `string`                                                                                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                   |
@@ -3116,7 +3128,7 @@ export default function PasswordInputExample() {
 | `checked`          | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 受控勾选状态，配合onChange更新。                             |
 | `placeholder`      | `string &#124; undefined`                                                                  | 否   | 未设置    | 未输入时的提示文字。                                         |
 | `readOnly`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 只读模式。                                                   |
-| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
 | `ref`              | `React.Ref<HTMLInputElement> &#124; undefined`                                             | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
 
 ### 事件回调
@@ -3141,7 +3153,7 @@ export default function PasswordInputExample() {
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | -------------------------------------------------------------------------- |
 | `form`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `list`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 数字输入的原生步长或any。                                                  |
 | `size`                           | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 组件尺寸。                                                                 |
 | `formAction`                     | `string &#124; ((formData: FormData) => void &#124; Promise<void>) &#124; undefined`                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `formEncType`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -3263,7 +3275,7 @@ export default function PasswordInputExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocus`                        | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。                         |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLInputElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -3418,15 +3430,15 @@ export default function PasswordInputExample() {
 | `alt`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 图片替代文字，同时用于预览弹窗标题。                                       |
 | `capture`                        | `boolean &#124; "user" &#124; "environment" &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                                         |
-| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最大数值或最晚日期，具体类型见签名。                                       |
 | `maxLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最小数值或最早日期，具体类型见签名。                                       |
 | `minLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `multiple`                       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `pattern`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `src`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。 |
-| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 列宽，接受CSS宽度值。                                                      |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                                             |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                                 |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                               |
 
 </details>
 
@@ -3468,7 +3480,7 @@ export default function TextareaExample() {
 | `name`             | `string &#124; undefined`                                                                  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                             |
 | `placeholder`      | `string &#124; undefined`                                                                  | 否   | 未设置    | 未输入时的提示文字。                                         |
 | `readOnly`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 只读模式。                                                   |
-| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
 | `rows`             | `number &#124; undefined`                                                                  | 否   | 4         | 多行输入默认可见行数，非最大字符数。                         |
 | `value`            | `string &#124; number &#124; readonly string[] &#124; undefined`                           | 否   | 未设置    | 当前受控值。                                                 |
 | `defaultChecked`   | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 非受控初始勾选状态。                                         |
@@ -3476,8 +3488,8 @@ export default function TextareaExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `ref`              | `React.Ref<HTMLTextAreaElement> &#124; undefined`                                          | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
@@ -3621,7 +3633,7 @@ export default function TextareaExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLTextAreaElement, Element> &#124; undefined`                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -3772,7 +3784,7 @@ export default function TextareaExample() {
 | `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStart`              | `React.TransitionEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLTextAreaElement> &#124; undefined`                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                               |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                 |
 
 </details>
 
@@ -3816,15 +3828,15 @@ export default function SelectExample() {
 | `autoComplete`     | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `disabled`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 禁用用户交互。                                               |
 | `name`             | `string &#124; undefined`                                                                  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                             |
-| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
 | `value`            | `string &#124; number &#124; readonly string[] &#124; undefined`                           | 否   | 未设置    | 当前受控值。                                                 |
 | `defaultChecked`   | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 非受控初始勾选状态。                                         |
 | `defaultValue`     | `string &#124; number &#124; readonly string[] &#124; undefined`                           | 否   | 未设置    | 非受控初始值，不与value同时使用。                            |
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `ref`              | `React.Ref<HTMLSelectElement> &#124; undefined`                                            | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
@@ -3966,7 +3978,7 @@ export default function SelectExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLSelectElement, Element> &#124; undefined`                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -4117,7 +4129,7 @@ export default function SelectExample() {
 | `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStart`              | `React.TransitionEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLSelectElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                               |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                 |
 
 </details>
 
@@ -4159,15 +4171,15 @@ export default function CheckboxExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `autoComplete`     | `React.HTMLInputAutoCompleteAttribute &#124; undefined`                                    | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `checked`          | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 受控勾选状态，配合onChange更新。                             |
 | `placeholder`      | `string &#124; undefined`                                                                  | 否   | 未设置    | 未输入时的提示文字。                                         |
 | `readOnly`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 只读模式。                                                   |
-| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
 | `ref`              | `React.Ref<HTMLInputElement> &#124; undefined`                                             | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
 
 ### 事件回调
@@ -4190,7 +4202,7 @@ export default function CheckboxExample() {
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | -------------------------------------------------------------------------- |
 | `form`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `list`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 数字输入的原生步长或any。                                                  |
 | `size`                           | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 组件尺寸。                                                                 |
 | `formAction`                     | `string &#124; ((formData: FormData) => void &#124; Promise<void>) &#124; undefined`                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `formEncType`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -4312,7 +4324,7 @@ export default function CheckboxExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocus`                        | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。                         |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLInputElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -4467,15 +4479,15 @@ export default function CheckboxExample() {
 | `alt`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 图片替代文字，同时用于预览弹窗标题。                                       |
 | `capture`                        | `boolean &#124; "user" &#124; "environment" &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                                         |
-| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最大数值或最晚日期，具体类型见签名。                                       |
 | `maxLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最小数值或最早日期，具体类型见签名。                                       |
 | `minLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `multiple`                       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `pattern`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `src`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。 |
-| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 列宽，接受CSS宽度值。                                                      |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                                             |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                                 |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                               |
 
 </details>
 
@@ -4517,15 +4529,15 @@ export default function SwitchExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
 | `autoComplete`     | `React.HTMLInputAutoCompleteAttribute &#124; undefined`                                    | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `checked`          | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 受控勾选状态，配合onChange更新。                             |
 | `placeholder`      | `string &#124; undefined`                                                                  | 否   | 未设置    | 未输入时的提示文字。                                         |
 | `readOnly`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 只读模式。                                                   |
-| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
 | `ref`              | `React.Ref<HTMLInputElement> &#124; undefined`                                             | 否   | 未设置    | 原生元素引用；Button/Input等forwardRef组件支持React18/19。   |
 
 ### 事件回调
@@ -4548,7 +4560,7 @@ export default function SwitchExample() {
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | -------------------------------------------------------------------------- |
 | `form`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `list`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 数字输入的原生步长或any。                                                  |
 | `size`                           | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 组件尺寸。                                                                 |
 | `formAction`                     | `string &#124; ((formData: FormData) => void &#124; Promise<void>) &#124; undefined`                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `formEncType`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -4669,7 +4681,7 @@ export default function SwitchExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocus`                        | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。                         |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLInputElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -4824,15 +4836,15 @@ export default function SwitchExample() {
 | `alt`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 图片替代文字，同时用于预览弹窗标题。                                       |
 | `capture`                        | `boolean &#124; "user" &#124; "environment" &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                                         |
-| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最大数值或最晚日期，具体类型见签名。                                       |
 | `maxLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最小数值或最早日期，具体类型见签名。                                       |
 | `minLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `multiple`                       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `pattern`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `src`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。 |
-| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 列宽，接受CSS宽度值。                                                      |
-| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一标识。                                                             |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                                 |
+| `key`                            | `React.Key &#124; null &#124; undefined`                                                                                                                                                                                          | 否   | 未设置 | 稳定唯一键。                                                               |
 
 </details>
 
@@ -4910,6 +4922,7 @@ export default function DataTableExample() {
 - 排序仅返回意图，不会修改items；配置sortable列且提供onSortChange才启用。
 - 640px以下使用移动卡片；caption只用于桌面表格。对象字段必须使用render。
 - 没有虚拟滚动、内置请求或分页；通过Pagination及业务层组合。
+- 列kind=actions或mobileLabel=false时，移动端隐藏该列标题，值占满整行且可换行；桌面表头仍保留。
 
 关联数据结构：[TableColumn](#tablecolumn)。
 
@@ -5101,8 +5114,8 @@ export default function BadgeExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置  | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置  | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置  | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置  | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置  | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置  | 子内容；具体展示位置由组件决定。                             |
 
@@ -5238,7 +5251,7 @@ export default function BadgeExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLSpanElement, Element> &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -5426,8 +5439,8 @@ export default function StatusChipExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 
 ### 事件回调
@@ -5564,7 +5577,7 @@ export default function StatusChipExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLSpanElement, Element> &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -5745,8 +5758,8 @@ export default function MethodChipExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `value`            | `string`                                                                                   | 是   | —（必填） | HTTP方法字符串，例如GET、POST；会转为大写显示。              |
 
@@ -5883,7 +5896,7 @@ export default function MethodChipExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLSpanElement, Element> &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -6064,8 +6077,8 @@ export default function RequestStatusChipExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `status`           | `number`                                                                                   | 是   | —（必填） | HTTP状态码；按状态类别配色。                                 |
 
@@ -6202,7 +6215,7 @@ export default function RequestStatusChipExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLSpanElement, Element> &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLSpanElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -6557,16 +6570,17 @@ export default function FileUploadExample({ upload }: { upload?: FileUploadProps
 
 ### 参数
 
-| 参数       | 类型                                                                                                                                      | 必填 | 默认值             | 说明                                                                            |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------ | ------------------------------------------------------------------------------- |
-| `label`    | `string`                                                                                                                                  | 是   | —（必填）          | 可见标签或无障碍名称，应明确描述控件用途。                                      |
-| `files`    | `readonly UploadItem[]`                                                                                                                   | 是   | —（必填）          | 受控文件条目列表。                                                              |
-| `upload`   | `((file: File, options: { signal: AbortSignal; onProgress: (progress: number) => void; }) => Promise<{ url: string; }>) &#124; undefined` | 否   | 未设置             | 上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。 |
-| `accept`   | `string &#124; undefined`                                                                                                                 | 否   | 空字符串（不限）   | 逗号分隔MIME或扩展名，例如image/*,.png。仅客户端体验校验。                      |
-| `maxCount` | `number &#124; undefined`                                                                                                                 | 否   | 5                  | 最多文件数。                                                                    |
-| `maxSize`  | `number &#124; undefined`                                                                                                                 | 否   | 10485760（10 MiB） | 单文件大小上限，单位字节。                                                      |
-| `disabled` | `boolean &#124; undefined`                                                                                                                | 否   | 未设置             | 禁用用户交互。                                                                  |
-| `hint`     | `ReactNode`                                                                                                                               | 否   | 未设置             | 辅助说明，错误存在时优先显示error。                                             |
+| 参数           | 类型                                                                                                                                      | 必填 | 默认值             | 说明                                                                                  |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------ | ------------------------------------------------------------------------------------- |
+| `label`        | `string`                                                                                                                                  | 是   | —（必填）          | 可见标签或无障碍名称，应明确描述控件用途。                                            |
+| `files`        | `readonly UploadItem[]`                                                                                                                   | 是   | —（必填）          | 受控文件条目列表。                                                                    |
+| `upload`       | `((file: File, options: { signal: AbortSignal; onProgress: (progress: number) => void; }) => Promise<{ url: string; }>) &#124; undefined` | 否   | 未设置             | 上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。       |
+| `beforeUpload` | `((file: File, options: { signal: AbortSignal; }) => File &#124; null &#124; Promise<File &#124; null>) &#124; undefined`                 | 否   | 未设置             | 上传前适配器，接收File和AbortSignal；返回处理后File，null取消；结果仍检查格式及大小。 |
+| `accept`       | `string &#124; undefined`                                                                                                                 | 否   | 空字符串（不限）   | 逗号分隔MIME或扩展名，例如image/*,.png。仅客户端体验校验。                            |
+| `maxCount`     | `number &#124; undefined`                                                                                                                 | 否   | 5                  | 同时展示的消息上限，至少1条；超出时移除最早消息。                                     |
+| `maxSize`      | `number &#124; undefined`                                                                                                                 | 否   | 10485760（10 MiB） | 单文件大小上限，单位字节。                                                            |
+| `disabled`     | `boolean &#124; undefined`                                                                                                                | 否   | 未设置             | 禁用用户交互。                                                                        |
+| `hint`         | `ReactNode`                                                                                                                               | 否   | 未设置             | 辅助说明，错误存在时优先显示error。                                                   |
 
 ### 事件回调
 
@@ -6581,6 +6595,7 @@ export default function FileUploadExample({ upload }: { upload?: FileUploadProps
 - upload接收signal和onProgress；移除/卸载触发abort，适配器需响应signal。
 - 格式/数量/大小限制是前端体验，不代替服务端验证；失败文件可移除后重选。
 - 进度限制0–100；完成URL不能使用危险协议；不包含分片/断点/自动重试。
+- beforeUpload 可进行裁剪或转换；处理期间status=processing，返回null取消，移除/卸载会终止signal，迟到结果不更新条目。
 
 关联数据结构：[UploadItem](#uploaditem)。
 
@@ -6616,15 +6631,16 @@ export default function ImageUploadExample({ upload }: { upload?: FileUploadProp
 
 ### 参数
 
-| 参数       | 类型                                                                                                                                      | 必填 | 默认值             | 说明                                                                            |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------ | ------------------------------------------------------------------------------- |
-| `hint`     | `ReactNode`                                                                                                                               | 否   | 未设置             | 辅助说明，错误存在时优先显示error。                                             |
-| `disabled` | `boolean &#124; undefined`                                                                                                                | 否   | 未设置             | 禁用用户交互。                                                                  |
-| `label`    | `string`                                                                                                                                  | 是   | —（必填）          | 可见标签或无障碍名称，应明确描述控件用途。                                      |
-| `files`    | `readonly UploadItem[]`                                                                                                                   | 是   | —（必填）          | 受控文件条目列表。                                                              |
-| `upload`   | `((file: File, options: { signal: AbortSignal; onProgress: (progress: number) => void; }) => Promise<{ url: string; }>) &#124; undefined` | 否   | 未设置             | 上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。 |
-| `maxCount` | `number &#124; undefined`                                                                                                                 | 否   | 5                  | 最多文件数。                                                                    |
-| `maxSize`  | `number &#124; undefined`                                                                                                                 | 否   | 10485760（10 MiB） | 单文件大小上限，单位字节。                                                      |
+| 参数           | 类型                                                                                                                                      | 必填 | 默认值             | 说明                                                                                  |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------ | ------------------------------------------------------------------------------------- |
+| `hint`         | `ReactNode`                                                                                                                               | 否   | 未设置             | 辅助说明，错误存在时优先显示error。                                                   |
+| `disabled`     | `boolean &#124; undefined`                                                                                                                | 否   | 未设置             | 禁用用户交互。                                                                        |
+| `label`        | `string`                                                                                                                                  | 是   | —（必填）          | 可见标签或无障碍名称，应明确描述控件用途。                                            |
+| `files`        | `readonly UploadItem[]`                                                                                                                   | 是   | —（必填）          | 受控文件条目列表。                                                                    |
+| `upload`       | `((file: File, options: { signal: AbortSignal; onProgress: (progress: number) => void; }) => Promise<{ url: string; }>) &#124; undefined` | 否   | 未设置             | 上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。       |
+| `beforeUpload` | `((file: File, options: { signal: AbortSignal; }) => File &#124; null &#124; Promise<File &#124; null>) &#124; undefined`                 | 否   | 未设置             | 上传前适配器，接收File和AbortSignal；返回处理后File，null取消；结果仍检查格式及大小。 |
+| `maxCount`     | `number &#124; undefined`                                                                                                                 | 否   | 5                  | 同时展示的消息上限，至少1条；超出时移除最早消息。                                     |
+| `maxSize`      | `number &#124; undefined`                                                                                                                 | 否   | 10485760（10 MiB） | 单文件大小上限，单位字节。                                                            |
 
 ### 事件回调
 
@@ -6675,14 +6691,15 @@ export default function VideoUploadExample({ upload }: { upload?: FileUploadProp
 
 ### 参数
 
-| 参数       | 类型                                                                                                                                      | 必填 | 默认值             | 说明                                                                            |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------ | ------------------------------------------------------------------------------- |
-| `hint`     | `ReactNode`                                                                                                                               | 否   | 未设置             | 辅助说明，错误存在时优先显示error。                                             |
-| `disabled` | `boolean &#124; undefined`                                                                                                                | 否   | 未设置             | 禁用用户交互。                                                                  |
-| `label`    | `string`                                                                                                                                  | 是   | —（必填）          | 可见标签或无障碍名称，应明确描述控件用途。                                      |
-| `files`    | `readonly UploadItem[]`                                                                                                                   | 是   | —（必填）          | 受控文件条目列表。                                                              |
-| `upload`   | `((file: File, options: { signal: AbortSignal; onProgress: (progress: number) => void; }) => Promise<{ url: string; }>) &#124; undefined` | 否   | 未设置             | 上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。 |
-| `maxSize`  | `number &#124; undefined`                                                                                                                 | 否   | 10485760（10 MiB） | 单文件大小上限，单位字节。                                                      |
+| 参数           | 类型                                                                                                                                      | 必填 | 默认值             | 说明                                                                                  |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------ | ------------------------------------------------------------------------------------- |
+| `hint`         | `ReactNode`                                                                                                                               | 否   | 未设置             | 辅助说明，错误存在时优先显示error。                                                   |
+| `disabled`     | `boolean &#124; undefined`                                                                                                                | 否   | 未设置             | 禁用用户交互。                                                                        |
+| `label`        | `string`                                                                                                                                  | 是   | —（必填）          | 可见标签或无障碍名称，应明确描述控件用途。                                            |
+| `files`        | `readonly UploadItem[]`                                                                                                                   | 是   | —（必填）          | 受控文件条目列表。                                                                    |
+| `upload`       | `((file: File, options: { signal: AbortSignal; onProgress: (progress: number) => void; }) => Promise<{ url: string; }>) &#124; undefined` | 否   | 未设置             | 上传适配器；接收File及signal/onProgress，返回Promise<{url}>。未传时仅选择文件。       |
+| `beforeUpload` | `((file: File, options: { signal: AbortSignal; }) => File &#124; null &#124; Promise<File &#124; null>) &#124; undefined`                 | 否   | 未设置             | 上传前适配器，接收File和AbortSignal；返回处理后File，null取消；结果仍检查格式及大小。 |
+| `maxSize`      | `number &#124; undefined`                                                                                                                 | 否   | 10485760（10 MiB） | 单文件大小上限，单位字节。                                                            |
 
 ### 事件回调
 
@@ -6728,8 +6745,8 @@ export default function ImagePreviewExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                                        |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。                    |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                              |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。                             |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                               |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `children`         | `React.ReactNode`                                                                          | 否   | 未设置    | 子内容；具体展示位置由组件决定。                                           |
 | `src`              | `string`                                                                                   | 是   | —（必填） | 媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。 |
@@ -6871,7 +6888,7 @@ export default function ImagePreviewExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLImageElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -7024,7 +7041,7 @@ export default function ImagePreviewExample() {
 | `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLImageElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `referrerPolicy`                 | `React.HTMLAttributeReferrerPolicy &#124; undefined`                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                           |
-| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 列宽，接受CSS宽度值。                                        |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                   |
 | `crossOrigin`                    | `CrossOrigin`                                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `decoding`                       | `"auto" &#124; "async" &#124; "sync" &#124; undefined`                                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `fetchPriority`                  | `"auto" &#124; "high" &#124; "low" &#124; undefined`                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -7061,8 +7078,8 @@ export default function VideoPlayerExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                                        |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。                    |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                              |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。                             |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                               |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
 | `children`         | `React.ReactNode`                                                                          | 否   | 未设置    | 子内容；具体展示位置由组件决定。                                           |
 | `poster`           | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
@@ -7209,7 +7226,7 @@ export default function VideoPlayerExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLVideoElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -7361,7 +7378,7 @@ export default function VideoPlayerExample() {
 | `onTransitionStart`              | `React.TransitionEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLVideoElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                           |
-| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 列宽，接受CSS宽度值。                                        |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                   |
 | `crossOrigin`                    | `CrossOrigin`                                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `playsInline`                    | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `disablePictureInPicture`        | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -7800,8 +7817,8 @@ export default function AlertExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置  | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置  | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置  | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置  | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置  | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置  | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置  | 子内容；具体展示位置由组件决定。                             |
 
@@ -7937,7 +7954,7 @@ export default function AlertExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLDivElement, Element> &#124; undefined`                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -8216,8 +8233,8 @@ export default function SpinnerExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置                     | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置                     | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置                     | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置                     | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置                     | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置                     | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置                     | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置                     | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置                     | 子内容；具体展示位置由组件决定。                             |
 | `label`            | `string &#124; undefined`                                                                  | 否   | 随locale：加载中 / Loading | 可见标签或无障碍名称，应明确描述控件用途。                   |
@@ -8355,7 +8372,7 @@ export default function SpinnerExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLDivElement, Element> &#124; undefined`                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -8535,8 +8552,8 @@ export default function SkeletonExample() {
 | `className`        | `string &#124; undefined`                                                                  | 否   | 未设置 | 附加CSS类；具体挂载节点见使用约定。                          |
 | `id`               | `string &#124; undefined`                                                                  | 否   | 未设置 | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
 | `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置 | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
-| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置 | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置 | 字段校验失败时为true，需透传给真实输入元素。                 |
 | `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `children`         | `ReactNode`                                                                                | 否   | 未设置 | 子内容；具体展示位置由组件决定。                             |
 | `lines`            | `number &#124; undefined`                                                                  | 否   | 3      | 占位行数；取整并限制1–20，非有限值回退3。                    |
@@ -8674,7 +8691,7 @@ export default function SkeletonExample() {
 | `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocus`                        | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onFocusCapture`                 | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
-| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
 | `onBlurCapture`                  | `React.FocusEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onChangeCapture`                | `React.ChangeEventHandler<HTMLDivElement, Element> &#124; undefined`                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
 | `onBeforeInput`                  | `React.InputEventHandler<HTMLDivElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
@@ -8828,6 +8845,1673 @@ export default function SkeletonExample() {
 
 </details>
 
+## MessageProvider
+
+导入：`@batype/ui`。源码：`src/components/Message.tsx`。
+
+作用域内的消息容器，配合 useMessage 显示成功、错误、警告和可更新的加载提示。
+
+### 使用示例
+
+```tsx
+import { useRef } from 'react'
+import { Button, MessageProvider, useMessage } from '@batype/ui'
+import '@batype/ui/style.css'
+
+function MessageActions() {
+  const message = useMessage(),
+    id = useRef('')
+  return (
+    <div>
+      <Button onClick={() => message.success('操作成功')}>成功提示</Button>
+      <Button onClick={() => message.error('操作失败，请重试')}>失败提示</Button>
+      <Button
+        onClick={() => {
+          id.current = message.loading('处理中…')
+        }}
+      >
+        开始处理
+      </Button>
+      <Button
+        onClick={() =>
+          message.update(id.current, {
+            content: '处理完成',
+            loading: false,
+            tone: 'success',
+            duration: 2000,
+          })
+        }
+      >
+        处理完成
+      </Button>
+    </div>
+  )
+}
+export default function MessageProviderExample() {
+  return (
+    <MessageProvider duration={4000} maxCount={3}>
+      <MessageActions />
+    </MessageProvider>
+  )
+}
+```
+
+### 参数
+
+| 参数       | 类型                                                                     | 必填 | 默认值    | 说明                                                |
+| ---------- | ------------------------------------------------------------------------ | ---- | --------- | --------------------------------------------------- |
+| `children` | `ReactNode`                                                              | 是   | —（必填） | 子内容；具体展示位置由组件决定。                    |
+| `duration` | `number &#124; undefined`                                                | 否   | 4000      | 消息显示时长，单位毫秒；0为持续显示。               |
+| `maxCount` | `number &#124; undefined`                                                | 否   | 5         | 同时展示的消息上限，至少1条；超出时移除最早消息。   |
+| `position` | `"top-right" &#124; "top-center" &#124; "bottom-right" &#124; undefined` | 否   | top-right | 消息容器位置：top-right、top-center、bottom-right。 |
+
+### 事件回调
+
+无。
+
+### 使用约定
+
+- 必须位于 UIProvider 内；useMessage 在 MessageProvider 后代使用，不创建跨应用的全局单例。
+- duration 单位为毫秒，0 表示持续显示；loading 消息不自动关闭。鼠标悬停或焦点停留时暂停倒计时。
+- show 返回 id；update 可把 loading 设为 false 并更新内容/颜色/时长，重新开始倒计时。卸载时清理计时器。
+
+关联数据结构：[MessageOptions](#messageoptions)、[MessageAPI](#messageapi)。
+
+## Form
+
+导入：`@batype/ui`。源码：`src/components/Form.tsx`。
+
+独立表单状态、字段校验、异步提交和重置，不包含业务请求。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { Form, FormField, Button } from '@batype/ui'
+import '@batype/ui/style.css'
+
+interface ExampleValues {
+  name: string
+}
+const initialValues: ExampleValues = { name: '' }
+
+export default function FormExample() {
+  const [result, setResult] = useState('')
+  return (
+    <>
+      <Form
+        initialValues={initialValues}
+        onFinish={(values) => {
+          setResult(values.name)
+        }}
+      >
+        {(form) => (
+          <>
+            <FormField name="name" label="名称" required>
+              {(control) => (
+                <input
+                  {...control}
+                  value={String(control.value ?? '')}
+                  onChange={(event) => control.onChange(event.target.value)}
+                />
+              )}
+            </FormField>
+            <Button type="submit" loading={form.submitting}>
+              提交表单
+            </Button>
+            <Button type="reset" variant="soft">
+              重置表单
+            </Button>
+          </>
+        )}
+      </Form>
+      <output aria-label="提交结果">{result}</output>
+    </>
+  )
+}
+```
+
+### 参数
+
+| 参数               | 类型                                                                                       | 必填 | 默认值    | 说明                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------ | ---- | --------- | ------------------------------------------------------------ |
+| `initialValues`    | `T`                                                                                        | 是   | —（必填） | 首次挂载的表单初值；切换对象使用新 key。                     |
+| `children`         | `ReactNode &#124; ((form: FormController<T>) => ReactNode)`                                | 是   | —（必填） | 子内容；具体展示位置由组件决定。                             |
+| `validate`         | `((values: T) => FormErrors &#124; Promise<FormErrors>) &#124; undefined`                  | 否   | 未设置    | 校验函数：字段返回错误字符串，表单返回字段错误字典；可异步。 |
+| `disabled`         | `boolean &#124; undefined`                                                                 | 否   | false     | 禁用用户交互。                                               |
+| `name`             | `string &#124; undefined`                                                                  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                             |
+| `defaultChecked`   | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 非受控初始勾选状态。                                         |
+| `defaultValue`     | `string &#124; number &#124; readonly string[] &#124; undefined`                           | 否   | 未设置    | 非受控初始值，不与value同时使用。                            |
+| `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
+| `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
+| `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
+| `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `autoComplete`     | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+
+### 事件回调
+
+| 参数             | 类型                                                        | 必填 | 默认值    | 说明                                         |
+| ---------------- | ----------------------------------------------------------- | ---- | --------- | -------------------------------------------- |
+| `onFinish`       | `(values: T) => void &#124; Promise<unknown>`               | 是   | —（必填） | 校验通过后的提交回调，可返回 Promise。       |
+| `onValuesChange` | `((values: T) => void) &#124; undefined`                    | 否   | 未设置    | 字段变化或重置后返回完整新值。               |
+| `onFinishFailed` | `((errors: FormErrors) => void) &#124; undefined`           | 否   | 未设置    | 校验不通过时返回错误字典。                   |
+| `onSubmitError`  | `((error: unknown) => void) &#124; undefined`               | 否   | 未设置    | 校验或提交抛出异常的通知回调。               |
+| `onError`        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined` | 否   | 未设置    | 错误回调，参数类型及错误来源见组件使用约定。 |
+| `onClick`        | `React.MouseEventHandler<HTMLFormElement> &#124; undefined` | 否   | 未设置    | 原生点击事件；组件不会自行发起业务请求。     |
+
+### 使用约定
+
+- initialValues 只在首次挂载时读取；切换编辑对象请改变 key。字段名为顶层 key，不解析点分路径。
+- onFinish 仅在所有校验通过后调用；处理中禁用原生字段、防止重复提交。异步失败显示错误并允许重试。
+- validate 返回字段错误字典；FormField 校验返回单个错误。onValuesChange 接收新对象，调用方不应原地修改。
+
+关联数据结构：[FormController](#formcontroller)、[FormErrors](#formerrors)。
+
+<details>
+<summary>其他 React 原生属性（271 项）</summary>
+
+| 参数                             | 类型                                                                                                                                                                                                                              | 必填 | 默认值 | 说明                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | ------------------------------------------------------------ |
+| `suppressContentEditableWarning` | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `suppressHydrationWarning`       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `accessKey`                      | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `autoCapitalize`                 | `(string & {}) &#124; "off" &#124; "none" &#124; "on" &#124; "sentences" &#124; "words" &#124; "characters" &#124; undefined`                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `autoFocus`                      | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `contentEditable`                | `Booleanish &#124; "inherit" &#124; "plaintext-only" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `contextMenu`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `dir`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `draggable`                      | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `enterKeyHint`                   | `"enter" &#124; "done" &#124; "go" &#124; "next" &#124; "previous" &#124; "search" &#124; "send" &#124; undefined`                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `hidden`                         | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `lang`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `nonce`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `slot`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `spellCheck`                     | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `tabIndex`                       | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `title`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 标题内容。                                                   |
+| `translate`                      | `"yes" &#124; "no" &#124; undefined`                                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `radioGroup`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `role`                           | `React.AriaRole &#124; undefined`                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `about`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `content`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 提示文本；TabItem中为该页签内容。                            |
+| `datatype`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `inlist`                         | `any`                                                                                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `prefix`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `property`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `rel`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `resource`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `rev`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `typeof`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `vocab`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `autoCorrect`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `autoSave`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `color`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `itemProp`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `itemScope`                      | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `itemType`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `itemID`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `itemRef`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `results`                        | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `security`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `unselectable`                   | `"off" &#124; "on" &#124; undefined`                                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `popover`                        | `"" &#124; "auto" &#124; "manual" &#124; "hint" &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `popoverTargetAction`            | `"toggle" &#124; "show" &#124; "hide" &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `popoverTarget`                  | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `inert`                          | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `inputMode`                      | `"none" &#124; "search" &#124; "text" &#124; "tel" &#124; "url" &#124; "email" &#124; "numeric" &#124; "decimal" &#124; undefined`                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `is`                             | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `exportparts`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `part`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-activedescendant`          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-atomic`                    | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-autocomplete`              | `"none" &#124; "list" &#124; "inline" &#124; "both" &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-braillelabel`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-brailleroledescription`    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-busy`                      | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-checked`                   | `boolean &#124; "true" &#124; "false" &#124; "mixed" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-colcount`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-colindex`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-colindextext`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-colspan`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-controls`                  | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-current`                   | `boolean &#124; "true" &#124; "false" &#124; "page" &#124; "step" &#124; "location" &#124; "date" &#124; "time" &#124; undefined`                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-description`               | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-details`                   | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-disabled`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-dropeffect`                | `"none" &#124; "link" &#124; "copy" &#124; "execute" &#124; "move" &#124; "popup" &#124; undefined`                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-errormessage`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-expanded`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-flowto`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-grabbed`                   | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-haspopup`                  | `boolean &#124; "true" &#124; "false" &#124; "dialog" &#124; "grid" &#124; "listbox" &#124; "menu" &#124; "tree" &#124; undefined`                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-hidden`                    | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-keyshortcuts`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-labelledby`                | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-level`                     | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-live`                      | `"off" &#124; "assertive" &#124; "polite" &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-modal`                     | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-multiline`                 | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-multiselectable`           | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-orientation`               | `"horizontal" &#124; "vertical" &#124; undefined`                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-owns`                      | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-placeholder`               | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-posinset`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-pressed`                   | `boolean &#124; "true" &#124; "false" &#124; "mixed" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-readonly`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-relevant`                  | `"text" &#124; "additions" &#124; "additions removals" &#124; "additions text" &#124; "all" &#124; "removals" &#124; "removals additions" &#124; "removals text" &#124; "text additions" &#124; "text removals" &#124; undefined` | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-required`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-roledescription`           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-rowcount`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-rowindex`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-rowindextext`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-rowspan`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-selected`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-setsize`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-sort`                      | `"none" &#124; "ascending" &#124; "descending" &#124; "other" &#124; undefined`                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-valuemax`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-valuemin`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-valuenow`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `aria-valuetext`                 | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `dangerouslySetInnerHTML`        | `{ __html: string &#124; TrustedHTML; } &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCopy`                         | `React.ClipboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCopyCapture`                  | `React.ClipboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCut`                          | `React.ClipboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCutCapture`                   | `React.ClipboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPaste`                        | `React.ClipboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPasteCapture`                 | `React.ClipboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCompositionEnd`               | `React.CompositionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCompositionEndCapture`        | `React.CompositionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCompositionStart`             | `React.CompositionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCompositionStartCapture`      | `React.CompositionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCompositionUpdate`            | `React.CompositionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onFocus`                        | `React.FocusEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onFocusCapture`                 | `React.FocusEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBlur`                         | `React.FocusEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。           |
+| `onBlurCapture`                  | `React.FocusEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onChangeCapture`                | `React.ChangeEventHandler<HTMLFormElement, Element> &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBeforeInput`                  | `React.InputEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBeforeInputCapture`           | `React.InputEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onInput`                        | `React.InputEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onInputCapture`                 | `React.InputEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onReset`                        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onResetCapture`                 | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSubmitCapture`                | `React.SubmitEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onInvalid`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onInvalidCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoad`                         | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoadCapture`                  | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onErrorCapture`                 | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onKeyDown`                      | `React.KeyboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onKeyDownCapture`               | `React.KeyboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onKeyPress`                     | `React.KeyboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onKeyPressCapture`              | `React.KeyboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onKeyUp`                        | `React.KeyboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onKeyUpCapture`                 | `React.KeyboardEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAbort`                        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAbortCapture`                 | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCanPlay`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCanPlayCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCanPlayThrough`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onCanPlayThroughCapture`        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDurationChange`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDurationChangeCapture`        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onEmptied`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onEmptiedCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onEncrypted`                    | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onEncryptedCapture`             | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onEnded`                        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onEndedCapture`                 | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoadedData`                   | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoadedDataCapture`            | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoadedMetadata`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoadedMetadataCapture`        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoadStart`                    | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLoadStartCapture`             | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPause`                        | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPauseCapture`                 | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPlay`                         | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPlayCapture`                  | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPlaying`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPlayingCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onProgress`                     | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onProgressCapture`              | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onRateChange`                   | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onRateChangeCapture`            | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSeeked`                       | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSeekedCapture`                | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSeeking`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSeekingCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onStalled`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onStalledCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSuspend`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSuspendCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTimeUpdate`                   | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTimeUpdateCapture`            | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onVolumeChange`                 | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onVolumeChangeCapture`          | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onWaiting`                      | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onWaitingCapture`               | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAuxClick`                     | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAuxClickCapture`              | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onClickCapture`                 | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onContextMenu`                  | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onContextMenuCapture`           | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDoubleClick`                  | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDoubleClickCapture`           | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDrag`                         | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragCapture`                  | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragEnd`                      | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragEndCapture`               | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragEnter`                    | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragEnterCapture`             | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragExit`                     | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragExitCapture`              | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragLeave`                    | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragLeaveCapture`             | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragOver`                     | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragOverCapture`              | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragStart`                    | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDragStartCapture`             | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDrop`                         | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onDropCapture`                  | `React.DragEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseDown`                    | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseDownCapture`             | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseEnter`                   | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseLeave`                   | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseMove`                    | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseMoveCapture`             | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseOut`                     | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseOutCapture`              | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseOver`                    | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseOverCapture`             | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseUp`                      | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onMouseUpCapture`               | `React.MouseEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onSelect`                       | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | 选择项时返回对应key；不访问路由。                            |
+| `onSelectCapture`                | `React.ReactEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchCancel`                  | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchCancelCapture`           | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchEnd`                     | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchEndCapture`              | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchMove`                    | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchMoveCapture`             | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchStart`                   | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTouchStartCapture`            | `React.TouchEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerDown`                  | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerDownCapture`           | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerMove`                  | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerMoveCapture`           | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerUp`                    | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerUpCapture`             | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerCancel`                | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerCancelCapture`         | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerEnter`                 | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerLeave`                 | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerOver`                  | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerOverCapture`           | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerOut`                   | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onPointerOutCapture`            | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onGotPointerCapture`            | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onGotPointerCaptureCapture`     | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLostPointerCapture`           | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onLostPointerCaptureCapture`    | `React.PointerEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onScroll`                       | `React.UIEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                          | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onScrollCapture`                | `React.UIEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                          | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onScrollEnd`                    | `React.UIEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                          | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onScrollEndCapture`             | `React.UIEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                          | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onWheel`                        | `React.WheelEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onWheelCapture`                 | `React.WheelEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAnimationStart`               | `React.AnimationEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAnimationStartCapture`        | `React.AnimationEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAnimationEnd`                 | `React.AnimationEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAnimationEndCapture`          | `React.AnimationEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAnimationIteration`           | `React.AnimationEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onAnimationIterationCapture`    | `React.AnimationEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onToggle`                       | `React.ToggleEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onBeforeToggle`                 | `React.ToggleEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionCancel`             | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionCancelCapture`      | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionEnd`                | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionEndCapture`         | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionRun`                | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionStart`              | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLFormElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `target`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `acceptCharset`                  | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `action`                         | `string &#124; ((formData: FormData) => void &#124; Promise<void>) &#124; undefined`                                                                                                                                              | 否   | 未设置 | 标题区域右侧的操作节点。                                     |
+| `encType`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `method`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `noValidate`                     | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+
+</details>
+
+## FormField
+
+导入：`@batype/ui`。源码：`src/components/Form.tsx`。
+
+关联标签、提示、校验和错误；通过 render prop 连接实际控件。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { Form, FormField, Button } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function FormFieldExample() {
+  const [result, setResult] = useState('')
+  return (
+    <>
+      <Form
+        initialValues={{ email: '' }}
+        onFinish={(values) => {
+          setResult(values.email)
+        }}
+      >
+        <FormField
+          name="email"
+          label="邮箱"
+          required
+          hint="用于接收通知"
+          validate={(value) => (String(value).includes('@') ? undefined : '请输入有效邮箱')}
+        >
+          {(control) => (
+            <input
+              {...control}
+              type="email"
+              value={String(control.value ?? '')}
+              onChange={(event) => control.onChange(event.target.value)}
+            />
+          )}
+        </FormField>
+        <Button type="submit">校验邮箱</Button>
+      </Form>
+      <output>{result}</output>
+    </>
+  )
+}
+```
+
+### 参数
+
+| 参数              | 类型                                       | 必填 | 默认值    | 说明                                                         |
+| ----------------- | ------------------------------------------ | ---- | --------- | ------------------------------------------------------------ |
+| `name`            | `string`                                   | 是   | —（必填） | 表单字段名称；Icon中为图标名称。                             |
+| `label`           | `ReactNode`                                | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                   |
+| `required`        | `boolean &#124; undefined`                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
+| `requiredMessage` | `string &#124; undefined`                  | 否   | 未设置    | required校验失败的自定义文字。                               |
+| `hint`            | `ReactNode`                                | 否   | 未设置    | 辅助说明，错误存在时优先显示error。                          |
+| `validate`        | `FieldValidator &#124; undefined`          | 否   | 未设置    | 校验函数：字段返回错误字符串，表单返回字段错误字典；可异步。 |
+| `children`        | `(control: FormFieldControl) => ReactNode` | 是   | —（必填） | 子内容；具体展示位置由组件决定。                             |
+
+### 事件回调
+
+无。
+
+### 使用约定
+
+- 必须放在 Form 内；children 接收 id/value/onChange/onBlur/disabled/ARIA 属性，示例展示完整连接。
+- required 将空字符串、null、undefined、false 和空数组视为空，0 为有效值。validate 可返回 Promise。
+- 不会自动克隆控件；原生 onChange 事件需转换为 control.onChange(event.target.value)。同名 FormField 不可重复注册。
+
+关联数据结构：[FormFieldControl](#formfieldcontrol)、[FieldValidator](#fieldvalidator)。
+
+## FormList
+
+导入：`@batype/ui`。源码：`src/components/Form.tsx`。
+
+动态数组字段的增加、移除、更新和移动，移除后保留其他行的稳定 key。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { Form, FormList, Button } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function FormListExample() {
+  const [result, setResult] = useState('')
+  return (
+    <>
+      <Form
+        initialValues={{ items: [{ name: '示例条目' }] }}
+        onFinish={(values) => {
+          setResult(JSON.stringify(values.items))
+        }}
+      >
+        <FormList<{ name: string }> name="items">
+          {(items, actions) => (
+            <>
+              {items.map((item) => (
+                <div key={item.key}>
+                  <label>
+                    第 {item.index + 1} 项名称
+                    <input
+                      value={item.value.name}
+                      disabled={actions.disabled}
+                      onChange={(event) => actions.update(item.index, { name: event.target.value })}
+                    />
+                  </label>
+                  <Button
+                    tone="danger"
+                    disabled={actions.disabled}
+                    onClick={() => actions.remove(item.index)}
+                  >
+                    移除第 {item.index + 1} 项
+                  </Button>
+                </div>
+              ))}
+              <Button disabled={actions.disabled} onClick={() => actions.add({ name: '' })}>
+                添加条目
+              </Button>
+            </>
+          )}
+        </FormList>
+        <Button type="submit">保存条目</Button>
+      </Form>
+      <output aria-label="条目提交结果">{result}</output>
+    </>
+  )
+}
+```
+
+### 参数
+
+| 参数       | 类型                                                                            | 必填 | 默认值    | 说明                             |
+| ---------- | ------------------------------------------------------------------------------- | ---- | --------- | -------------------------------- |
+| `name`     | `string`                                                                        | 是   | —（必填） | 表单字段名称；Icon中为图标名称。 |
+| `children` | `(items: readonly FormListItem<T>[], actions: FormListActions<T>) => ReactNode` | 是   | —（必填） | 子内容；具体展示位置由组件决定。 |
+
+### 事件回调
+
+无。
+
+### 使用约定
+
+- 必须放在 Form 内，name 指向顶层数组字段；空列表提交为 []。不删除任何服务端数据。
+- children 接收 items 和 actions；以 item.key 为 React key，update/remove/move 使用 item.index。
+- 列表数据由 Form 管理，所有更新生成新数组；在 submitting/disabled 状态下操作无效。列表整体校验交给 Form.validate。
+
+关联数据结构：[FormListItem](#formlistitem)、[FormListActions](#formlistactions)。
+
+## SearchSelect
+
+导入：`@batype/ui`。源码：`src/components/SearchSelect.tsx`。
+
+受控、可搜索的单选框，支持键盘导航、禁用项和清空。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { SearchSelect } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function SearchSelectExample() {
+  const [value, setValue] = useState('')
+  return (
+    <SearchSelect
+      label="搜索组件"
+      value={value}
+      onChange={setValue}
+      placeholder="输入名称搜索"
+      options={[
+        { value: 'button', label: '按钮 Button' },
+        { value: 'table', label: '表格 DataTable' },
+        { value: 'disabled', label: '禁用示例', disabled: true },
+      ]}
+    />
+  )
+}
+```
+
+### 参数
+
+| 参数          | 类型                       | 必填 | 默认值    | 说明                                                      |
+| ------------- | -------------------------- | ---- | --------- | --------------------------------------------------------- |
+| `label`       | `string`                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                |
+| `options`     | `readonly SelectOption[]`  | 是   | —（必填） | 候选项数组，value唯一；每项含value、label和可选disabled。 |
+| `value`       | `string`                   | 是   | —（必填） | 当前受控值。                                              |
+| `placeholder` | `string &#124; undefined`  | 否   | 未设置    | 未输入时的提示文字。                                      |
+| `emptyLabel`  | `string &#124; undefined`  | 否   | 未设置    | 无匹配候选项时的展示文字。                                |
+| `disabled`    | `boolean &#124; undefined` | 否   | false     | 禁用用户交互。                                            |
+| `clearable`   | `boolean &#124; undefined` | 否   | true      | 是否提供清空选择按钮。                                    |
+| `name`        | `string &#124; undefined`  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                          |
+| `hint`        | `string &#124; undefined`  | 否   | 未设置    | 辅助说明，错误存在时优先显示error。                       |
+| `error`       | `string &#124; undefined`  | 否   | 未设置    | 错误提示；存在时标记aria-invalid。                        |
+
+### 事件回调
+
+| 参数       | 类型                                         | 必填 | 默认值    | 说明                                                                |
+| ---------- | -------------------------------------------- | ---- | --------- | ------------------------------------------------------------------- |
+| `onChange` | `(value: string) => void`                    | 是   | —（必填） | 值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。 |
+| `onSearch` | `((query: string) => void) &#124; undefined` | 否   | 未设置    | 搜索文本变化通知，不执行请求。                                      |
+
+### 使用约定
+
+- 独立于原生 Select；onChange 直接返回字符串，不返回原生事件。value 与 options.value 使用字符串。
+- ArrowUp/ArrowDown/Home/End 移动候选，Enter 选择，Escape 关闭且不改变已选值。无匹配项不会创建任意新值。
+- onSearch 只通知查询文本变化，不发请求；options 由调用方维护。弹层不通过 Portal，受父容器 overflow 约束。
+
+关联数据结构：[SelectOption](#selectoption)。
+
+## Cascader
+
+导入：`@batype/ui`。源码：`src/components/SearchSelect.tsx`。
+
+无业务区域数据的多级原生选择，父项变化时清空下级。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { Cascader } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function CascaderExample() {
+  const [value, setValue] = useState<string[]>([])
+  return (
+    <Cascader
+      label="选择区域"
+      value={value}
+      onChange={setValue}
+      levelLabels={['省份', '城市', '区县']}
+      options={[
+        {
+          value: 'east',
+          label: '示例省',
+          children: [
+            { value: 'city', label: '示例市', children: [{ value: 'district', label: '示例区' }] },
+          ],
+        },
+        { value: 'west', label: '其他省', children: [{ value: 'other', label: '其他市' }] },
+      ]}
+    />
+  )
+}
+```
+
+### 参数
+
+| 参数          | 类型                                 | 必填 | 默认值    | 说明                                                      |
+| ------------- | ------------------------------------ | ---- | --------- | --------------------------------------------------------- |
+| `label`       | `string`                             | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                |
+| `options`     | `readonly CascaderOption[]`          | 是   | —（必填） | 候选项数组，value唯一；每项含value、label和可选disabled。 |
+| `value`       | `readonly string[]`                  | 是   | —（必填） | 当前受控值。                                              |
+| `levelLabels` | `readonly string[] &#124; undefined` | 否   | 未设置    | 各级原生选择框的标签。                                    |
+| `placeholder` | `string &#124; undefined`            | 否   | 未设置    | 未输入时的提示文字。                                      |
+| `disabled`    | `boolean &#124; undefined`           | 否   | 未设置    | 禁用用户交互。                                            |
+| `error`       | `string &#124; undefined`            | 否   | 未设置    | 错误提示；存在时标记aria-invalid。                        |
+
+### 事件回调
+
+| 参数       | 类型                        | 必填 | 默认值    | 说明                                                                |
+| ---------- | --------------------------- | ---- | --------- | ------------------------------------------------------------------- |
+| `onChange` | `(value: string[]) => void` | 是   | —（必填） | 值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。 |
+
+### 使用约定
+
+- value 为根到当前项的字符串路径；每一级改变都会回调新路径，允许部分选择。需要叶节点时由表单校验。
+- 不内置省市区、分类数据或远程加载；options/value 由调用方维护；每层 value 应唯一且不为空。
+- 使用原生 select，支持键盘和系统选择器；最多展示32级。
+
+关联数据结构：[CascaderOption](#cascaderoption)。
+
+## DatePicker
+
+导入：`@batype/ui`。源码：`src/components/FieldControls.tsx`。
+
+带标签的原生 date 输入，不隐式转换时区。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { DatePicker } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function DatePickerExample() {
+  const [value, setValue] = useState('2026-11-06')
+  return (
+    <DatePicker
+      label="日期"
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+      min="2026-01-01"
+      max="2026-12-31"
+    />
+  )
+}
+```
+
+### 参数
+
+| 参数               | 类型                                                                                       | 必填 | 默认值    | 说明                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------ | ---- | --------- | ------------------------------------------------------------ |
+| `hint`             | `React.ReactNode`                                                                          | 否   | 未设置    | 辅助说明，错误存在时优先显示error。                          |
+| `startContent`     | `React.ReactNode`                                                                          | 否   | 未设置    | 内容前侧插槽。                                               |
+| `endContent`       | `React.ReactNode`                                                                          | 否   | 未设置    | 内容后侧插槽。                                               |
+| `disabled`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 禁用用户交互。                                               |
+| `name`             | `string &#124; undefined`                                                                  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                             |
+| `value`            | `string &#124; number &#124; readonly string[] &#124; undefined`                           | 否   | 未设置    | 当前受控值。                                                 |
+| `defaultChecked`   | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 非受控初始勾选状态。                                         |
+| `defaultValue`     | `string &#124; number &#124; readonly string[] &#124; undefined`                           | 否   | 未设置    | 非受控初始值，不与value同时使用。                            |
+| `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
+| `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
+| `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
+| `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `children`         | `React.ReactNode`                                                                          | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
+| `label`            | `string`                                                                                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                   |
+| `error`            | `React.ReactNode`                                                                          | 否   | 未设置    | 错误提示；存在时标记aria-invalid。                           |
+| `autoComplete`     | `React.HTMLInputAutoCompleteAttribute &#124; undefined`                                    | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `checked`          | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 受控勾选状态，配合onChange更新。                             |
+| `placeholder`      | `string &#124; undefined`                                                                  | 否   | 未设置    | 未输入时的提示文字。                                         |
+| `readOnly`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 只读模式。                                                   |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
+
+### 事件回调
+
+| 参数       | 类型                                                                            | 必填 | 默认值 | 说明                                                                |
+| ---------- | ------------------------------------------------------------------------------- | ---- | ------ | ------------------------------------------------------------------- |
+| `onChange` | `React.ChangeEventHandler<HTMLInputElement, HTMLInputElement> &#124; undefined` | 否   | 未设置 | 值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。 |
+| `onError`  | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                    | 否   | 未设置 | 错误回调，参数类型及错误来源见组件使用约定。                        |
+| `onClick`  | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                    | 否   | 未设置 | 原生点击事件；组件不会自行发起业务请求。                            |
+
+### 使用约定
+
+- 值遵循浏览器 date 输入：YYYY-MM-DD 或空字符串；onChange 是原生事件。
+- 弹出的日历外观、键盘行为和本地化由浏览器/操作系统提供，不是自绘日历。min/max 是日期字符串。
+
+<details>
+<summary>其他 React 原生属性（287 项）</summary>
+
+| 参数                             | 类型                                                                                                                                                                                                                              | 必填 | 默认值 | 说明                                                                       |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | -------------------------------------------------------------------------- |
+| `form`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `list`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `step`                           | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 数字输入的原生步长或any。                                                  |
+| `size`                           | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 组件尺寸。                                                                 |
+| `formAction`                     | `string &#124; ((formData: FormData) => void &#124; Promise<void>) &#124; undefined`                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formEncType`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formMethod`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formNoValidate`                 | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formTarget`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `suppressContentEditableWarning` | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `suppressHydrationWarning`       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `accessKey`                      | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoCapitalize`                 | `(string & {}) &#124; "off" &#124; "none" &#124; "on" &#124; "sentences" &#124; "words" &#124; "characters" &#124; undefined`                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoFocus`                      | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `contentEditable`                | `Booleanish &#124; "inherit" &#124; "plaintext-only" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `contextMenu`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `dir`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `draggable`                      | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `enterKeyHint`                   | `"enter" &#124; "done" &#124; "go" &#124; "next" &#124; "previous" &#124; "search" &#124; "send" &#124; undefined`                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `hidden`                         | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `lang`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `nonce`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `slot`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `spellCheck`                     | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `tabIndex`                       | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `title`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 标题内容。                                                                 |
+| `translate`                      | `"yes" &#124; "no" &#124; undefined`                                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `radioGroup`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `role`                           | `React.AriaRole &#124; undefined`                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `about`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `content`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 提示文本；TabItem中为该页签内容。                                          |
+| `datatype`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `inlist`                         | `any`                                                                                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `prefix`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `property`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `rel`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `resource`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `rev`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `typeof`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `vocab`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoCorrect`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoSave`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `color`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemProp`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemScope`                      | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemType`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemID`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemRef`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `results`                        | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `security`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `unselectable`                   | `"off" &#124; "on" &#124; undefined`                                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `popover`                        | `"" &#124; "auto" &#124; "manual" &#124; "hint" &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `popoverTargetAction`            | `"toggle" &#124; "show" &#124; "hide" &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `popoverTarget`                  | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `inert`                          | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `inputMode`                      | `"none" &#124; "search" &#124; "text" &#124; "tel" &#124; "url" &#124; "email" &#124; "numeric" &#124; "decimal" &#124; undefined`                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `is`                             | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `exportparts`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `part`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-activedescendant`          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-atomic`                    | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-autocomplete`              | `"none" &#124; "list" &#124; "inline" &#124; "both" &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-braillelabel`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-brailleroledescription`    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-busy`                      | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-checked`                   | `boolean &#124; "true" &#124; "false" &#124; "mixed" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colcount`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colindex`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colindextext`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colspan`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-controls`                  | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-current`                   | `boolean &#124; "true" &#124; "false" &#124; "page" &#124; "step" &#124; "location" &#124; "date" &#124; "time" &#124; undefined`                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-description`               | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-details`                   | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-disabled`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-dropeffect`                | `"none" &#124; "link" &#124; "copy" &#124; "execute" &#124; "move" &#124; "popup" &#124; undefined`                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-errormessage`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-expanded`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-flowto`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-grabbed`                   | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-haspopup`                  | `boolean &#124; "true" &#124; "false" &#124; "dialog" &#124; "grid" &#124; "listbox" &#124; "menu" &#124; "tree" &#124; undefined`                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-hidden`                    | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-keyshortcuts`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-labelledby`                | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-level`                     | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-live`                      | `"off" &#124; "assertive" &#124; "polite" &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-modal`                     | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-multiline`                 | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-multiselectable`           | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-orientation`               | `"horizontal" &#124; "vertical" &#124; undefined`                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-owns`                      | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-placeholder`               | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-posinset`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-pressed`                   | `boolean &#124; "true" &#124; "false" &#124; "mixed" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-readonly`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-relevant`                  | `"text" &#124; "additions" &#124; "additions removals" &#124; "additions text" &#124; "all" &#124; "removals" &#124; "removals additions" &#124; "removals text" &#124; "text additions" &#124; "text removals" &#124; undefined` | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-required`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-roledescription`           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowcount`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowindex`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowindextext`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowspan`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-selected`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-setsize`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-sort`                      | `"none" &#124; "ascending" &#124; "descending" &#124; "other" &#124; undefined`                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuemax`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuemin`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuenow`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuetext`                 | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `dangerouslySetInnerHTML`        | `{ __html: string &#124; TrustedHTML; } &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCopy`                         | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCopyCapture`                  | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCut`                          | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCutCapture`                   | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPaste`                        | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPasteCapture`                 | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionEnd`               | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionEndCapture`        | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionStart`             | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionStartCapture`      | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionUpdate`            | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onFocus`                        | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onFocusCapture`                 | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。                         |
+| `onBlurCapture`                  | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onChangeCapture`                | `React.ChangeEventHandler<HTMLInputElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBeforeInput`                  | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBeforeInputCapture`           | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInput`                        | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInputCapture`                 | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onReset`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onResetCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSubmit`                       | `React.SubmitEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSubmitCapture`                | `React.SubmitEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInvalid`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInvalidCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoad`                         | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadCapture`                  | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onErrorCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyDown`                      | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyDownCapture`               | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyPress`                     | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyPressCapture`              | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyUp`                        | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyUpCapture`                 | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAbort`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAbortCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlay`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlayCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlayThrough`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlayThroughCapture`        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDurationChange`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDurationChangeCapture`        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEmptied`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEmptiedCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEncrypted`                    | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEncryptedCapture`             | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEnded`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEndedCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedData`                   | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedDataCapture`            | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedMetadata`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedMetadataCapture`        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadStart`                    | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadStartCapture`             | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPause`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPauseCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlay`                         | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlayCapture`                  | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlaying`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlayingCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onProgress`                     | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onProgressCapture`              | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onRateChange`                   | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onRateChangeCapture`            | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeeked`                       | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeekedCapture`                | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeeking`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeekingCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onStalled`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onStalledCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSuspend`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSuspendCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTimeUpdate`                   | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTimeUpdateCapture`            | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onVolumeChange`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onVolumeChangeCapture`          | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWaiting`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWaitingCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAuxClick`                     | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAuxClickCapture`              | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onClickCapture`                 | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onContextMenu`                  | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onContextMenuCapture`           | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDoubleClick`                  | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDoubleClickCapture`           | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDrag`                         | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragCapture`                  | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEnd`                      | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEndCapture`               | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEnter`                    | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEnterCapture`             | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragExit`                     | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragExitCapture`              | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragLeave`                    | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragLeaveCapture`             | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragOver`                     | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragOverCapture`              | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragStart`                    | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragStartCapture`             | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDrop`                         | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDropCapture`                  | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseDown`                    | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseDownCapture`             | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseEnter`                   | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseLeave`                   | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseMove`                    | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseMoveCapture`             | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOut`                     | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOutCapture`              | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOver`                    | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOverCapture`             | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseUp`                      | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseUpCapture`               | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSelect`                       | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 选择项时返回对应key；不访问路由。                                          |
+| `onSelectCapture`                | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchCancel`                  | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchCancelCapture`           | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchEnd`                     | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchEndCapture`              | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchMove`                    | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchMoveCapture`             | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchStart`                   | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchStartCapture`            | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerDown`                  | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerDownCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerMove`                  | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerMoveCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerUp`                    | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerUpCapture`             | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerCancel`                | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerCancelCapture`         | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerEnter`                 | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerLeave`                 | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOver`                  | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOverCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOut`                   | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOutCapture`            | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onGotPointerCapture`            | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onGotPointerCaptureCapture`     | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLostPointerCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLostPointerCaptureCapture`    | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScroll`                       | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScrollCapture`                | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScrollEnd`                    | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScrollEndCapture`             | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWheel`                        | `React.WheelEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWheelCapture`                 | `React.WheelEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationStart`               | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationStartCapture`        | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationEnd`                 | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationEndCapture`          | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationIteration`           | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationIterationCapture`    | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onToggle`                       | `React.ToggleEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBeforeToggle`                 | `React.ToggleEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionCancel`             | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionCancelCapture`      | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionEnd`                | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionEndCapture`         | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionRun`                | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionStart`              | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `accept`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 逗号分隔MIME或扩展名，例如image/*,.png。仅客户端体验校验。                 |
+| `alt`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 图片替代文字，同时用于预览弹窗标题。                                       |
+| `capture`                        | `boolean &#124; "user" &#124; "environment" &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                                         |
+| `max`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最大数值或最晚日期，具体类型见签名。                                       |
+| `maxLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `min`                            | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 最小数值或最早日期，具体类型见签名。                                       |
+| `minLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `multiple`                       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `pattern`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `src`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。 |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                                 |
+
+</details>
+
+## DateRangePicker
+
+导入：`@batype/ui`。源码：`src/components/FieldControls.tsx`。
+
+受控的开始/结束日期组合，展示反向范围错误。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { DateRangePicker } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function DateRangePickerExample() {
+  const [value, setValue] = useState<[string, string]>(['2026-11-01', '2026-11-06'])
+  return (
+    <DateRangePicker
+      label="统计日期"
+      value={value}
+      onChange={setValue}
+      hint="日期字符串不做时区转换"
+    />
+  )
+}
+```
+
+### 参数
+
+| 参数       | 类型                        | 必填 | 默认值    | 说明                                       |
+| ---------- | --------------------------- | ---- | --------- | ------------------------------------------ |
+| `label`    | `string`                    | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。 |
+| `value`    | `readonly [string, string]` | 是   | —（必填） | 当前受控值。                               |
+| `min`      | `string &#124; undefined`   | 否   | 未设置    | 最小数值或最早日期，具体类型见签名。       |
+| `max`      | `string &#124; undefined`   | 否   | 未设置    | 最大数值或最晚日期，具体类型见签名。       |
+| `disabled` | `boolean &#124; undefined`  | 否   | 未设置    | 禁用用户交互。                             |
+| `required` | `boolean &#124; undefined`  | 否   | 未设置    | 是否必填，具体空值规则见组件约定。         |
+| `error`    | `string &#124; undefined`   | 否   | 未设置    | 错误提示；存在时标记aria-invalid。         |
+| `hint`     | `string &#124; undefined`   | 否   | 未设置    | 辅助说明，错误存在时优先显示error。        |
+
+### 事件回调
+
+| 参数       | 类型                                | 必填 | 默认值    | 说明                                                                |
+| ---------- | ----------------------------------- | ---- | --------- | ------------------------------------------------------------------- |
+| `onChange` | `(value: [string, string]) => void` | 是   | —（必填） | 值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。 |
+
+### 使用约定
+
+- onChange 返回 [start,end]，清空一端保留另一端。不会偷偷交换日期或转换 UTC。
+- 反向范围保留原值并展示错误；提交时仍须在 Form.validate 或服务端验证。min/max 传递给两个原生 date 控件。
+
+## NumberInput
+
+导入：`@batype/ui`。源码：`src/components/FieldControls.tsx`。
+
+受控数字或 null，支持范围、步长及失焦精度规范。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { NumberInput } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function NumberInputExample() {
+  const [value, setValue] = useState<number | null>(1)
+  return (
+    <NumberInput
+      label="数量"
+      value={value}
+      onChange={setValue}
+      min={0}
+      max={100}
+      precision={2}
+      step={0.01}
+      hint="失焦时规范精度及范围；清空为 null"
+    />
+  )
+}
+```
+
+### 参数
+
+| 参数               | 类型                                                                                       | 必填 | 默认值    | 说明                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------ | ---- | --------- | ------------------------------------------------------------ |
+| `value`            | `number &#124; null`                                                                       | 是   | —（必填） | 当前受控值。                                                 |
+| `min`              | `number &#124; undefined`                                                                  | 否   | 未设置    | 最小数值或最早日期，具体类型见签名。                         |
+| `max`              | `number &#124; undefined`                                                                  | 否   | 未设置    | 最大数值或最晚日期，具体类型见签名。                         |
+| `step`             | `number &#124; "any" &#124; undefined`                                                     | 否   | any       | 数字输入的原生步长或any。                                    |
+| `precision`        | `number &#124; undefined`                                                                  | 否   | 未设置    | 失焦后的小数位数，支持0到15。                                |
+| `hint`             | `React.ReactNode`                                                                          | 否   | 未设置    | 辅助说明，错误存在时优先显示error。                          |
+| `startContent`     | `React.ReactNode`                                                                          | 否   | 未设置    | 内容前侧插槽。                                               |
+| `endContent`       | `React.ReactNode`                                                                          | 否   | 未设置    | 内容后侧插槽。                                               |
+| `disabled`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 禁用用户交互。                                               |
+| `name`             | `string &#124; undefined`                                                                  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                             |
+| `defaultChecked`   | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 非受控初始勾选状态。                                         |
+| `className`        | `string &#124; undefined`                                                                  | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。                          |
+| `id`               | `string &#124; undefined`                                                                  | 否   | 未设置    | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。      |
+| `style`            | `React.CSSProperties &#124; undefined`                                                     | 否   | 未设置    | 原生内联样式；使用CSS变量进行主题覆盖更方便。                |
+| `aria-describedby` | `string &#124; undefined`                                                                  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。               |
+| `aria-invalid`     | `boolean &#124; "true" &#124; "false" &#124; "grammar" &#124; "spelling" &#124; undefined` | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                 |
+| `aria-label`       | `string &#124; undefined`                                                                  | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `children`         | `React.ReactNode`                                                                          | 否   | 未设置    | 子内容；具体展示位置由组件决定。                             |
+| `label`            | `string`                                                                                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                   |
+| `error`            | `React.ReactNode`                                                                          | 否   | 未设置    | 错误提示；存在时标记aria-invalid。                           |
+| `autoComplete`     | `React.HTMLInputAutoCompleteAttribute &#124; undefined`                                    | 否   | 未设置    | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。 |
+| `checked`          | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 受控勾选状态，配合onChange更新。                             |
+| `placeholder`      | `string &#124; undefined`                                                                  | 否   | 未设置    | 未输入时的提示文字。                                         |
+| `readOnly`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 只读模式。                                                   |
+| `required`         | `boolean &#124; undefined`                                                                 | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                           |
+
+### 事件回调
+
+| 参数       | 类型                                                         | 必填 | 默认值    | 说明                                                                |
+| ---------- | ------------------------------------------------------------ | ---- | --------- | ------------------------------------------------------------------- |
+| `onChange` | `(value: number &#124; null) => void`                        | 是   | —（必填） | 值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。 |
+| `onError`  | `React.ReactEventHandler<HTMLInputElement> &#124; undefined` | 否   | 未设置    | 错误回调，参数类型及错误来源见组件使用约定。                        |
+| `onClick`  | `React.MouseEventHandler<HTMLInputElement> &#124; undefined` | 否   | 未设置    | 原生点击事件；组件不会自行发起业务请求。                            |
+
+### 使用约定
+
+- 清空返回 null；onChange 直接返回 number/null。输入时允许暂时超出 min/max，失焦后钳制范围并处理 precision。
+- precision 为0到15整数；step遵循原生数字输入语义。disabled/readOnly 不产生用户值更新。
+- 使用 JavaScript number，不提供金融级任意精度；大整数ID或精确十进制金额应使用文本输入和业务精度库。
+
+<details>
+<summary>其他 React 原生属性（284 项）</summary>
+
+| 参数                             | 类型                                                                                                                                                                                                                              | 必填 | 默认值 | 说明                                                                       |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------ | -------------------------------------------------------------------------- |
+| `form`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `list`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `size`                           | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 组件尺寸。                                                                 |
+| `formAction`                     | `string &#124; ((formData: FormData) => void &#124; Promise<void>) &#124; undefined`                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formEncType`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formMethod`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formNoValidate`                 | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `formTarget`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `suppressContentEditableWarning` | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `suppressHydrationWarning`       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `accessKey`                      | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoCapitalize`                 | `(string & {}) &#124; "off" &#124; "none" &#124; "on" &#124; "sentences" &#124; "words" &#124; "characters" &#124; undefined`                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoFocus`                      | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `contentEditable`                | `Booleanish &#124; "inherit" &#124; "plaintext-only" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `contextMenu`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `dir`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `draggable`                      | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `enterKeyHint`                   | `"enter" &#124; "done" &#124; "go" &#124; "next" &#124; "previous" &#124; "search" &#124; "send" &#124; undefined`                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `hidden`                         | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `lang`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `nonce`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `slot`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `spellCheck`                     | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `tabIndex`                       | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `title`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 标题内容。                                                                 |
+| `translate`                      | `"yes" &#124; "no" &#124; undefined`                                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `radioGroup`                     | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `role`                           | `React.AriaRole &#124; undefined`                                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `about`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `content`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 提示文本；TabItem中为该页签内容。                                          |
+| `datatype`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `inlist`                         | `any`                                                                                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `prefix`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `property`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `rel`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `resource`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `rev`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `typeof`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `vocab`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoCorrect`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `autoSave`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `color`                          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemProp`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemScope`                      | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemType`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemID`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `itemRef`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `results`                        | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `security`                       | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `unselectable`                   | `"off" &#124; "on" &#124; undefined`                                                                                                                                                                                              | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `popover`                        | `"" &#124; "auto" &#124; "manual" &#124; "hint" &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `popoverTargetAction`            | `"toggle" &#124; "show" &#124; "hide" &#124; undefined`                                                                                                                                                                           | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `popoverTarget`                  | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `inert`                          | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `inputMode`                      | `"none" &#124; "search" &#124; "text" &#124; "tel" &#124; "url" &#124; "email" &#124; "numeric" &#124; "decimal" &#124; undefined`                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `is`                             | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `exportparts`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `part`                           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-activedescendant`          | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-atomic`                    | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-autocomplete`              | `"none" &#124; "list" &#124; "inline" &#124; "both" &#124; undefined`                                                                                                                                                             | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-braillelabel`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-brailleroledescription`    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-busy`                      | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-checked`                   | `boolean &#124; "true" &#124; "false" &#124; "mixed" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colcount`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colindex`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colindextext`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-colspan`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-controls`                  | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-current`                   | `boolean &#124; "true" &#124; "false" &#124; "page" &#124; "step" &#124; "location" &#124; "date" &#124; "time" &#124; undefined`                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-description`               | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-details`                   | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-disabled`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-dropeffect`                | `"none" &#124; "link" &#124; "copy" &#124; "execute" &#124; "move" &#124; "popup" &#124; undefined`                                                                                                                               | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-errormessage`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-expanded`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-flowto`                    | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-grabbed`                   | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-haspopup`                  | `boolean &#124; "true" &#124; "false" &#124; "dialog" &#124; "grid" &#124; "listbox" &#124; "menu" &#124; "tree" &#124; undefined`                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-hidden`                    | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-keyshortcuts`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-labelledby`                | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-level`                     | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-live`                      | `"off" &#124; "assertive" &#124; "polite" &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-modal`                     | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-multiline`                 | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-multiselectable`           | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-orientation`               | `"horizontal" &#124; "vertical" &#124; undefined`                                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-owns`                      | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-placeholder`               | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-posinset`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-pressed`                   | `boolean &#124; "true" &#124; "false" &#124; "mixed" &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-readonly`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-relevant`                  | `"text" &#124; "additions" &#124; "additions removals" &#124; "additions text" &#124; "all" &#124; "removals" &#124; "removals additions" &#124; "removals text" &#124; "text additions" &#124; "text removals" &#124; undefined` | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-required`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-roledescription`           | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowcount`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowindex`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowindextext`              | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-rowspan`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-selected`                  | `Booleanish &#124; undefined`                                                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-setsize`                   | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-sort`                      | `"none" &#124; "ascending" &#124; "descending" &#124; "other" &#124; undefined`                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuemax`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuemin`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuenow`                  | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `aria-valuetext`                 | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `dangerouslySetInnerHTML`        | `{ __html: string &#124; TrustedHTML; } &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCopy`                         | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCopyCapture`                  | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCut`                          | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCutCapture`                   | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPaste`                        | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPasteCapture`                 | `React.ClipboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionEnd`               | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionEndCapture`        | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionStart`             | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionStartCapture`      | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionUpdate`            | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCompositionUpdateCapture`     | `React.CompositionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onFocus`                        | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onFocusCapture`                 | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBlur`                         | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 控件失焦通知；FormFieldControl中用于触发字段校验。                         |
+| `onBlurCapture`                  | `React.FocusEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onChangeCapture`                | `React.ChangeEventHandler<HTMLInputElement, Element> &#124; undefined`                                                                                                                                                            | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBeforeInput`                  | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBeforeInputCapture`           | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInput`                        | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInputCapture`                 | `React.InputEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onReset`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onResetCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSubmit`                       | `React.SubmitEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSubmitCapture`                | `React.SubmitEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInvalid`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onInvalidCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoad`                         | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadCapture`                  | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onErrorCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyDown`                      | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyDownCapture`               | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyPress`                     | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyPressCapture`              | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyUp`                        | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onKeyUpCapture`                 | `React.KeyboardEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                   | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAbort`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAbortCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlay`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlayCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlayThrough`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onCanPlayThroughCapture`        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDurationChange`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDurationChangeCapture`        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEmptied`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEmptiedCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEncrypted`                    | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEncryptedCapture`             | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEnded`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onEndedCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedData`                   | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedDataCapture`            | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedMetadata`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadedMetadataCapture`        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadStart`                    | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLoadStartCapture`             | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPause`                        | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPauseCapture`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlay`                         | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlayCapture`                  | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlaying`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPlayingCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onProgress`                     | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onProgressCapture`              | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onRateChange`                   | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onRateChangeCapture`            | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeeked`                       | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeekedCapture`                | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeeking`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSeekingCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onStalled`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onStalledCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSuspend`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSuspendCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTimeUpdate`                   | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTimeUpdateCapture`            | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onVolumeChange`                 | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onVolumeChangeCapture`          | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWaiting`                      | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWaitingCapture`               | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAuxClick`                     | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAuxClickCapture`              | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onClickCapture`                 | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onContextMenu`                  | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onContextMenuCapture`           | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDoubleClick`                  | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDoubleClickCapture`           | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDrag`                         | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragCapture`                  | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEnd`                      | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEndCapture`               | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEnter`                    | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragEnterCapture`             | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragExit`                     | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragExitCapture`              | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragLeave`                    | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragLeaveCapture`             | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragOver`                     | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragOverCapture`              | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragStart`                    | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDragStartCapture`             | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDrop`                         | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onDropCapture`                  | `React.DragEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                       | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseDown`                    | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseDownCapture`             | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseEnter`                   | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseLeave`                   | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseMove`                    | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseMoveCapture`             | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOut`                     | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOutCapture`              | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOver`                    | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseOverCapture`             | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseUp`                      | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onMouseUpCapture`               | `React.MouseEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onSelect`                       | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | 选择项时返回对应key；不访问路由。                                          |
+| `onSelectCapture`                | `React.ReactEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchCancel`                  | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchCancelCapture`           | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchEnd`                     | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchEndCapture`              | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchMove`                    | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchMoveCapture`             | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchStart`                   | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTouchStartCapture`            | `React.TouchEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerDown`                  | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerDownCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerMove`                  | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerMoveCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerUp`                    | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerUpCapture`             | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerCancel`                | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerCancelCapture`         | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerEnter`                 | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerLeave`                 | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOver`                  | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOverCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOut`                   | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onPointerOutCapture`            | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onGotPointerCapture`            | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onGotPointerCaptureCapture`     | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLostPointerCapture`           | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onLostPointerCaptureCapture`    | `React.PointerEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                    | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScroll`                       | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScrollCapture`                | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScrollEnd`                    | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onScrollEndCapture`             | `React.UIEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWheel`                        | `React.WheelEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onWheelCapture`                 | `React.WheelEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                      | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationStart`               | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationStartCapture`        | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationEnd`                 | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationEndCapture`          | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationIteration`           | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onAnimationIterationCapture`    | `React.AnimationEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                  | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onToggle`                       | `React.ToggleEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onBeforeToggle`                 | `React.ToggleEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionCancel`             | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionCancelCapture`      | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionEnd`                | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionEndCapture`         | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionRun`                | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionRunCapture`         | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionStart`              | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `onTransitionStartCapture`       | `React.TransitionEventHandler<HTMLInputElement> &#124; undefined`                                                                                                                                                                 | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `accept`                         | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 逗号分隔MIME或扩展名，例如image/*,.png。仅客户端体验校验。                 |
+| `alt`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 图片替代文字，同时用于预览弹窗标题。                                       |
+| `capture`                        | `boolean &#124; "user" &#124; "environment" &#124; undefined`                                                                                                                                                                     | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `height`                         | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 编辑区高度，单位px；不包含工具栏。                                         |
+| `maxLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `minLength`                      | `number &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `multiple`                       | `boolean &#124; undefined`                                                                                                                                                                                                        | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `pattern`                        | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | React 原生属性；遵循相应 DOM 元素的 React 类型及浏览器语义。               |
+| `src`                            | `string &#124; undefined`                                                                                                                                                                                                         | 否   | 未设置 | 媒体URL，允许http/https/blob/相对路径及特定base64图片/视频；拒绝危险协议。 |
+| `width`                          | `string &#124; number &#124; undefined`                                                                                                                                                                                           | 否   | 未设置 | 源图片裁剪宽度，单位像素。                                                 |
+
+</details>
+
+## RadioGroup
+
+导入：`@batype/ui`。源码：`src/components/FieldControls.tsx`。
+
+带 legend 的原生受控单选组，支持组及单项禁用。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { RadioGroup } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function RadioGroupExample() {
+  const [value, setValue] = useState('active')
+  return (
+    <RadioGroup
+      label="状态"
+      value={value}
+      onChange={setValue}
+      options={[
+        { value: 'active', label: '启用' },
+        { value: 'inactive', label: '停用' },
+        { value: 'unavailable', label: '不可选', disabled: true },
+      ]}
+    />
+  )
+}
+```
+
+### 参数
+
+| 参数       | 类型                       | 必填 | 默认值    | 说明                                                      |
+| ---------- | -------------------------- | ---- | --------- | --------------------------------------------------------- |
+| `label`    | `string`                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                |
+| `options`  | `readonly SelectOption[]`  | 是   | —（必填） | 候选项数组，value唯一；每项含value、label和可选disabled。 |
+| `value`    | `string`                   | 是   | —（必填） | 当前受控值。                                              |
+| `name`     | `string &#124; undefined`  | 否   | 未设置    | 表单字段名称；Icon中为图标名称。                          |
+| `disabled` | `boolean &#124; undefined` | 否   | 未设置    | 禁用用户交互。                                            |
+| `required` | `boolean &#124; undefined` | 否   | 未设置    | 是否必填，具体空值规则见组件约定。                        |
+| `error`    | `string &#124; undefined`  | 否   | 未设置    | 错误提示；存在时标记aria-invalid。                        |
+
+### 事件回调
+
+| 参数       | 类型                      | 必填 | 默认值    | 说明                                                                |
+| ---------- | ------------------------- | ---- | --------- | ------------------------------------------------------------------- |
+| `onChange` | `(value: string) => void` | 是   | —（必填） | 值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。 |
+
+### 使用约定
+
+- value 为字符串，onChange 直接返回新值；未给 name 时生成实例唯一名称，避免不同单选组串选。
+- required 遵循原生约束；Form 使用 noValidate 时应注册相应校验。
+
+关联数据结构：[SelectOption](#selectoption)。
+
+## ImageCropper
+
+导入：`@batype/ui`。源码：`src/components/ImageCropper.tsx`。
+
+本地图片裁剪弹窗，预览与 Canvas 导出共享源像素坐标。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { ImageCropper } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function ImageCropperExample() {
+  const [file, setFile] = useState<File | null>(null),
+    [result, setResult] = useState('')
+  return (
+    <>
+      <label>
+        选择裁剪图片
+        <input
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          onChange={(event) => {
+            setFile(event.target.files?.[0] ?? null)
+            event.target.value = ''
+          }}
+        />
+      </label>
+      <ImageCropper
+        isOpen={!!file}
+        file={file}
+        onClose={() => setFile(null)}
+        aspect={1}
+        outputWidth={512}
+        onCrop={(cropped) => {
+          setResult(`${cropped.name} (${cropped.size} bytes)`)
+          setFile(null)
+        }}
+      />
+      <output aria-label="裁剪结果">{result}</output>
+    </>
+  )
+}
+```
+
+### 参数
+
+| 参数          | 类型                                                                   | 必填 | 默认值    | 说明                                               |
+| ------------- | ---------------------------------------------------------------------- | ---- | --------- | -------------------------------------------------- |
+| `isOpen`      | `boolean`                                                              | 是   | —（必填） | 受控打开状态。                                     |
+| `file`        | `File &#124; null`                                                     | 是   | —（必填） | 当前本地图片文件；null表示无文件。                 |
+| `aspect`      | `number &#124; undefined`                                              | 否   | 1         | 裁剪框宽高比，大于0。                              |
+| `outputWidth` | `number &#124; undefined`                                              | 否   | 1024      | 期望输出宽度，不超过4096；小图不放大。             |
+| `outputType`  | `"image/png" &#124; "image/jpeg" &#124; "image/webp" &#124; undefined` | 否   | image/png | 输出图片MIME类型；浏览器不支持时使用实际导出类型。 |
+| `quality`     | `number &#124; undefined`                                              | 否   | 0.92      | JPEG/WebP导出质量，0到1；PNG遵循浏览器编码。       |
+| `title`       | `string &#124; undefined`                                              | 否   | 未设置    | 标题内容。                                         |
+
+### 事件回调
+
+| 参数      | 类型                                           | 必填 | 默认值    | 说明                                                  |
+| --------- | ---------------------------------------------- | ---- | --------- | ----------------------------------------------------- |
+| `onClose` | `() => void`                                   | 是   | —（必填） | 请求关闭回调；调用方需将isOpen设为false。             |
+| `onCrop`  | `(file: File) => void &#124; Promise<unknown>` | 是   | —（必填） | 接收裁剪后的File，可返回Promise；不会自动上传或关闭。 |
+
+### 使用约定
+
+- 仅处理调用方提供的 PNG/JPEG/WebP File（20MB以内、最多6400万像素），不下载远程资源或上传文件。
+- 支持比例、缩放和水平/垂直位置；输出最长单边受4096像素限制，不自动放大小图。onCrop 返回新 File，成功后由调用方关闭。
+- 可在 FileUpload.beforeUpload 适配器中等待裁剪结果；取消时返回 null，AbortSignal 触发时应关闭对应裁剪流程。
+- 对象URL在关闭/换文件/卸载时回收；导出或回调失败保留弹窗供重试。
+
+关联数据结构：[CropRect](#croprect)。
+
+## PageHeader
+
+导入：`@batype/ui`。源码：`src/components/PageHeader.tsx`。
+
+响应式标题、说明、面包屑和操作区，不读取路由或翻译状态。
+
+### 使用示例
+
+```tsx
+import { useState } from 'react'
+import { PageHeader, Button } from '@batype/ui'
+import '@batype/ui/style.css'
+
+export default function PageHeaderExample() {
+  const [count, setCount] = useState(0)
+  return (
+    <PageHeader
+      title="示例页面"
+      description={`已刷新 ${count} 次`}
+      breadcrumb={<span>工作区 / 示例</span>}
+      actions={<Button onClick={() => setCount((value) => value + 1)}>刷新页面</Button>}
+    />
+  )
+}
+```
+
+### 参数
+
+| 参数          | 类型                      | 必填 | 默认值    | 说明                                |
+| ------------- | ------------------------- | ---- | --------- | ----------------------------------- |
+| `title`       | `ReactNode`               | 是   | —（必填） | 标题内容。                          |
+| `description` | `ReactNode`               | 否   | 未设置    | 补充说明内容。                      |
+| `actions`     | `ReactNode`               | 否   | 未设置    | 页头操作节点。                      |
+| `breadcrumb`  | `ReactNode`               | 否   | 未设置    | 页头面包屑插槽，不读取路由。        |
+| `className`   | `string &#124; undefined` | 否   | 未设置    | 附加CSS类；具体挂载节点见使用约定。 |
+
+### 事件回调
+
+无。
+
+### 使用约定
+
+- title 和其他插槽接受 ReactNode；文案、权限和路由全部由调用方提供。
+- 使用 h1，通常每个页面使用一个；操作区在窄屏自动换行。
+
 ## 公共数据结构
 
 ### Tone
@@ -8875,18 +10559,22 @@ export interface TableColumn<T> {
   width?: CSSProperties['width']
   sortable?: boolean
   mobileHidden?: boolean
+  mobileLabel?: boolean
+  kind?: 'data' | 'actions'
 }
 ```
 
-| 参数           | 类型                                                     | 必填 | 默认值    | 说明                                               |
-| -------------- | -------------------------------------------------------- | ---- | --------- | -------------------------------------------------- |
-| `key`          | `string`                                                 | 是   | —（必填） | 列唯一key；没有render时也作为行字段名读取。        |
-| `title`        | `ReactNode`                                              | 是   | —（必填） | 标题内容。                                         |
-| `render`       | `((row: T) => ReactNode) &#124; undefined`               | 否   | 未设置    | 自定义展示函数，具体输入见签名。                   |
-| `align`        | `"left" &#124; "center" &#124; "right" &#124; undefined` | 否   | 未设置    | 单元格对齐方式。                                   |
-| `width`        | `Property.Width<string &#124; number> &#124; undefined`  | 否   | 未设置    | 列宽，接受CSS宽度值。                              |
-| `sortable`     | `boolean &#124; undefined`                               | 否   | 未设置    | 展示排序按钮还需要提供onSortChange。               |
-| `mobileHidden` | `boolean &#124; undefined`                               | 否   | 未设置    | 手机卡片中隐藏该列；调用方需提供其他信息访问入口。 |
+| 参数           | 类型                                                     | 必填 | 默认值    | 说明                                                      |
+| -------------- | -------------------------------------------------------- | ---- | --------- | --------------------------------------------------------- |
+| `key`          | `string`                                                 | 是   | —（必填） | 列唯一key；没有render时也作为行字段名读取。               |
+| `title`        | `ReactNode`                                              | 是   | —（必填） | 标题内容。                                                |
+| `render`       | `((row: T) => ReactNode) &#124; undefined`               | 否   | 未设置    | 自定义展示函数，具体输入见签名。                          |
+| `align`        | `"left" &#124; "center" &#124; "right" &#124; undefined` | 否   | 未设置    | 单元格对齐方式。                                          |
+| `width`        | `Property.Width<string &#124; number> &#124; undefined`  | 否   | 未设置    | 源图片裁剪宽度，单位像素。                                |
+| `sortable`     | `boolean &#124; undefined`                               | 否   | 未设置    | 展示排序按钮还需要提供onSortChange。                      |
+| `mobileHidden` | `boolean &#124; undefined`                               | 否   | 未设置    | 手机卡片中隐藏该列；调用方需提供其他信息访问入口。        |
+| `mobileLabel`  | `boolean &#124; undefined`                               | 否   | 未设置    | 是否在移动卡片中显示列标题，false使值占满整行；默认显示。 |
+| `kind`         | `"data" &#124; "actions" &#124; undefined`               | 否   | 未设置    | data或actions；actions在移动端隐藏列名并允许按钮换行。    |
 
 ### DetailField
 
@@ -8919,7 +10607,7 @@ export interface DropdownItem {
 
 | 参数       | 类型                       | 必填 | 默认值    | 说明                                                 |
 | ---------- | -------------------------- | ---- | --------- | ---------------------------------------------------- |
-| `key`      | `string`                   | 是   | —（必填） | 稳定唯一标识。                                       |
+| `key`      | `string`                   | 是   | —（必填） | 稳定唯一键。                                         |
 | `label`    | `string`                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。           |
 | `disabled` | `boolean &#124; undefined` | 否   | 未设置    | 禁用用户交互。                                       |
 | `tone`     | `Tone &#124; undefined`    | 否   | 未设置    | 语义色：neutral、primary、success、warning、danger。 |
@@ -8930,7 +10618,7 @@ export interface DropdownItem {
 export interface UploadItem {
   id: string
   name: string
-  status: 'selected' | 'uploading' | 'done' | 'error'
+  status: 'selected' | 'processing' | 'uploading' | 'done' | 'error'
   progress?: number
   url?: string
   error?: string
@@ -8938,15 +10626,15 @@ export interface UploadItem {
 }
 ```
 
-| 参数       | 类型                                                         | 必填 | 默认值    | 说明                                                     |
-| ---------- | ------------------------------------------------------------ | ---- | --------- | -------------------------------------------------------- |
-| `id`       | `string`                                                     | 是   | —（必填） | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。  |
-| `name`     | `string`                                                     | 是   | —（必填） | 文件名，包含扩展名。                                     |
-| `status`   | `"done" &#124; "error" &#124; "selected" &#124; "uploading"` | 是   | —（必填） | selected仅选择、uploading上传中、done已完成、error失败。 |
-| `progress` | `number &#124; undefined`                                    | 否   | 未设置    | 上传进度，范围0–100。                                    |
-| `url`      | `string &#124; undefined`                                    | 否   | 未设置    | 上传后返回的展示URL。                                    |
-| `error`    | `string &#124; undefined`                                    | 否   | 未设置    | 该文件上传失败的消息。                                   |
-| `file`     | `File &#124; undefined`                                      | 否   | 未设置    | 本地File对象；由文件选择生成。                           |
+| 参数       | 类型                                                                             | 必填 | 默认值    | 说明                                                                         |
+| ---------- | -------------------------------------------------------------------------------- | ---- | --------- | ---------------------------------------------------------------------------- |
+| `id`       | `string`                                                                         | 是   | —（必填） | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。                      |
+| `name`     | `string`                                                                         | 是   | —（必填） | 文件名，包含扩展名。                                                         |
+| `status`   | `"done" &#124; "error" &#124; "selected" &#124; "processing" &#124; "uploading"` | 是   | —（必填） | selected仅选择、processing上传前处理、uploading上传中、done完成、error失败。 |
+| `progress` | `number &#124; undefined`                                                        | 否   | 未设置    | 上传进度，范围0–100。                                                        |
+| `url`      | `string &#124; undefined`                                                        | 否   | 未设置    | 上传后返回的展示URL。                                                        |
+| `error`    | `string &#124; undefined`                                                        | 否   | 未设置    | 该文件上传失败的消息。                                                       |
+| `file`     | `File &#124; undefined`                                                          | 否   | 未设置    | 当前本地图片文件；null表示无文件。                                           |
 
 ### NavigationItem
 
@@ -8962,7 +10650,7 @@ export interface NavigationItem {
 
 | 参数       | 类型                                         | 必填 | 默认值    | 说明                                       |
 | ---------- | -------------------------------------------- | ---- | --------- | ------------------------------------------ |
-| `key`      | `string`                                     | 是   | —（必填） | 稳定唯一标识。                             |
+| `key`      | `string`                                     | 是   | —（必填） | 稳定唯一键。                               |
 | `label`    | `string`                                     | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。 |
 | `icon`     | `ReactNode`                                  | 否   | 未设置    | 图标节点；可传本库Icon或外部ReactNode。    |
 | `disabled` | `boolean &#124; undefined`                   | 否   | 未设置    | 禁用用户交互。                             |
@@ -8981,10 +10669,10 @@ export interface RouteTab {
 
 | 参数       | 类型                       | 必填 | 默认值    | 说明                                       |
 | ---------- | -------------------------- | ---- | --------- | ------------------------------------------ |
-| `key`      | `string`                   | 是   | —（必填） | 稳定唯一标识。                             |
+| `key`      | `string`                   | 是   | —（必填） | 稳定唯一键。                               |
 | `label`    | `string`                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。 |
 | `icon`     | `ReactNode`                | 否   | 未设置    | 图标节点；可传本库Icon或外部ReactNode。    |
-| `closable` | `boolean &#124; undefined` | 否   | 未设置    | 允许关闭；还需RouteTabs提供onClose。       |
+| `closable` | `boolean &#124; undefined` | 否   | 未设置    | 是否显示关闭按钮，默认true。               |
 
 ### TabItem
 
@@ -8999,7 +10687,199 @@ export interface TabItem {
 
 | 参数       | 类型                       | 必填 | 默认值    | 说明                                       |
 | ---------- | -------------------------- | ---- | --------- | ------------------------------------------ |
-| `key`      | `string`                   | 是   | —（必填） | 稳定唯一标识。                             |
+| `key`      | `string`                   | 是   | —（必填） | 稳定唯一键。                               |
 | `label`    | `ReactNode`                | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。 |
 | `content`  | `ReactNode`                | 是   | —（必填） | 提示文本；TabItem中为该页签内容。          |
 | `disabled` | `boolean &#124; undefined` | 否   | 未设置    | 禁用用户交互。                             |
+
+### MessageOptions
+
+```ts
+export interface MessageOptions {
+  content: ReactNode
+  tone?: Tone
+  loading?: boolean
+  duration?: number
+  closable?: boolean
+}
+```
+
+| 参数       | 类型                       | 必填 | 默认值    | 说明                                                   |
+| ---------- | -------------------------- | ---- | --------- | ------------------------------------------------------ |
+| `content`  | `ReactNode`                | 是   | —（必填） | 提示文本；TabItem中为该页签内容。                      |
+| `tone`     | `Tone &#124; undefined`    | 否   | 未设置    | 语义色：neutral、primary、success、warning、danger。   |
+| `loading`  | `boolean &#124; undefined` | 否   | 未设置    | 加载状态；按钮加载时禁用交互，表格加载时保留现有数据。 |
+| `duration` | `number &#124; undefined`  | 否   | 未设置    | 消息显示时长，单位毫秒；0为持续显示。                  |
+| `closable` | `boolean &#124; undefined` | 否   | 未设置    | 是否显示关闭按钮，默认true。                           |
+
+### MessageAPI
+
+```ts
+export interface MessageAPI {
+  show: (options: MessageOptions) => string
+  success: (content: ReactNode, duration?: number) => string
+  error: (content: ReactNode, duration?: number) => string
+  warning: (content: ReactNode, duration?: number) => string
+  loading: (content: ReactNode) => string
+  update: (id: string, patch: Partial<MessageOptions>) => void
+  close: (id: string) => void
+  clear: () => void
+}
+```
+
+| 参数      | 类型                                                   | 必填 | 默认值    | 说明                                                      |
+| --------- | ------------------------------------------------------ | ---- | --------- | --------------------------------------------------------- |
+| `show`    | `(options: MessageOptions) => string`                  | 是   | —（必填） | 显示消息并返回id。                                        |
+| `success` | `(content: ReactNode, duration?: number) => string`    | 是   | —（必填） | 显示成功消息并返回id。                                    |
+| `error`   | `(content: ReactNode, duration?: number) => string`    | 是   | —（必填） | 显示错误消息并返回id。                                    |
+| `warning` | `(content: ReactNode, duration?: number) => string`    | 是   | —（必填） | 显示警告消息并返回id。                                    |
+| `loading` | `(content: ReactNode) => string`                       | 是   | —（必填） | 显示持续加载消息并返回id，需显式更新loading=false或关闭。 |
+| `update`  | `(id: string, patch: Partial<MessageOptions>) => void` | 是   | —（必填） | 按id更新消息或按index替换列表项，具体签名见类型。         |
+| `close`   | `(id: string) => void`                                 | 是   | —（必填） | 按id移除指定消息。                                        |
+| `clear`   | `() => void`                                           | 是   | —（必填） | 移除当前容器内全部消息。                                  |
+
+### FormController
+
+```ts
+export interface FormController<T extends object = FormValues> {
+  values: T
+  errors: FormErrors
+  submitting: boolean
+  disabled: boolean
+  setFieldValue: (name: keyof T & string, value: unknown) => void
+  reset: () => void
+}
+```
+
+| 参数            | 类型                                               | 必填 | 默认值    | 说明                                                |
+| --------------- | -------------------------------------------------- | ---- | --------- | --------------------------------------------------- |
+| `values`        | `T`                                                | 是   | —（必填） | 表单当前完整值，禁止原地修改。                      |
+| `errors`        | `FormErrors`                                       | 是   | —（必填） | 字段名到错误消息的映射。                            |
+| `submitting`    | `boolean`                                          | 是   | —（必填） | 表单校验及提交处理中。                              |
+| `disabled`      | `boolean`                                          | 是   | —（必填） | 只读状态：表单禁用或处理中。                        |
+| `setFieldValue` | `(name: keyof T & string, value: unknown) => void` | 是   | —（必填） | 设置顶层字段并清除该字段旧错误；禁用/提交中不修改。 |
+| `reset`         | `() => void`                                       | 是   | —（必填） | 恢复首次挂载初值并清空错误；提交中不生效。          |
+
+### FormErrors
+
+```ts
+export type FormErrors = Record<string, string>
+```
+
+### FormFieldControl
+
+```ts
+export interface FormFieldControl {
+  id: string
+  value: unknown
+  onChange: (value: unknown) => void
+  onBlur: () => void
+  disabled: boolean
+  'aria-invalid'?: true
+  'aria-describedby'?: string
+}
+```
+
+| 参数               | 类型                       | 必填 | 默认值    | 说明                                                                |
+| ------------------ | -------------------------- | ---- | --------- | ------------------------------------------------------------------- |
+| `id`               | `string`                   | 是   | —（必填） | 稳定标识；DOM中用于关联标签，UploadItem中用于区分文件。             |
+| `value`            | `unknown`                  | 是   | —（必填） | 当前受控值。                                                        |
+| `onChange`         | `(value: unknown) => void` | 是   | —（必填） | 值变化回调；返回的新值/事件类型见签名，受控模式需由调用方更新状态。 |
+| `onBlur`           | `() => void`               | 是   | —（必填） | 控件失焦通知；FormFieldControl中用于触发字段校验。                  |
+| `disabled`         | `boolean`                  | 是   | —（必填） | 禁用用户交互。                                                      |
+| `aria-invalid`     | `true &#124; undefined`    | 否   | 未设置    | 字段校验失败时为true，需透传给真实输入元素。                        |
+| `aria-describedby` | `string &#124; undefined`  | 否   | 未设置    | 字段提示或错误节点的id，需透传给真实输入元素。                      |
+
+### FieldValidator
+
+```ts
+export type FieldValidator = (
+  value: unknown,
+  values: FormValues,
+) => string | undefined | Promise<string | undefined>
+```
+
+### FormListItem
+
+```ts
+export interface FormListItem<T> {
+  key: string
+  index: number
+  value: T
+}
+```
+
+| 参数    | 类型     | 必填 | 默认值    | 说明                         |
+| ------- | -------- | ---- | --------- | ---------------------------- |
+| `key`   | `string` | 是   | —（必填） | 稳定唯一键。                 |
+| `index` | `number` | 是   | —（必填） | 当前数组下标，用于列表操作。 |
+| `value` | `T`      | 是   | —（必填） | 当前受控值。                 |
+
+### FormListActions
+
+```ts
+export interface FormListActions<T> {
+  add: (value: T) => void
+  remove: (index: number) => void
+  update: (index: number, value: T) => void
+  move: (from: number, to: number) => void
+  disabled: boolean
+}
+```
+
+| 参数       | 类型                                 | 必填 | 默认值    | 说明                                              |
+| ---------- | ------------------------------------ | ---- | --------- | ------------------------------------------------- |
+| `add`      | `(value: T) => void`                 | 是   | —（必填） | 向动态列表追加新值。                              |
+| `remove`   | `(index: number) => void`            | 是   | —（必填） | 按下标移除当前表单列表项，不操作服务端。          |
+| `update`   | `(index: number, value: T) => void`  | 是   | —（必填） | 按id更新消息或按index替换列表项，具体签名见类型。 |
+| `move`     | `(from: number, to: number) => void` | 是   | —（必填） | 按下标移动列表项，同时保留稳定React键。           |
+| `disabled` | `boolean`                            | 是   | —（必填） | 禁用用户交互。                                    |
+
+### SelectOption
+
+```ts
+export interface SelectOption {
+  value: string
+  label: string
+  disabled?: boolean
+}
+```
+
+| 参数       | 类型                       | 必填 | 默认值    | 说明                                       |
+| ---------- | -------------------------- | ---- | --------- | ------------------------------------------ |
+| `value`    | `string`                   | 是   | —（必填） | 当前受控值。                               |
+| `label`    | `string`                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。 |
+| `disabled` | `boolean &#124; undefined` | 否   | 未设置    | 禁用用户交互。                             |
+
+### CascaderOption
+
+```ts
+export interface CascaderOption extends SelectOption {
+  children?: readonly CascaderOption[]
+}
+```
+
+| 参数       | 类型                                         | 必填 | 默认值    | 说明                                       |
+| ---------- | -------------------------------------------- | ---- | --------- | ------------------------------------------ |
+| `children` | `readonly CascaderOption[] &#124; undefined` | 否   | 未设置    | 子内容；具体展示位置由组件决定。           |
+| `value`    | `string`                                     | 是   | —（必填） | 当前受控值。                               |
+| `label`    | `string`                                     | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。 |
+| `disabled` | `boolean &#124; undefined`                   | 否   | 未设置    | 禁用用户交互。                             |
+
+### CropRect
+
+```ts
+export interface CropRect {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+```
+
+| 参数     | 类型     | 必填 | 默认值    | 说明                               |
+| -------- | -------- | ---- | --------- | ---------------------------------- |
+| `x`      | `number` | 是   | —（必填） | 源图片横向像素坐标。               |
+| `y`      | `number` | 是   | —（必填） | 源图片纵向像素坐标。               |
+| `width`  | `number` | 是   | —（必填） | 源图片裁剪宽度，单位像素。         |
+| `height` | `number` | 是   | —（必填） | 编辑区高度，单位px；不包含工具栏。 |

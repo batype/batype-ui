@@ -36,10 +36,10 @@
 | 业务删除弹窗的纯交互模式                   | ConfirmDialog                                                                           | 不包含软删除、数据库操作与权限判断                          |
 | 页面控件与媒体展示模式                     | Select / Textarea / Checkbox / Switch / Tooltip / Dropdown / ImagePreview / VideoPlayer | 为独立组合提供展示原语，不冒充原目录同名文件                |
 
-本版45个UI组件，每项都有可运行文档和真实导出；不等于原目录每个文件都另建一个组件。重复视觉变体通过参数表达。
+本版57个UI组件，每项都有可运行文档和真实导出；不等于原目录每个文件都另建一个组件。重复视觉变体通过参数表达。
 
 ## 明确排除或尚未迁移
 
 SDK、RootContext、usePermission、withAuth、登录/注册、账户/支付表单、业务新增编辑弹窗、软删除动作、订单/彩票/公排/资金卡片、Sentry/埋点、锁屏、KeepAlive、业务全局搜索、Algolia凭据、CodeGenerator、SolidCaptcha验证服务、IP/地理位置请求、私有iconfont和真实截图。
 
-EmailInput/PhoneInput/AccountInput等业务规则不进入库，调用方组合Input。图片裁剪、Markdown数学公式、编辑器更多语言和完整应用布局尚未提供。UI表格不包含无限滚动或虚拟化。排除这些不代表其功能已经用空壳组件实现。
+EmailInput/PhoneInput/AccountInput等业务规则不进入库，调用方组合Input。本轮新增本地图片裁剪、上传前处理、表单、消息、高频筛选控件和页头；不带原业务规则。Markdown数学公式、编辑器更多语言和完整应用布局仍未提供。UI表格不包含无限滚动或虚拟化。排除这些不代表其功能已经用空壳组件实现。

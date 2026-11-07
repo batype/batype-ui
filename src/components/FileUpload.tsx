@@ -4,7 +4,7 @@ import { ImagePreview, VideoPlayer, safeMediaSrc } from './Media.js'
 export interface UploadItem {
   id: string
   name: string
-  status: 'selected' | 'uploading' | 'done' | 'error'
+  status: 'selected' | 'processing' | 'uploading' | 'done' | 'error'
   progress?: number
   url?: string
   error?: string
@@ -18,6 +18,10 @@ export interface FileUploadProps {
     file: File,
     options: { signal: AbortSignal; onProgress: (progress: number) => void },
   ) => Promise<{ url: string }>
+  beforeUpload?: (
+    file: File,
+    options: { signal: AbortSignal },
+  ) => File | null | Promise<File | null>
   accept?: string
   maxCount?: number
   maxSize?: number
@@ -44,6 +48,7 @@ export function FileUpload({
   files,
   onChange,
   upload,
+  beforeUpload,
   accept = '',
   maxCount = 5,
   maxSize = 10 * 1024 * 1024,
@@ -101,18 +106,38 @@ export function FileUpload({
         id: `file-${Date.now()}-${++sequence}`,
         name: file.name,
         file,
-        status: upload ? 'uploading' : 'selected',
+        status: beforeUpload ? 'processing' : upload ? 'uploading' : 'selected',
         progress: 0,
       })
     }
     publish([...current.current, ...added])
-    if (!upload) return
+    if (!upload && !beforeUpload) return
     await Promise.all(
       added.map(async (item) => {
         const controller = new AbortController()
         controllers.current.set(item.id, controller)
         try {
-          const result = await upload(item.file!, {
+          const prepared = beforeUpload
+            ? await beforeUpload(item.file!, { signal: controller.signal })
+            : item.file!
+          if (controller.signal.aborted || !mounted.current) return
+          if (!prepared) {
+            publish(current.current.filter((file) => file.id !== item.id))
+            return
+          }
+          if (
+            !(prepared instanceof File) ||
+            prepared.size > maxSize ||
+            !matchesAccept(prepared, accept)
+          )
+            throw new Error('处理后的文件格式或大小不符合要求')
+          update(item.id, {
+            file: prepared,
+            name: prepared.name,
+            status: upload ? 'uploading' : 'selected',
+          })
+          if (!upload) return
+          const result = await upload(prepared, {
             signal: controller.signal,
             onProgress: (progress) => {
               if (!controller.signal.aborted)
@@ -171,13 +196,15 @@ export function FileUpload({
             <span>
               {file.name}
               <small>
-                {file.status === 'uploading'
-                  ? `上传中 ${file.progress || 0}%`
-                  : file.status === 'done'
-                    ? '已完成'
-                    : file.status === 'error'
-                      ? file.error
-                      : '已选择'}
+                {file.status === 'processing'
+                  ? '处理中'
+                  : file.status === 'uploading'
+                    ? `上传中 ${file.progress || 0}%`
+                    : file.status === 'done'
+                      ? '已完成'
+                      : file.status === 'error'
+                        ? file.error
+                        : '已选择'}
               </small>
             </span>
             <Button
