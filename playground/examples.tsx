@@ -584,10 +584,18 @@ export function ComponentExample({
       )
       break
     case 'ImagePreview':
-      demo = <UI.ImagePreview src="/preview.svg" alt="Batype UI 预览示例" style={{ width: 360 }} />
+      demo = (
+        <UI.ImagePreview
+          src={`${import.meta.env.BASE_URL}preview.svg`}
+          alt="Batype UI 预览示例"
+          style={{ width: 360 }}
+        />
+      )
       break
     case 'VideoPlayer':
-      demo = <UI.VideoPlayer src="/demo.webm" label="Batype UI 演示视频" />
+      demo = (
+        <UI.VideoPlayer src={`${import.meta.env.BASE_URL}demo.webm`} label="Batype UI 演示视频" />
+      )
       break
     case 'CodeBlock':
       demo = <UI.CodeBlock code={code} language="typescript" />

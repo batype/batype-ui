@@ -2,6 +2,8 @@
 
 A business-independent React UI package extracted and adapted from Batype Manager.
 
+[Live component documentation](https://batype.github.io/batype-ui/) · [Pages deployment](docs/PAGES.md)
+
 57 typed components, scoped CSS tokens, light/dark/system themes, localized core strings, responsive tables, native dialogs, and controlled interaction APIs. No SDK, router, authorization state, private fonts, HeroUI, Ant Design, or Tailwind runtime dependency.
 
 **Source repository: [batype/batype-ui](https://github.com/batype/batype-ui). Version 0.3.0.** Check the [npm registry](https://www.npmjs.com/package/@batype/ui) for public release availability.

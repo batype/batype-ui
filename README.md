@@ -6,6 +6,8 @@
 
 [English](README.en.md) · [组件 API](docs/API.md) · [提取来源](docs/EXTRACTION.md) · [迁移指南](docs/MIGRATION.md) · [发布检查](docs/RELEASING.md)
 
+[在线组件文档](https://batype.github.io/batype-ui/) · [文档站部署说明](docs/PAGES.md)
+
 > 源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。当前版本 `0.3.0`；公开发布状态以 [npm 注册表](https://www.npmjs.com/package/@batype/ui) 为准。
 
 ## 快速体验

@@ -16,7 +16,7 @@ export default defineConfig({
     ],
   },
   root: 'playground',
-  base: './',
+  base: process.env.BUI_DOCS_BASE || './',
   server: { host: '127.0.0.1', port: 5192, strictPort: true },
   build: { outDir: '../site', emptyOutDir: true },
 })
