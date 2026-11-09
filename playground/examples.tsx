@@ -20,6 +20,9 @@ const RichTextEditor = lazy(() =>
   import('../src/editors').then((m) => ({ default: m.RichTextEditor })),
 )
 const Markdown = lazy(() => import('../src/markdown').then((m) => ({ default: m.Markdown })))
+const AntdCompatibilityProviderDemo = lazy(
+  () => import('../docs/examples/AntdCompatibilityProvider'),
+)
 export type Task = { id: string; name: string; owner: string; status: string; updated: string }
 const tasks: Task[] = [
   { id: 'CMP-001', name: '组件设计规范', owner: 'Lin', status: 'done', updated: '2026-11-01' },
@@ -217,7 +220,7 @@ export function ComponentExample({
     ]),
     [code, setCode] = useState('const greeting: string = "Hello UI"\nconsole.log(greeting)\n'),
     [html, setHtml] = useState(
-      '<p>欢迎使用 <strong>Batype UI</strong>。</p><p style="text-indent: 2em;">富文本样式与空白保持原样。</p>',
+      '<p>欢迎使用 <strong>Batype UI</strong>。</p><p style="text-indent: 2em;">富文本样式与空白保持原样。</p><p>可在本段试用缩进和多行选区。</p>',
     )
   const urls = useRef<string[]>([])
   useEffect(() => () => urls.current.forEach(URL.revokeObjectURL), [])
@@ -260,6 +263,9 @@ export function ComponentExample({
   if (Extra) return <Extra />
   let demo: React.ReactNode
   switch (name) {
+    case 'AntdCompatibilityProvider':
+      demo = <AntdCompatibilityProviderDemo />
+      break
     case 'UIProvider':
       demo = (
         <div className="dual-demo">
@@ -612,7 +618,15 @@ export function ComponentExample({
     case 'RichTextEditor':
       demo = (
         <>
-          <RichTextEditor label="正文示例" value={html} onChange={setHtml} readOnly={!checked} />
+          <RichTextEditor
+            label="正文示例"
+            value={html}
+            onChange={setHtml}
+            readOnly={!checked}
+            mode="default"
+            hoverbarPlacement="below"
+            lineHeight={1.5}
+          />
           <UI.Switch
             label="允许编辑"
             checked={checked}

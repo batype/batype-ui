@@ -6,13 +6,14 @@ import { renderToString } from 'react-dom/server'
 import * as Core from '../src'
 import * as Editors from '../src/editors'
 import * as MarkdownEntry from '../src/markdown'
+import * as AntdEntry from '../src/antd'
 import { catalog } from '../playground/catalog'
 import api from '../playground/api.generated.json'
 describe('组件覆盖及新增交互', () => {
-  it('57个组件都有独立文档、真实导出和代码示例，没有占位菜单', () => {
-    expect(catalog).toHaveLength(57)
-    expect(new Set(catalog.map((c) => c.name)).size).toBe(57)
-    const all = { ...Core, ...Editors, ...MarkdownEntry }
+  it('58个组件都有独立文档、真实导出和代码示例，没有占位菜单', () => {
+    expect(catalog).toHaveLength(58)
+    expect(new Set(catalog.map((c) => c.name)).size).toBe(58)
+    const all = { ...Core, ...Editors, ...MarkdownEntry, ...AntdEntry }
     for (const entry of catalog) {
       expect(all[entry.name]).toBeTruthy()
       expect(api.components[entry.name].example).toContain(entry.name)

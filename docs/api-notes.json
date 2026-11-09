@@ -169,7 +169,22 @@
     "close": "按id移除指定消息。",
     "clear": "移除当前容器内全部消息。",
     "values": "表单当前完整值，禁止原地修改。",
-    "errors": "字段名到错误消息的映射。"
+    "errors": "字段名到错误消息的映射。",
+    "showTime": "是否使用 datetime-local；false 为 date。值为本地日期时间字符串，不隐式转换时区。",
+    "mode": "wangEditor工具栏模式；切换模式会重建编辑器并清空撤销历史，受控value保留。",
+    "hoverbarPlacement": "auto保留上游定位；below优先放在整个选区下方，底部空间不足时放在选区上方。",
+    "lineHeight": "段落默认行高；正数，非法值回退1.5。p段落默认无额外上下间距，显式HTML内联样式优先。",
+    "maxImageSize": "富文本单图上传大小上限，单位字节；默认10MB。上传适配器调用前检查类型和大小。",
+    "config": "可选Ant Design ConfigProvider配置；未设置时继承外部主题和语言。弹窗内优先使用当前dialog作为弹出容器。",
+    "mobileRowClassName": "移动卡片字段行的附加类名。",
+    "mobileValueClassName": "移动卡片字段值的附加类名。",
+    "allowed": "由应用计算的当前权限结果；false时动作适配器返回null。",
+    "tooltip": "旧操作按钮提示，转换为新按钮label。",
+    "color": "旧语义色，default映射为neutral。",
+    "renderCell": "旧逐单元格渲染(row,columnKey)，适配为逐列render。",
+    "_key": "旧行标识字段；rowKey显式配置优先，缺省时仅回退id/orderId。",
+    "allSelectionKeys": "旧selectedKeys为all时必传的显式全选范围，不从当前页猜测。",
+    "setSelectedKeys": "旧受控选择通知，返回新Set并保留其他页已选键。"
   },
   "components": {
     "UIProvider": {
@@ -219,7 +234,7 @@
         "loading": "false"
       },
       "properties": {},
-      "models": []
+      "models": ["LegacyActionOptions", "LegacyColor"]
     },
     "Icon": {
       "summary": "本库内置线条SVG图标。",
@@ -399,7 +414,7 @@
         "selectedKeys": "空Set（不自动保存）"
       },
       "properties": {},
-      "models": ["TableColumn"]
+      "models": ["TableColumn", "LegacyColumn", "LegacyTableOptions"]
     },
     "TreeTable": {
       "summary": "将层级节点展开为响应式表格。",
@@ -428,7 +443,7 @@
         "pageSizeOptions": "[10, 20, 50]"
       },
       "properties": {},
-      "models": []
+      "models": ["LegacyPaginationOptions"]
     },
     "DescriptionList": {
       "summary": "基于字段定义展示记录详情。",
@@ -495,7 +510,9 @@
         "loading优先；否则children非null时优先于data/fields；extra只在data渲染分支展示。",
         "footer为null/undefined时仍使用默认关闭按钮；需要空底部传<></>。",
         "dismissible=false只禁用Escape/背景/右上角关闭，默认底部关闭按钮仍可点击；异步提交应自定义footer。",
-        "原生dialog负责焦点约束与关闭恢复；需现代浏览器支持showModal。"
+        "原生dialog负责焦点约束与关闭恢复；需现代浏览器支持showModal。",
+        "内部提供usePopupContainer容器；第三方Portal需要显式接入该容器，可使用AntdCompatibilityProvider。CSS z-index无法把body下的弹层提升到原生dialog顶层。",
+        "hideEmpty/emptyValue透传DescriptionList；默认行为不变。旧详情兼容可设置hideEmpty=false与emptyValue=\"-\"。"
       ],
       "defaults": {
         "fields": "[]",
@@ -670,12 +687,17 @@
         "onChange直接返回HTML字符串；外部value回显不会重建编辑器或回调。",
         "uploadImage和toolbarKeys在初始化时决定，需改变能力时用key重建组件；未传适配器时不启用图片上传。",
         "输出HTML不是净化后的安全HTML，保存和再次展示前须服务端允许列表净化。",
-        "客户端动态初始化及销毁，SSR只展示容器；上游工具栏保留中文行为。"
+        "客户端动态初始化及销毁，SSR只展示容器；上游工具栏保留中文行为。",
+        "原后台迁移可用mode=default、hoverbarPlacement=below、lineHeight=1.5；父组件正常回传HTML不会执行setHtml重置选区。"
       ],
       "defaults": {
         "readOnly": "false",
         "height": "300",
-        "placeholder": "请输入内容…"
+        "placeholder": "请输入内容…",
+        "mode": "simple",
+        "hoverbarPlacement": "auto",
+        "lineHeight": "1.5",
+        "maxImageSize": "10485760（10MB）"
       },
       "properties": {
         "onChange": {
@@ -897,18 +919,26 @@
       "models": ["CascaderOption"]
     },
     "DatePicker": {
-      "summary": "带标签的原生 date 输入，不隐式转换时区。",
+      "summary": "原生日期或本地日期时间输入，不隐式转换时区。",
       "notes": [
         "值遵循浏览器 date 输入：YYYY-MM-DD 或空字符串；onChange 是原生事件。",
-        "弹出的日历外观、键盘行为和本地化由浏览器/操作系统提供，不是自绘日历。min/max 是日期字符串。"
-      ]
+        "弹出的日历外观、键盘行为和本地化由浏览器/操作系统提供，不是自绘日历。min/max 是日期字符串。",
+        "showTime=true时值为YYYY-MM-DDTHH:mm[:ss]或空字符串；step=1支持秒。不要直接传Dayjs、ISO Z或UTC偏移，需在应用边界转换。"
+      ],
+      "defaults": {
+        "showTime": "false"
+      }
     },
     "DateRangePicker": {
       "summary": "受控的开始/结束日期组合，展示反向范围错误。",
       "notes": [
         "onChange 返回 [start,end]，清空一端保留另一端。不会偷偷交换日期或转换 UTC。",
-        "反向范围保留原值并展示错误；提交时仍须在 Form.validate 或服务端验证。min/max 传递给两个原生 date 控件。"
-      ]
+        "反向范围保留原值并展示错误；提交时仍须在 Form.validate 或服务端验证。min/max 传递给两个原生 date 控件。",
+        "showTime=true时两端使用datetime-local；step=1支持秒。min/max需与当前模式一致。北京时间等业务时区和接口序列化由应用处理。"
+      ],
+      "defaults": {
+        "showTime": "false"
+      }
     },
     "NumberInput": {
       "summary": "受控数字或 null，支持范围、步长及失焦精度规范。",
@@ -951,6 +981,16 @@
         "title 和其他插槽接受 ReactNode；文案、权限和路由全部由调用方提供。",
         "使用 h1，通常每个页面使用一个；操作区在窄屏自动换行。"
       ]
+    },
+    "AntdCompatibilityProvider": {
+      "summary": "可选Ant Design渐进接入桥接层；保留复杂表单原有API，并将下拉框与上下文消息限制在当前弹窗内。",
+      "notes": [
+        "只从 @batype/ui/antd 导入，需应用自行安装可选peer antd 5.29+或6；核心入口不依赖Ant Design。",
+        "必须放在DetailModal内部，作为需要Ant Design控件的内容祖先；外部应用级Provider无法读取内部弹窗容器。",
+        "AntdForm/AntdSelect/AntdDatePicker/AntdInputNumber为上游原始组件，保留useForm、嵌套字段、Form.List、多选与showTime。",
+        "消息使用useAntdApp()返回的message/notification，保留上下文；直接import的静态message不受当前容器控制。",
+        "config继承外部主题和语言；在dialog内强制使用弹窗容器，弹窗外采用config自定义容器或document.body。"
+      ]
     }
   },
   "models": [
@@ -975,7 +1015,12 @@
     "FormListActions",
     "SelectOption",
     "CascaderOption",
-    "CropRect"
+    "CropRect",
+    "LegacyActionOptions",
+    "LegacyColumn",
+    "LegacyTableOptions",
+    "LegacyPaginationOptions",
+    "LegacyColor"
   ],
   "modelNotes": {
     "UploadItem": {
@@ -1027,6 +1072,16 @@
       "properties": {
         "disabled": {
           "description": "只读状态：表单禁用或处理中。"
+        }
+      }
+    },
+    "LegacyPaginationOptions": {
+      "properties": {
+        "onChange": {
+          "description": "旧页码变化回调，仅返回目标page。"
+        },
+        "onPageSizeChange": {
+          "description": "旧式(page,size)回调；适配器修改size时明确返回(1,size)。"
         }
       }
     }

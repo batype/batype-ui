@@ -4,6 +4,7 @@ import { UIProvider, Button, Icon, Badge, Card, Input, type Locale } from '../sr
 import { catalog, groups, isComponentName, type ComponentName } from './catalog'
 import { ComponentExample, TableExample } from './examples'
 import { UsageDocs, ApiDocs } from './ApiDocs'
+import { version } from '../package.json'
 import '../src/styles.css'
 import './site.css'
 type Page = 'overview' | ComponentName
@@ -42,7 +43,7 @@ function App() {
             <strong>
               batype<span> / ui</span>
             </strong>
-            <Badge>0.3.0</Badge>
+            <Badge>{version}</Badge>
           </a>
           <div className="header-actions">
             <span>REACT COMPONENT LIBRARY</span>
@@ -127,13 +128,7 @@ function App() {
                     : '从真实管理后台提取，为下一个项目准备。'}
                 </p>
               </div>
-              <Badge
-                tone={
-                  current?.entry.endsWith('/editors') || current?.entry.endsWith('/markdown')
-                    ? 'warning'
-                    : 'success'
-                }
-              >
+              <Badge tone={current && current.entry !== '@batype/ui' ? 'warning' : 'success'}>
                 {current?.entry === '@batype/ui' || !current ? 'Core' : 'Optional'}
               </Badge>
             </div>

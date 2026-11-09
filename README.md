@@ -2,13 +2,13 @@
 
 **从真实管理后台提取、可独立使用的 React UI 组件库。**
 
-57 个组件，TypeScript 类型，作用域 CSS 令牌，深浅色/系统主题，基础组件中英文文案，桌面表格与移动卡片。移除了原项目的 SDK、权限、路由、账号、订单与环境配置；不依赖 HeroUI、Ant Design、Tailwind 或私有字体。
+58 个组件，TypeScript 类型，作用域 CSS 令牌，深浅色/系统主题，基础组件中英文文案，桌面表格与移动卡片。移除了原项目的 SDK、权限、路由、账号、订单与环境配置；核心入口不依赖 HeroUI、Ant Design、Tailwind 或私有字体。可选 `/antd` 入口支持旧复杂表单与弹窗渐进接入，见 [接入兼容说明](docs/ADOPTION.md)。这些兼容能力从0.4.0提供。
 
 [English](README.en.md) · [组件 API](docs/API.md) · [提取来源](docs/EXTRACTION.md) · [迁移指南](docs/MIGRATION.md) · [发布检查](docs/RELEASING.md)
 
 [在线组件文档](https://batype.github.io/batype-ui/) · [文档站部署说明](docs/PAGES.md)
 
-> 源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。当前版本 `0.3.0`；公开发布状态以 [npm 注册表](https://www.npmjs.com/package/@batype/ui) 为准。
+> 源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。当前版本 `0.4.0`；公开发布状态以 [npm 注册表](https://www.npmjs.com/package/@batype/ui) 为准。
 
 ## 快速体验
 
@@ -27,7 +27,7 @@ pnpm dev
 ## 安装到另一个项目
 
 ```sh
-npm install @batype/ui@0.3.0
+npm install @batype/ui@0.4.0
 ```
 
 也可以从源码构建本地安装包：
@@ -36,7 +36,7 @@ npm install @batype/ui@0.3.0
 # 本仓库
 pnpm pack
 # 目标项目：使用生成的实际文件路径
-pnpm add /path/to/batype-ui/batype-ui-0.3.0.tgz
+pnpm add /path/to/batype-ui/batype-ui-0.4.0.tgz
 ```
 
 ```tsx
@@ -100,7 +100,7 @@ CodeEditor 使用 CodeMirror 6，支持 JavaScript/TypeScript/JSON/纯文本、�
 
 例如 `#Input` 的 onChange 接收原生事件，`#CodeEditor` 的 onChange 直接接收字符串；受控值的更新写法在每个完整示例中给出。共享结构如 TableColumn、UploadItem、DetailField 也有字段表。可选组件页面附安装命令。
 
-源码中的说明入口为 `docs/api-notes.json`，57个可编译示例位于 `docs/examples/`。参数类型/必填项由TypeScript提取，生成文档站契约及 [完整 API](docs/API.md)。
+源码中的说明入口为 `docs/api-notes.json`，58个组件示例及接入适配示例位于 `docs/examples/`。参数类型/必填项由TypeScript提取，生成文档站契约及 [完整 API](docs/API.md)。
 
 ```sh
 pnpm docs:api   # 更新文档契约和Markdown

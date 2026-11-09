@@ -8,3 +8,5 @@ React and development tools retain their respective upstream licenses; they are 
 The small interface SVGs in this package were authored for this extraction; no project icon font is included.
 
 Optional peer engines CodeMirror, wangEditor, react-markdown and remark-gfm retain their upstream licenses. Their source/assets are not vendored into the published library; optional wrappers dynamically load the installed engines. Documentation builds include installed engines for local demonstrations.
+
+The optional Ant Design compatibility entry re-exports installed upstream components and adapts popup containers. Ant Design remains an optional peer under its own MIT license and is not bundled into the core library. The scoped multiline rich-text toolbar positioning is adapted from the manager component authored by shaosong.

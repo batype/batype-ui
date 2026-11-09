@@ -3,10 +3,12 @@ import { Input, type InputProps } from './Input.js'
 import { useUI } from '../provider.js'
 import type { SelectOption } from './SearchSelect.js'
 
-export type DatePickerProps = Omit<InputProps, 'type'>
-/** Native calendar. Values are date-only strings; no implicit UTC/local conversion. */
-export function DatePicker(props: DatePickerProps) {
-  return <Input {...props} type="date" />
+export interface DatePickerProps extends Omit<InputProps, 'type'> {
+  /** Local wall-clock date/time; deliberately performs no timezone conversion. */
+  showTime?: boolean
+}
+export function DatePicker({ showTime = false, ...props }: DatePickerProps) {
+  return <Input {...props} type={showTime ? 'datetime-local' : 'date'} />
 }
 
 export interface DateRangePickerProps {
@@ -19,6 +21,14 @@ export interface DateRangePickerProps {
   required?: boolean
   error?: string
   hint?: string
+  showTime?: boolean
+  step?: number | 'any'
+}
+function comparableDate(value: string, showTime: boolean): string {
+  if (!showTime) return value
+  const [date, time = ''] = value.split('T')
+  const [hour = '', minute = '', second = '0'] = time.split(':')
+  return `${date}T${hour}:${minute}:${Number(second).toFixed(9).padStart(12, '0')}`
 }
 export function DateRangePicker({
   label,
@@ -30,10 +40,13 @@ export function DateRangePicker({
   required,
   error,
   hint,
+  showTime = false,
+  step,
 }: DateRangePickerProps) {
   const id = useId(),
     { locale } = useUI()
-  const invalid = value[0] && value[1] && value[0] > value[1]
+  const invalid =
+    value[0] && value[1] && comparableDate(value[0], showTime) > comparableDate(value[1], showTime)
   const problem =
     error ||
     (invalid
@@ -48,6 +61,8 @@ export function DateRangePicker({
         <DatePicker
           label={locale === 'en' ? 'Start date' : '开始日期'}
           value={value[0]}
+          showTime={showTime}
+          step={step}
           required={required}
           min={min}
           max={max}
@@ -58,6 +73,8 @@ export function DateRangePicker({
         <DatePicker
           label={locale === 'en' ? 'End date' : '结束日期'}
           value={value[1]}
+          showTime={showTime}
+          step={step}
           required={required}
           min={min}
           max={max}

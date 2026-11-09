@@ -36,7 +36,7 @@
 | 业务删除弹窗的纯交互模式                   | ConfirmDialog                                                                           | 不包含软删除、数据库操作与权限判断                          |
 | 页面控件与媒体展示模式                     | Select / Textarea / Checkbox / Switch / Tooltip / Dropdown / ImagePreview / VideoPlayer | 为独立组合提供展示原语，不冒充原目录同名文件                |
 
-本版57个UI组件，每项都有可运行文档和真实导出；不等于原目录每个文件都另建一个组件。重复视觉变体通过参数表达。
+当前源码有58个UI组件（包括可选Ant Design兼容Provider），每项都有可运行文档和真实导出；不等于原目录每个文件都另建一个组件。重复视觉变体通过参数表达。0.4.0接入兼容能力见ADOPTION.md。
 
 ## 明确排除或尚未迁移
 

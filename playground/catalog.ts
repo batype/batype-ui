@@ -1,5 +1,12 @@
 const entries = [
   {
+    name: 'AntdCompatibilityProvider',
+    chinese: '渐进接入兼容层',
+    group: '反馈',
+    props: 'children / config',
+    entry: '@batype/ui/antd',
+  },
+  {
     name: 'UIProvider',
     chinese: '主题提供器',
     group: '基础',

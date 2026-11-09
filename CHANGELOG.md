@@ -2,6 +2,16 @@
 
 源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。公开发布状态以 npm 注册表和 GitHub Releases 为准。
 
+## 0.4.0 — 2026-11-09
+
+- 新增可选 `@batype/ui/antd` 兼容入口，保留原有复杂表单、多选与日期控件API；弹出层和上下文消息使用当前原生dialog容器，手机日期时间弹层可滚动。
+- 新增旧操作按钮、表格和分页参数适配器；应用显式传入权限与全选范围，保留稳定行键、移动操作区及页大小回调。
+- 日期和范围组件支持本地日期时间与秒精度；不隐式转换业务时区。
+- 富文本支持完整工具栏模式、1.5段落行高、多行选区工具栏避让；保留受控回显的光标保护。
+- Markdown可选peer同时支持9.x与10.x；核心仍无Ant Design、SDK或业务运行时依赖。
+- 58个组件、27个共享类型及完整接入示例；62项单元测试、30项桌面/手机回归通过。React18/19及后台实际构建环境验证通过。
+- 可选Ant Design入口按后台既有配置使用skipLibCheck处理上游声明问题；核心/编辑器/Markdown保持严格消费检查。未批量替换后台业务页面。
+
 ## 0.3.0 — 2026-11-07
 
 - 新增 MessageProvider/useMessage、Form/FormField/FormList、SearchSelect、Cascader、DatePicker/DateRangePicker、NumberInput、RadioGroup、ImageCropper 和 PageHeader，组件总数为57。

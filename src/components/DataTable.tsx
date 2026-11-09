@@ -12,6 +12,9 @@ export interface TableColumn<T> {
   mobileHidden?: boolean
   mobileLabel?: boolean
   kind?: 'data' | 'actions'
+  style?: CSSProperties
+  mobileRowClassName?: string
+  mobileValueClassName?: string
 }
 export interface DataTableProps<T> {
   items: readonly T[]
@@ -128,7 +131,7 @@ export function DataTable<T>({
                     <th
                       key={column.key}
                       scope="col"
-                      style={{ width: column.width, textAlign: column.align }}
+                      style={{ width: column.width, textAlign: column.align, ...column.style }}
                       aria-sort={
                         sort?.key === column.key
                           ? sort.direction === 'asc'
@@ -190,16 +193,17 @@ export function DataTable<T>({
                     .map((column) => (
                       <div
                         key={column.key}
-                        className={
+                        className={cx(
+                          column.mobileRowClassName,
                           column.kind === 'actions' || column.mobileLabel === false
                             ? 'bui-table-mobile__wide'
-                            : undefined
-                        }
+                            : undefined,
+                        )}
                       >
                         {column.kind !== 'actions' && column.mobileLabel !== false && (
                           <dt>{column.title}</dt>
                         )}
-                        <dd>{cell(row, column)}</dd>
+                        <dd className={column.mobileValueClassName}>{cell(row, column)}</dd>
                       </div>
                     ))}
                 </dl>

@@ -6,6 +6,10 @@ export default defineConfig({
   resolve: {
     alias: [
       {
+        find: /^@batype\/ui\/antd$/,
+        replacement: fileURLToPath(new URL('./src/antd.tsx', import.meta.url)),
+      },
+      {
         find: /^@batype\/ui$/,
         replacement: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       },

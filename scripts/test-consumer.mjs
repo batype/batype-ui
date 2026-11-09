@@ -65,16 +65,20 @@ try {
         fs.readFile(join(root, 'package.json'), 'utf8'),
       ),
     )
-    const optional = Object.keys(peers.peerDependenciesMeta).map(
-      (name) => name + '@' + peers.peerDependencies[name],
-    )
+    const optional = Object.keys(peers.peerDependenciesMeta)
+      .filter((name) => name !== 'antd')
+      .map((name) =>
+        name === 'react-markdown'
+          ? `react-markdown@${major === 18 ? '9.1.0' : '10.1.0'}`
+          : name + '@' + peers.peerDependencies[name],
+      )
     execFileSync('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', ...optional], {
       cwd,
       stdio: 'pipe',
     })
     await writeFile(
       join(cwd, 'optional.tsx'),
-      `import {CodeEditor, RichTextEditor} from '@batype/ui/editors'\nimport {Markdown} from '@batype/ui/markdown'\nexport const optional=<><CodeEditor value="text" label="Code"/><RichTextEditor value="<p>Text</p>" label="Body"/><Markdown>**Text**</Markdown></>\n`,
+      `import {CodeEditor, RichTextEditor} from '@batype/ui/editors'\nimport {Markdown} from '@batype/ui/markdown'\nexport const optional=<><CodeEditor value="text" label="Code"/><RichTextEditor value="<p>Text</p>" label="Body" mode="default" hoverbarPlacement="below"/><Markdown>**Text**</Markdown></>\n`,
     )
     execFileSync(
       join(cwd, 'node_modules/.bin/tsc'),
@@ -98,6 +102,42 @@ try {
       `import React from 'react';import {renderToString} from 'react-dom/server';import {strict as assert} from 'node:assert';import {CodeEditor,RichTextEditor} from '@batype/ui/editors';import {Markdown} from '@batype/ui/markdown';assert(renderToString(React.createElement(CodeEditor,{value:'text',label:'Code'})).includes('Code'));assert(renderToString(React.createElement(RichTextEditor,{value:'<p>Text</p>',label:'Body'})).includes('Body'));assert(renderToString(React.createElement(Markdown,null,'**Text**')).includes('<strong>Text</strong>'));console.log('React '+React.version+' optional-entry ESM/SSR/NodeNext types passed');`,
     )
     process.stdout.write(execFileSync('node', ['optional.mjs'], { cwd, encoding: 'utf8' }))
+    const antd = major === 18 ? '5.29.0' : '6.4.3'
+    execFileSync(
+      'npm',
+      ['install', '--ignore-scripts', '--no-audit', '--no-fund', `antd@${antd}`],
+      { cwd, stdio: 'pipe' },
+    )
+    await writeFile(
+      join(cwd, 'antd-consumer.tsx'),
+      `import {AntdCompatibilityProvider,AntdForm,AntdSelect,useAntdApp} from '@batype/ui/antd'\nexport const legacy=<AntdCompatibilityProvider><AntdForm><AntdSelect mode="multiple"/></AntdForm></AntdCompatibilityProvider>\n// @ts-expect-error invalid application props must still be rejected\nexport const invalid=<AntdSelect mode="invalid-mode"/>\nexport const hook=useAntdApp\n`,
+    )
+    // The host manager already uses skipLibCheck. Only this optional upstream bridge
+    // needs it: AntD/rc-picker declarations have known strict React 18 type errors.
+    // Core, editors and Markdown above continue to pass without skipLibCheck.
+    execFileSync(
+      join(cwd, 'node_modules/.bin/tsc'),
+      [
+        '--noEmit',
+        '--strict',
+        '--skipLibCheck',
+        '--jsx',
+        'react-jsx',
+        '--module',
+        'NodeNext',
+        '--moduleResolution',
+        'NodeNext',
+        '--target',
+        'ES2022',
+        'antd-consumer.tsx',
+      ],
+      { cwd, stdio: 'pipe' },
+    )
+    await writeFile(
+      join(cwd, 'antd-consumer.mjs'),
+      `import React from 'react';import {renderToString} from 'react-dom/server';import {strict as assert} from 'node:assert';import {AntdCompatibilityProvider,AntdForm} from '@batype/ui/antd';assert(renderToString(React.createElement(AntdCompatibilityProvider,null,React.createElement(AntdForm,null,'Legacy'))).includes('Legacy'));console.log('React '+React.version+' AntD ${antd} bridge ESM/SSR/application types passed (skipLibCheck for upstream declarations)');`,
+    )
+    process.stdout.write(execFileSync('node', ['antd-consumer.mjs'], { cwd, encoding: 'utf8' }))
   }
 } catch (error) {
   if (error.stdout) process.stderr.write(String(error.stdout))

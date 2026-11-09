@@ -4,12 +4,12 @@ A business-independent React UI package extracted and adapted from Batype Manage
 
 [Live component documentation](https://batype.github.io/batype-ui/) · [Pages deployment](docs/PAGES.md)
 
-57 typed components, scoped CSS tokens, light/dark/system themes, localized core strings, responsive tables, native dialogs, and controlled interaction APIs. No SDK, router, authorization state, private fonts, HeroUI, Ant Design, or Tailwind runtime dependency.
+58 typed components, scoped CSS tokens, light/dark/system themes, localized core strings, responsive tables, native dialogs, and controlled interaction APIs. The core entry has no SDK, router, authorization state, private fonts, HeroUI, Ant Design, or Tailwind runtime dependency. An optional `/antd` bridge preserves existing advanced forms during adoption; see [integration notes](docs/ADOPTION.md). These adoption APIs are available starting with 0.4.0.
 
-**Source repository: [batype/batype-ui](https://github.com/batype/batype-ui). Version 0.3.0.** Check the [npm registry](https://www.npmjs.com/package/@batype/ui) for public release availability.
+**Source repository: [batype/batype-ui](https://github.com/batype/batype-ui). Version 0.4.0.** Check the [npm registry](https://www.npmjs.com/package/@batype/ui) for public release availability.
 
 ```sh
-npm install @batype/ui@0.3.0
+npm install @batype/ui@0.4.0
 ```
 
 ```sh
@@ -52,4 +52,4 @@ The sidebar now uses actual component names, with English/Chinese search, dedica
 
 Every component page now includes a complete typed example, prop and callback tables (type, required status, default, description), behavior notes and related model schemas. Native React attributes are available in expandable tables. Search by parameter, type or description. Event objects and direct value callbacks are explicitly distinguished.
 
-`pnpm docs:api` extracts TypeScript contracts and combines them with `docs/api-notes.json` and 57 checked TSX examples. `pnpm check:api` detects stale documentation; the standard `check` command includes it. `docs/API.md` and `playground/api.generated.json` are generated outputs.
+`pnpm docs:api` extracts TypeScript contracts and combines them with `docs/api-notes.json` and 58 checked component examples. `pnpm check:api` detects stale documentation; the standard `check` command includes it. `docs/API.md` and `playground/api.generated.json` are generated outputs.

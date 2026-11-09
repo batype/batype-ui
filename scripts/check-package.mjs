@@ -21,6 +21,8 @@ for (const file of [
   'dist/markdown.js',
   'dist/markdown.d.ts',
   'dist/style.css',
+  'dist/antd.js',
+  'dist/antd.d.ts',
   'LICENSE',
   'NOTICE',
   'README.md',
@@ -36,7 +38,7 @@ for (const entry of await readdir('dist', { recursive: true })) {
     ),
     'Business or private content in ' + file,
   )
-  if (/^dist\/(index|editors|markdown)\.(js|cjs)$/.test(file))
+  if (/^dist\/(index|editors|markdown|antd)\.(js|cjs)$/.test(file))
     assert(text.includes('use client'), 'Client boundary must survive build')
 }
 for (const [peer, meta] of Object.entries(pkg.peerDependenciesMeta)) {
@@ -44,7 +46,9 @@ for (const [peer, meta] of Object.entries(pkg.peerDependenciesMeta)) {
 }
 const optionalEditors = await import('../dist/editors.js')
 const optionalMarkdown = await import('../dist/markdown.js')
+const optionalAntd = await import('../dist/antd.js')
 assert(optionalEditors.CodeEditor && optionalEditors.RichTextEditor && optionalMarkdown.Markdown)
+assert(optionalAntd.AntdCompatibilityProvider && optionalAntd.AntdForm && optionalAntd.useAntdApp)
 const esm = await import('../dist/index.js'),
   cjs = createRequire(import.meta.url)('../dist/index.cjs')
 for (const name of ['Button', 'DataTable', 'DetailModal', 'UIProvider', 'StatusChip'])

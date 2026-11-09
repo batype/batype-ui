@@ -45,7 +45,10 @@ test('级联选择、范围输入、消息提示及移动操作列', async ({ pa
   await page.getByLabel('数量', { exact: true }).blur()
   await expect(page.getByLabel('数量', { exact: true })).toHaveValue('100')
   await page.goto('/#DateRangePicker')
-  await page.getByLabel('开始日期', { exact: true }).fill('2026-12-01')
+  await page
+    .getByRole('group', { name: '统计日期', exact: true })
+    .getByLabel('开始日期', { exact: true })
+    .fill('2026-12-01')
   await expect(page.getByRole('alert')).toHaveText('开始日期不能晚于结束日期')
   await page.goto('/#MessageProvider')
   await page.getByRole('button', { name: '开始处理', exact: true }).click()

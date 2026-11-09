@@ -33,7 +33,7 @@ assert.deepEqual(
   'Every component needs documented behavior',
 )
 const exports = new Map()
-for (const path of ['src/index.ts', 'src/editors.ts', 'src/markdown.ts']) {
+for (const path of ['src/index.ts', 'src/editors.ts', 'src/markdown.ts', 'src/antd.tsx']) {
   const file = program.getSourceFile(resolve(path)) || program.getSourceFile(path)
   for (const symbol of checker.getExportsOfModule(checker.getSymbolAtLocation(file))) {
     exports.set(
@@ -132,11 +132,13 @@ for (const name of names) {
   assert(example.includes(`function ${name}Example`), `${name} example must be a complete function`)
   output.components[name] = {
     entry:
-      name === 'CodeEditor' || name === 'RichTextEditor'
-        ? '@batype/ui/editors'
-        : name === 'Markdown'
-          ? '@batype/ui/markdown'
-          : '@batype/ui',
+      name === 'AntdCompatibilityProvider'
+        ? '@batype/ui/antd'
+        : name === 'CodeEditor' || name === 'RichTextEditor'
+          ? '@batype/ui/editors'
+          : name === 'Markdown'
+            ? '@batype/ui/markdown'
+            : '@batype/ui',
     source: relative(process.cwd(), declaration.getSourceFile().fileName),
     signature: checker.signatureToString(signature, declaration, typeFlags),
     ...meta,

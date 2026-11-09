@@ -1,5 +1,8 @@
 /* MIT · scoped design tokens; does not reset document or host application styles. */
 /* Additive form and feedback primitives; no host document reset. */
+.bui-antd-compat {
+  min-width: 0;
+}
 .bui-messages {
   position: fixed;
   z-index: 10000;
@@ -1302,6 +1305,23 @@
 }
 .bui-rich-editor .w-e-text-container {
   color: var(--bui-text);
+}
+.bui-rich-editor .w-e-text-container [data-slate-editor] p {
+  margin: 0;
+  line-height: var(--bui-editor-line-height, 1.5);
+}
+@media (max-width: 640px) {
+  .bui-modal .ant-picker-dropdown {
+    max-width: calc(100vw - 48px);
+    max-height: calc(100dvh - 80px);
+    overflow: auto;
+  }
+  .bui-modal .ant-picker-datetime-panel {
+    flex-direction: column;
+  }
+  .bui-modal .ant-picker-panels {
+    flex-wrap: wrap;
+  }
 }
 .bui-markdown {
   line-height: 1.8;

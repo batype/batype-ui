@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import type { IDomEditor, IToolbarConfig } from '@wangeditor/editor'
 import { Alert, Spinner } from '../components/Feedback.js'
 import { safeMediaSrc } from '../components/Media.js'
+import { positionSelectionToolbar } from './richTextHoverbar.js'
 export interface RichTextEditorProps {
   value: string
   onChange?: (html: string) => void
@@ -12,9 +13,22 @@ export interface RichTextEditorProps {
   uploadImage?: (file: File) => Promise<string>
   onError?: (error: unknown) => void
   toolbarKeys?: string[]
+  mode?: 'default' | 'simple'
+  hoverbarPlacement?: 'auto' | 'below'
+  lineHeight?: number
+  maxImageSize?: number
 }
 export function RichTextEditor(props: RichTextEditorProps) {
-  const { value, label, readOnly = false, height = 300 } = props,
+  const {
+      value,
+      label,
+      readOnly = false,
+      height = 300,
+      mode = 'simple',
+      hoverbarPlacement = 'auto',
+      lineHeight = 1.5,
+    } = props,
+    root = useRef<HTMLDivElement>(null),
     host = useRef<HTMLDivElement>(null),
     toolbar = useRef<HTMLDivElement>(null),
     editor = useRef<IDomEditor | null>(null),
@@ -55,6 +69,9 @@ export function RichTextEditor(props: RichTextEditorProps) {
                       insert: (url: string, alt: string, href: string) => void,
                     ) => {
                       try {
+                        if (!file.type.startsWith('image/')) throw new Error('请选择图片文件')
+                        if (file.size > (latest.current.maxImageSize ?? 10 * 1024 * 1024))
+                          throw new Error('图片超过大小限制')
                         const url = await latest.current.uploadImage!(file)
                         if (!safeMediaSrc(url)) throw new Error('图片URL无效')
                         if (!cancelled) insert(url, file.name, '')
@@ -67,7 +84,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
                 }
               : {},
           },
-          mode: 'simple',
+          mode,
         })
         editor.current = instance
         const config: Partial<IToolbarConfig> = {
@@ -82,7 +99,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
           editor: instance,
           selector: toolbar.current,
           config,
-          mode: 'simple',
+          mode,
         })
         const editable = instance.getEditableContainer().querySelector('[data-slate-editor]')
         editable?.setAttribute('role', 'textbox')
@@ -107,7 +124,11 @@ export function RichTextEditor(props: RichTextEditorProps) {
       editor.current?.destroy()
       editor.current = null
     }
-  }, [])
+  }, [mode])
+  useEffect(() => {
+    if (hoverbarPlacement !== 'below' || !root.current) return
+    return positionSelectionToolbar(root.current)
+  }, [hoverbarPlacement, ready])
   useEffect(() => {
     const instance = editor.current
     if (!instance || value === last.current || value === instance.getHtml()) return
@@ -131,7 +152,16 @@ export function RichTextEditor(props: RichTextEditorProps) {
       ?.setAttribute('aria-label', label)
   }, [ready, label])
   return (
-    <div className="bui-rich-editor">
+    <div
+      ref={root}
+      className="bui-rich-editor"
+      style={
+        {
+          '--bui-editor-line-height':
+            Number.isFinite(lineHeight) && lineHeight > 0 ? lineHeight : 1.5,
+        } as CSSProperties
+      }
+    >
       <span className="bui-editor-label">{label}</span>
       {error ? (
         <Alert tone="danger">{error}</Alert>
