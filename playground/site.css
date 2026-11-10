@@ -114,7 +114,7 @@ body {
     monospace;
 }
 .sidebar nav button[aria-current='page'] {
-  color: var(--bui-primary);
+  color: var(--bui-primary-ink);
   background: var(--bui-primary-soft);
   font-weight: 550;
 }
@@ -302,7 +302,7 @@ main {
   height: 23px;
   border-radius: 50%;
   background: var(--bui-primary-soft);
-  color: var(--bui-primary);
+  color: var(--bui-primary-ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -388,7 +388,7 @@ main {
   position: fixed;
   top: -80px;
   background: var(--bui-surface);
-  color: var(--bui-primary);
+  color: var(--bui-primary-ink);
   padding: 12px;
   z-index: 10;
 }
@@ -534,7 +534,7 @@ main {
 }
 .sidebar nav a[aria-current='page'] {
   background: var(--bui-primary-soft);
-  color: var(--bui-primary);
+  color: var(--bui-primary-ink);
   font-weight: 600;
 }
 .sidebar nav a > small {
@@ -748,4 +748,33 @@ main {
   background: var(--bui-subtle);
   font-size: 12px;
   line-height: 1.8;
+}
+
+/* Real controls in both themes and densities, kept out of the published stylesheet. */
+.style-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.style-showcase .bui-root {
+  min-width: 0;
+  border-radius: var(--bui-radius);
+}
+.style-showcase__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.style-showcase__row {
+  margin: 16px 0;
+}
+@media (max-width: 900px) {
+  .style-showcase {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .style-showcase__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

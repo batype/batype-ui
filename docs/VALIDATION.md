@@ -1,5 +1,13 @@
 # 本地验收记录
 
+## 0.4.1 发布前验证 — 2026-11-10
+
+- `pnpm check`：格式、类型、58组件/27共享类型API契约、62项单元测试、库构建、包边界及文档构建通过。
+- `pnpm test:browser`：Chromium桌面/手机共36项通过；新增四组主题/密度的控件实际高度对照、宿主字体/焦点隔离、全部58组件的布局检查，以及浅深色对比度与320/390px窄屏验证。原复杂表单、日期、裁剪和富文本交互继续通过。
+- 来源后台保持已有适配层与npm 0.4.0依赖，本轮仅发布组件库，不触发后台发布。未验证Firefox、Safari或所有辅助技术；axe扫描不代表完整认证。
+- `pnpm test:consumer`：本版本tarball在React18.3.1/19.3.1中核心ESM/CJS/SSR/严格类型/CSS通过；编辑器和Markdown可选入口通过，Ant Design5.29.0/6.4.3桥接入口沿用skipLibCheck处理上游声明，应用参数检查通过。
+- `pnpm audit --audit-level high`：No known vulnerabilities found。包边界与发布文件名单已检查。以上为发布前验证，实际npm/Pages状态以注册表及Actions为准。
+
 ## 0.4.0 发布前验证 — 2026-11-09
 
 - `pnpm check`：格式、严格类型、58组件/27共享类型API契约、62项单元测试、库构建、包边界和文档构建通过。

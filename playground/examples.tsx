@@ -1,3 +1,4 @@
+import StyleShowcase from './StyleShowcase'
 import MessageProviderDemo from '../docs/examples/MessageProvider'
 import FormDemo from '../docs/examples/Form'
 import FormFieldDemo from '../docs/examples/FormField'
@@ -119,7 +120,6 @@ export function TableExample() {
             }}
           />
           <UI.Button
-            size="sm"
             variant="outline"
             tone="neutral"
             onClick={() => {
@@ -267,20 +267,7 @@ export function ComponentExample({
       demo = <AntdCompatibilityProviderDemo />
       break
     case 'UIProvider':
-      demo = (
-        <div className="dual-demo">
-          <UI.UIProvider theme="light">
-            <UI.Card title="Light">
-              <UI.Button>浅色主题</UI.Button>
-            </UI.Card>
-          </UI.UIProvider>
-          <UI.UIProvider theme="dark">
-            <UI.Card title="Dark">
-              <UI.Button>深色主题</UI.Button>
-            </UI.Card>
-          </UI.UIProvider>
-        </div>
-      )
+      demo = <StyleShowcase />
       break
     case 'Button':
       demo = (

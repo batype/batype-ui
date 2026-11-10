@@ -234,6 +234,7 @@ export default function UIProviderExample() {
 - 必须在应用中单独导入样式；不对html/body做全局重置。
 - style合并时覆盖同名tokens；CSS变量以--bui-开头。
 - locale不会翻译业务文案，上传/媒体提示与上游工具栏目前主要为中文。
+- 控件默认40px，compact密度32px；按钮sm/md/lg对应32px/密度高度/48px。CSS只重置库自身控件，不覆盖宿主按钮和输入框。
 
 关联数据结构：[Tone](#tone)、[Size](#size)、[Locale](#locale)。
 
@@ -897,7 +898,7 @@ export default function ActionButtonExample() {
 | ------------------ | ------------------------------------------------------------------------------------------ | ---- | --------- | ------------------------------------------------------------ |
 | `label`            | `string`                                                                                   | 是   | —（必填） | 可见标签或无障碍名称，应明确描述控件用途。                   |
 | `icon`             | `ReactNode`                                                                                | 是   | —（必填） | 图标节点；可传本库Icon或外部ReactNode。                      |
-| `variant`          | `"solid" &#124; "soft" &#124; "outline" &#124; "ghost" &#124; undefined`                   | 否   | soft      | 视觉变体：solid、soft、outline、ghost。                      |
+| `variant`          | `"solid" &#124; "soft" &#124; "outline" &#124; "ghost" &#124; undefined`                   | 否   | solid     | 视觉变体：solid、soft、outline、ghost。                      |
 | `tone`             | `Tone &#124; undefined`                                                                    | 否   | neutral   | 语义色：neutral、primary、success、warning、danger。         |
 | `size`             | `Size &#124; undefined`                                                                    | 否   | sm        | 组件尺寸。                                                   |
 | `loading`          | `boolean &#124; undefined`                                                                 | 否   | false     | 加载状态；按钮加载时禁用交互，表格加载时保留现有数据。       |
@@ -930,6 +931,7 @@ export default function ActionButtonExample() {
 - 不包含权限校验；调用方决定是否渲染。
 - label覆盖aria-label及title；icon作为唯一children。
 - 其余支持Button参数，ref指向button。
+- 默认实色；弱化操作可显式指定variant="soft"或"ghost"。
 
 关联数据结构：[LegacyActionOptions](#legacyactionoptions)、[LegacyColor](#legacycolor)。
 

@@ -8,7 +8,7 @@
 
 [在线组件文档](https://batype.github.io/batype-ui/) · [文档站部署说明](docs/PAGES.md)
 
-> 源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。当前版本 `0.4.0`；公开发布状态以 [npm 注册表](https://www.npmjs.com/package/@batype/ui) 为准。
+> 源码仓库：[batype/batype-ui](https://github.com/batype/batype-ui)。当前版本 `0.4.1`；公开发布状态以 [npm 注册表](https://www.npmjs.com/package/@batype/ui) 为准。
 
 ## 快速体验
 
@@ -27,7 +27,7 @@ pnpm dev
 ## 安装到另一个项目
 
 ```sh
-npm install @batype/ui@0.4.0
+npm install @batype/ui@0.4.1
 ```
 
 也可以从源码构建本地安装包：
@@ -36,7 +36,7 @@ npm install @batype/ui@0.4.0
 # 本仓库
 pnpm pack
 # 目标项目：使用生成的实际文件路径
-pnpm add /path/to/batype-ui/batype-ui-0.4.0.tgz
+pnpm add /path/to/batype-ui/batype-ui-0.4.1.tgz
 ```
 
 ```tsx
@@ -133,3 +133,5 @@ pnpm pack            # 构建并生成本地可安装 tarball
 ## 开源与贡献
 
 MIT，保留原项目 `Copyright (c) 2025 batype` 和作者来源说明，详见 [LICENSE](LICENSE)、[NOTICE](NOTICE)、[CONTRIBUTING](CONTRIBUTING.md)。第三方工具不被重新许可；不分发原项目字体或业务素材。
+
+[视觉规范与尺寸](docs/VISUAL-STYLE.md)

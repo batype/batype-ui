@@ -55,7 +55,7 @@ export interface ActionButtonProps extends Omit<ButtonProps, 'children' | 'aria-
 }
 /** 仅负责UI：删除/编辑权限必须由调用方判断。 */
 export const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(function ActionButton(
-  { label, icon, className, variant = 'soft', size = 'sm', tone = 'neutral', ...props },
+  { label, icon, className, variant = 'solid', size = 'sm', tone = 'neutral', ...props },
   ref,
 ) {
   return (
